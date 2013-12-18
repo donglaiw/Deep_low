@@ -16,6 +16,7 @@ patchSiz=17;
 ps =cell(1,nImgs);
 ff=1;
 step = 3;
+
 parfor i = 1:nImgs
     I = imread([trnImgDir imgIds{i}]);    
     switch ff
