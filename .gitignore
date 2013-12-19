@@ -1,2 +1,7 @@
+# data
 *.mat
 *.pkl
+*.npy
+# tmp file
+*~
+.*.sw*
