@@ -1,7 +1,7 @@
-# data
+# no data
 *.mat
 *.pkl
 *.npy
-# tmp file
+# no tmp
 *~
 .*.sw*

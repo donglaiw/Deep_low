@@ -9,23 +9,30 @@ if __name__ == "__main__":
     # e.g. denoising 
     #ishape = VectorSpace(17,17,3)
     nclass = 17*17
-    if U_LOCAL:
-        DD = '/home/Stephen/Desktop/Deep_Low/dn/'
-    else:
-        DD = './voc/'
-    param = param_dnn()
+    # 1. parameter
+    DD = './voc/'
+    ishape = Conv2DSpace(shape = (17,17),num_channels = 1)        
+    param = SetParam()    
     
-    ishape = Conv2DSpace(shape = (17,17),num_channels = 3)        
-    """"""
-    p_fc = param.param_model_fc(dim = 1000,irange=0.1)    
-    p_cf = param.param_model_cf(n_classes = nclass,irange=0.1)        
-    p_algo = param.param_algo(num_perbatch = 1000,num_epoch=100,rate_grad=0.001,rate_momentum=0.5)
-                            
+    p_fc = param.param_model_fc(dim = 1000,irange=0.1,layer_type=0)    
+    #p_cf = param.param_model_cf(n_classes = nclass,irange=0.1)        
+    p_linear = param.param_model_fc(dim = nclass,irange=0.1,layer_type=2)        
+    
+    p_algo = param.param_algo(batch_size = 1000,
+                             termination_criterion=EpochCounter(max_epochs=10),
+                            #cost=Dropout(input_include_probs={'l1': .8},input_scales={'l1': 1.}),                             
+                             learning_rate=0.001,
+                             batches_per_iter =9,
+                             init_momentum=0.5)
+               
 
-    net = CNN_NET(DD, ishape, [[p_fc],[p_cf]],p_algo)
+    net = CNN_NET(ishape)
     
     np.random.seed(1)
     rand_ind = np.random.permutation([i for i in range(100000)])
-    net.loaddata(2,rand_ind[:90000],rand_ind[90000:])
-    net.model()
+    print "lll"
+    net.loaddata(DD,2,nclass,rand_ind[:90000],rand_ind[90000:])
+    print "lll2"
+    net.setup([[p_fc,p_linear]],p_algo)
+    
     net.train()
