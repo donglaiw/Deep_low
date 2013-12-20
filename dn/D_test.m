@@ -16,7 +16,7 @@ save(['data/test/test_' num2str(id)],'ps','nps');
 done = 0
 if done
     load dl_r0_1_10
-    c=scol2im(result{1},psz,sz(1)-psz+1,sz(2)-psz+1,'mean');
+    c=scol2im(result{1},psz,sz(1),sz(2),'average');
     imwrite(uint8(255*c),'ha.png')
     load(['data/test/test_' num2str(id)],'ps','nps');
     imwrite(uint8(I),'hac.png')
