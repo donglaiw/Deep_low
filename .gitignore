@@ -2,6 +2,9 @@
 *.mat
 *.pkl
 *.npy
+*.png
+*.jpg
+*.tif
 # no tmp
 *~
 .*.sw*

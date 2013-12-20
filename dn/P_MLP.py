@@ -1,38 +1,90 @@
-import os,sys
-sys.path.append(os.path.expanduser('~/')+'ss/')
-from U_const import *
-sys.path.append(U_VLIB+'Donglai/DeepL/pylearn2')
-sys.path.append(U_VLIB+'Donglai/DeepL/Deep_wrapper/pylearn2')
-from DBL_test import *
+import os
+import cPickle 
+import numpy as np
+from pylearn2.space import Conv2DSpace
+from pylearn2.termination_criteria import EpochCounter
+from DBL_model import DBL_model
+from DBL_util import SetParam
 
-if __name__ == "__main__": 
-    # e.g. denoising 
-    #ishape = VectorSpace(17,17,3)
-    nclass = 17*17
-    # 1. parameter
-    DD = './voc/'
-    ishape = Conv2DSpace(shape = (17,17),num_channels = 1)        
-    param = SetParam()    
+class Deep_low(DBL_model):
+    def __init__(self,exp_id,model_id): 
+        self.exp_id = exp_id
+        self.model_id = model_id
+        self.setup()
+        super(Deep_low, self).__init__(self.ishape,self.p_layers,self.dataset_id)
+        self.runExp()
     
-    p_fc = param.param_model_fc(dim = 1000,irange=0.1,layer_type=0)    
-    #p_cf = param.param_model_cf(n_classes = nclass,irange=0.1)        
-    p_linear = param.param_model_fc(dim = nclass,irange=0.1,layer_type=2)        
-    
-    p_algo = param.param_algo(batch_size = 1000,
-                             termination_criterion=EpochCounter(max_epochs=10),
-                            #cost=Dropout(input_include_probs={'l1': .8},input_scales={'l1': 1.}),                             
-                             learning_rate=0.001,
-                             batches_per_iter =9,
-                             init_momentum=0.5)
-               
+    def setup(self):        
+        if self.exp_id == 0:
+            # 17*17 denoising exp
+            self.ishape = Conv2DSpace(shape = (17,17),num_channels = 1)
+            self.path_train = 'data/VOC_patch/'
+            self.path_test = 'data/test/'
+            self.dataset_id = 2            
+            self.num_epoch = 10
+            self.batch_size = 1000
+            self.num_dim = [289,1000]
+        
+        self.param_pkl = 'dl_p'+str(self.exp_id)+'_'+str(self.model_id)+'_'+str(self.num_epoch)+'.pkl'
+        self.result_mat = 'dl_r'+str(self.exp_id)+'_'+str(self.model_id)+'_'+str(self.num_epoch)+'.mat'
+        self.param = SetParam()
+        self.buildMLP()
 
-    net = CNN_NET(ishape)
+    def runExp(self):
+        if not os.path.exists(self.param_pkl):
+            if self.exp_id == 0:
+                np.random.seed(1)
+                rand_ind = np.random.permutation([i for i in range(100000)])       
+                self.loadData(self.path_train,'train',rand_ind[:90000])
+                self.loadData(self.path_train,'valid',rand_ind[90000:])
+                self.loadData(self.path_test,'test',options={'data_id':1,'data':'test_10010.mat'})
+                p_algo = self.param.param_algo(batch_size = self.batch_size,
+                                         termination_criterion=EpochCounter(max_epochs=self.num_epoch),
+                                        #cost=Dropout(input_include_probs={'l1': .8},input_scales={'l1': 1.}),
+                                         learning_rate=0.001,
+                                         batches_per_iter =9,
+                                         init_momentum=0.5)    
+            self.train(p_algo)
+            self.saveWeight(self.param_pkl)
+        elif not os.path.exists(self.result_mat):
+            if self.exp_id==0:
+                self.loadData(self.path_test,'test',options={'data_id':1,'data':'test_10010.mat'})
+            self.loadWeight(self.param_pkl)
+            result = self.test(self.batch_size,1)
+            import scipy.io        
+            scipy.io.savemat(self.result_mat,mdict={'result':result})
+
+    def buildMLP(self):        
+        # 1. parameter        
+        if self.model_id ==-1:
+            self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.1,layer_type=2)]]            
+        elif self.model_id ==0:
+            # train 1 sigmoid layer
+            self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.1,layer_type=0)]]
+        elif self.model_id ==1:        
+            # train 1 tanh layer
+            self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.1,layer_type=1)]]
+        elif self.model_id ==2:        
+            # train 1 maxout layer
+            pass
+        elif self.model_id ==3:
+            # train 2 sigmoid layer            
+            self.p_layers = [[self.param.param_model_fc(dim = num_kernels[0],irange=0.1,layer_type=0),
+                    self.param.param_model_fc(dim = num_kernels[1],irange=0.1,layer_type=0)]]
+        elif self.model_id ==4:        
+            # train 2 tanh layer
+            self.p_layers = [[self.param.param_model_fc(dim = num_kernels[0],irange=0.1,layer_type=1),
+                    self.param.param_model_fc(dim = num_kernels[1],irange=0.1,layer_type=1)]]
+        elif self.model_id ==5:        
+            # train 2 maxout layer            
+            pass
+
+
+if __name__ == "__main__":             
+    exps = Deep_low(0,1)
+    """
+    import cPickle
+    nn = 'dl_r0_1_10.pkl' 
+    a=cPickle.load(open(nn))
+    """
     
-    np.random.seed(1)
-    rand_ind = np.random.permutation([i for i in range(100000)])
-    print "lll"
-    net.loaddata(DD,2,nclass,rand_ind[:90000],rand_ind[90000:])
-    print "lll2"
-    net.setup([[p_fc,p_linear]],p_algo)
-    
-    net.train()
