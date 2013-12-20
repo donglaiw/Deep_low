@@ -38,6 +38,10 @@ class Deep_low(DBL_model):
                 self.loadData(self.path_train,'train',rand_ind[:90000])
                 self.loadData(self.path_train,'valid',rand_ind[90000:])
                 self.loadData(self.path_test,'test',options={'data_id':1,'data':'test_p10010.mat'})
+                # l2 paramters
+                import scipy.io
+                mat = scipy.io.loadmat('l2opt.mat')
+                
                 p_algo = self.param.param_algo(batch_size = self.batch_size,
                                          termination_criterion=EpochCounter(max_epochs=self.num_epoch),
                                         #cost=Dropout(input_include_probs={'l1': .8},input_scales={'l1': 1.}),
