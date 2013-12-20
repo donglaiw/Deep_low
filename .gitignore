@@ -8,3 +8,5 @@
 # no tmp
 *~
 .*.sw*
+# no configuration
+init.m
