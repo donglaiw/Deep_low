@@ -47,13 +47,16 @@ class Deep_low(DBL_model):
             self.train(p_algo)
             self.saveWeight(self.param_pkl)
         elif not os.path.exists(self.result_mat):
+            import scipy.io        
+            self.loadWeight(self.param_pkl)
             if self.exp_id==0:
                 #self.loadData(self.path_test,'test',options={'data_id':1,'data':'test_p10010.mat'})
-                self.loadData(self.path_test,'test',options={'data_id':2,'data':'berk_test.mat'})
-            self.loadWeight(self.param_pkl)
-            result = self.test(self.batch_size,1)
-            import scipy.io        
-            scipy.io.savemat(self.result_mat,mdict={'result':result})
+                #result = self.test(self.batch_size,1)
+                for i in range(100):
+                    print "do: image "+str(i)
+                    self.loadData(self.path_test,'test',options={'data_id':2,'data':'berk_test.mat','im_id':i})
+                    result = self.test(self.batch_size,1)
+                    scipy.io.savemat(str(i)+self.result_mat,mdict={'result':result})
 
     def buildMLP(self):        
         # 1. parameter        
