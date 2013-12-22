@@ -3,8 +3,9 @@ import cPickle
 import numpy as np
 from pylearn2.space import Conv2DSpace
 from pylearn2.termination_criteria import EpochCounter
+from pylearn2.training_algorithms.learning_rule import Momentum
 from DBL_model import DBL_model
-from DBL_util import SetParam
+from DBL_util import paramSet
 
 class Deep_low(DBL_model):
     def __init__(self,exp_id,model_id,num_epoch,num_dim): 
@@ -23,32 +24,35 @@ class Deep_low(DBL_model):
             self.path_train = 'data/VOC_patch/'
             self.path_test = 'data/test/'
             self.dataset_id = 2            
-            self.batch_size = 1000
+            self.batch_size = 10000
         
         self.param_pkl = 'dl_p'+str(self.exp_id)+'_'+str(self.model_id)+'_'+str(self.num_epoch)+'.pkl'
         self.result_mat = 'dl_r'+str(self.exp_id)+'_'+str(self.model_id)+'_'+str(self.num_epoch)+'.mat'
-        self.param = SetParam()
+        self.param = paramSet()
         self.buildMLP()
 
     def runExp(self):
         if not os.path.exists(self.param_pkl):
             if self.exp_id == 0:
-                np.random.seed(1)
+                np.random.seed(100)
                 rand_ind = np.random.permutation([i for i in range(100000)])       
+                #rand_ind = [i for i in range(100000)]
                 self.loadData(self.path_train,'train',rand_ind[:90000])
                 self.loadData(self.path_train,'valid',rand_ind[90000:])
-                self.loadData(self.path_test,'test',options={'data_id':1,'data':'test_p10010.mat'})
-                # l2 paramters
-                import scipy.io
-                mat = scipy.io.loadmat('l2opt.mat')
-                
-                p_algo = self.param.param_algo(batch_size = self.batch_size,
-                                         termination_criterion=EpochCounter(max_epochs=self.num_epoch),
-                                        #cost=Dropout(input_include_probs={'l1': .8},input_scales={'l1': 1.}),
-                                         learning_rate=0.001,
-                                         batches_per_iter =9,
-                                         init_momentum=0.5)    
-            self.train(p_algo)
+                #print self.DataLoader.data['train'].X.shape
+                #print self.DataLoader.data['valid'].X.shape
+                if self.model_id == -1:
+                    # l2 paramters    
+                    print "load weight:"                
+                    self.loadWeight('init_p0.mat')
+                    pass
+                p_monitor =['train_objective','valid_objective']
+                p_algo = self.param.param_algo(batch_size = self.batch_size,                    
+                         termination_criterion=EpochCounter(max_epochs=self.num_epoch),
+                         #cost=Dropout(input_include_probs={'l1': .8},input_scales={'l1': 1.}),
+                         learning_rate=0.001,
+                         learning_rule = Momentum(0.5))    
+            self.train(p_algo,p_monitor)        
             self.saveWeight(self.param_pkl)
         elif not os.path.exists(self.result_mat):
             import scipy.io        
@@ -93,6 +97,12 @@ class Deep_low(DBL_model):
         elif self.model_id ==5:        
             # train 2 maxout layer            
             pass
+    def test_param(self):
+        print 'test param:'
+        param = self.model.layers[0].get_params()      
+        aa = param[0].get_value()
+        bb = param[1].get_value()
+        print aa[:3,:3],bb[:10]
 
 
 if __name__ == "__main__":             
