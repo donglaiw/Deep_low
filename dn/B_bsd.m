@@ -7,7 +7,7 @@ init
 load([T_DIR 'berk_test'])
 err= zeros(1,5);
 yhats= cell(1,5);
-In = Ins{id};
+In = double(Ins{id});
 I = Is{id};
 psz = 17;
 sz = size(I);
@@ -19,9 +19,9 @@ for algo =1:6
         yhat = In;
     case 2
         % optimal L2
-        load l2opt
+        load init_p-1
         nps = im2col(In,[psz psz]);        
-        phat = [double(nps);ones(1,size(nps,2))]'*xx;
+        phat = [single(nps);ones(1,size(nps,2))]'*[param{1};param{2}];
         yhat = uint8(scol2im(phat',psz,sz(1),sz(2),'average'));
         % initial test image error: 0.1715
         %{
@@ -36,7 +36,7 @@ for algo =1:6
     case 4
         exp_id = 0; 
         model_id = 1;
-        num_epoch =100;
+        num_epoch =10000;
         nn = sprintf('%d_%d_%d',exp_id,model_id,num_epoch);
         fn = [R_DIR nn '/dl_r' nn '.mat'];
         if exist(fn,'file')
@@ -46,10 +46,10 @@ for algo =1:6
         yhat = yhat*255;
     case 5
         exp_id = 0; 
-        model_id = 1;
+        model_id = 3;
         num_epoch = 1000;
         nn = sprintf('%d_%d_%d',exp_id,model_id,num_epoch);
-        fn = [R_DIR nn '/dl_r' nn '.mat'];
+        fn = [R_DIR nn '/' num2str(id-1) 'dl_r1_' nn '.mat'];
         if exist(fn,'file')
             load(fn) 
             yhat=scol2im(result{1}',psz,sz(1),sz(2),'average');
@@ -63,10 +63,9 @@ for algo =1:6
         model.weightsSig = 2;
         % the denoising stride. Smaller is better, but is computationally 
         % more expensive.
-        model.step = 3;
+        model.step = 1;
         % denoise
         fprintf('Starting to denoise...\n');
-        tstart = tic;
         yhat = fdenoiseNeural(In, 25, model);        
     end
     err(algo) = U_psnr(I,yhat);

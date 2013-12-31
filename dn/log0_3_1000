@@ -1,0 +1,2012 @@
+	Epochs seen: 0
+	train_objective: 21.9012451172
+	Epochs seen: 1
+	train_objective: 2.469e+04
+	Epochs seen: 0
+	train_objective: 21.9012451172
+	Epochs seen: 1
+	train_objective: 21.8969841003
+	Epochs seen: 0
+	train_objective: 21.9012451172
+	Epochs seen: 1
+	train_objective: 26.2133388519
+	Epochs seen: 0
+	train_objective: 21.9012451172
+	Epochs seen: 1
+	train_objective: 21.8969841003
+	Epochs seen: 2
+	train_objective: 21.8939628601
+	Epochs seen: 3
+	train_objective: 21.8922386169
+	Epochs seen: 4
+	train_objective: 21.8902664185
+	Epochs seen: 5
+	train_objective: 21.8870220184
+	Epochs seen: 6
+	train_objective: 21.8852386475
+	Epochs seen: 7
+	train_objective: 21.8840255737
+	Epochs seen: 8
+	train_objective: 21.8817958832
+	Epochs seen: 9
+	train_objective: 21.8796215057
+	Epochs seen: 10
+	train_objective: 21.8776798248
+	Epochs seen: 11
+	train_objective: 21.8782119751
+	Epochs seen: 12
+	train_objective: 21.8755149841
+	Epochs seen: 13
+	train_objective: 21.8730010986
+	Epochs seen: 14
+	train_objective: 21.872209549
+	Epochs seen: 15
+	train_objective: 21.8800010681
+	Epochs seen: 16
+	train_objective: 21.8696842194
+	Epochs seen: 17
+	train_objective: 21.8688316345
+	Epochs seen: 18
+	train_objective: 21.8664913177
+	Epochs seen: 19
+	train_objective: 21.8652381897
+	Epochs seen: 20
+	train_objective: 21.864112854
+	Epochs seen: 21
+	train_objective: 21.8630638123
+	Epochs seen: 22
+	train_objective: 21.8667507172
+	Epochs seen: 23
+	train_objective: 21.8624172211
+	Epochs seen: 24
+	train_objective: 21.8603019714
+	Epochs seen: 25
+	train_objective: 21.8593769073
+	Epochs seen: 26
+	train_objective: 21.8579483032
+	Epochs seen: 27
+	train_objective: 21.8571643829
+	Epochs seen: 28
+	train_objective: 21.8567142487
+	Epochs seen: 29
+	train_objective: 21.8579273224
+	Epochs seen: 30
+	train_objective: 21.8543510437
+	Epochs seen: 31
+	train_objective: 21.8541221619
+	Epochs seen: 32
+	train_objective: 21.8528194427
+	Epochs seen: 33
+	train_objective: 21.8546924591
+	Epochs seen: 34
+	train_objective: 21.8520336151
+	Epochs seen: 35
+	train_objective: 21.8503475189
+	Epochs seen: 36
+	train_objective: 21.8493785858
+	Epochs seen: 37
+	train_objective: 21.848690033
+	Epochs seen: 38
+	train_objective: 21.8479042053
+	Epochs seen: 39
+	train_objective: 21.8475818634
+	Epochs seen: 40
+	train_objective: 21.8477954865
+	Epochs seen: 41
+	train_objective: 21.8459377289
+	Epochs seen: 42
+	train_objective: 21.8454723358
+	Epochs seen: 43
+	train_objective: 21.844877243
+	Epochs seen: 44
+	train_objective: 21.8444328308
+	Epochs seen: 45
+	train_objective: 21.8434467316
+	Epochs seen: 46
+	train_objective: 21.8423423767
+	Epochs seen: 47
+	train_objective: 21.8426055908
+	Epochs seen: 48
+	train_objective: 21.842464447
+	Epochs seen: 49
+	train_objective: 21.8414363861
+	Epochs seen: 50
+	train_objective: 21.8427600861
+	Epochs seen: 51
+	train_objective: 21.8397655487
+	Epochs seen: 52
+	train_objective: 21.8392982483
+	Epochs seen: 53
+	train_objective: 21.8384246826
+	Epochs seen: 54
+	train_objective: 21.8379001617
+	Epochs seen: 55
+	train_objective: 21.8383636475
+	Epochs seen: 56
+	train_objective: 21.837474823
+	Epochs seen: 57
+	train_objective: 21.8364200592
+	Epochs seen: 58
+	train_objective: 21.839805603
+	Epochs seen: 59
+	train_objective: 21.8368721008
+	Epochs seen: 60
+	train_objective: 21.8349380493
+	Epochs seen: 61
+	train_objective: 21.8359966278
+	Epochs seen: 62
+	train_objective: 21.8340339661
+	Epochs seen: 63
+	train_objective: 21.8341445923
+	Epochs seen: 64
+	train_objective: 21.8334770203
+	Epochs seen: 65
+	train_objective: 21.8331565857
+	Epochs seen: 66
+	train_objective: 21.8320960999
+	Epochs seen: 67
+	train_objective: 21.8318080902
+	Epochs seen: 68
+	train_objective: 21.8309650421
+	Epochs seen: 69
+	train_objective: 21.8314743042
+	Epochs seen: 70
+	train_objective: 21.8299732208
+	Epochs seen: 71
+	train_objective: 21.8298912048
+	Epochs seen: 72
+	train_objective: 21.8294048309
+	Epochs seen: 73
+	train_objective: 21.8288631439
+	Epochs seen: 74
+	train_objective: 21.8290634155
+	Epochs seen: 75
+	train_objective: 21.8309116364
+	Epochs seen: 76
+	train_objective: 21.828207016
+	Epochs seen: 77
+	train_objective: 21.8293952942
+	Epochs seen: 78
+	train_objective: 21.8269042969
+	Epochs seen: 79
+	train_objective: 21.8268928528
+	Epochs seen: 80
+	train_objective: 21.8260478973
+	Epochs seen: 81
+	train_objective: 21.8255290985
+	Epochs seen: 82
+	train_objective: 21.8259868622
+	Epochs seen: 83
+	train_objective: 21.8250179291
+	Epochs seen: 84
+	train_objective: 21.8247814178
+	Epochs seen: 85
+	train_objective: 21.8241539001
+	Epochs seen: 86
+	train_objective: 21.82380867
+	Epochs seen: 87
+	train_objective: 21.8234043121
+	Epochs seen: 88
+	train_objective: 21.8232727051
+	Epochs seen: 89
+	train_objective: 21.8253040314
+	Epochs seen: 90
+	train_objective: 21.822845459
+	Epochs seen: 91
+	train_objective: 21.822101593
+	Epochs seen: 92
+	train_objective: 21.8215751648
+	Epochs seen: 93
+	train_objective: 21.8217220306
+	Epochs seen: 94
+	train_objective: 21.8207263947
+	Epochs seen: 95
+	train_objective: 21.8211345673
+	Epochs seen: 96
+	train_objective: 21.8203372955
+	Epochs seen: 97
+	train_objective: 21.8210601807
+	Epochs seen: 98
+	train_objective: 21.8200340271
+	Epochs seen: 99
+	train_objective: 21.8192825317
+	Epochs seen: 100
+	train_objective: 21.8190460205
+	Epochs seen: 101
+	train_objective: 21.8188362122
+	Epochs seen: 102
+	train_objective: 21.8212623596
+	Epochs seen: 103
+	train_objective: 21.8193759918
+	Epochs seen: 104
+	train_objective: 21.8212547302
+	Epochs seen: 105
+	train_objective: 21.8197441101
+	Epochs seen: 106
+	train_objective: 21.8170566559
+	Epochs seen: 107
+	train_objective: 21.8173027039
+	Epochs seen: 108
+	train_objective: 21.817855835
+	Epochs seen: 109
+	train_objective: 21.8162117004
+	Epochs seen: 110
+	train_objective: 21.8158130646
+	Epochs seen: 111
+	train_objective: 21.8184986115
+	Epochs seen: 112
+	train_objective: 21.8156738281
+	Epochs seen: 113
+	train_objective: 21.8158111572
+	Epochs seen: 114
+	train_objective: 21.8146324158
+	Epochs seen: 115
+	train_objective: 21.8144378662
+	Epochs seen: 116
+	train_objective: 21.8147888184
+	Epochs seen: 117
+	train_objective: 21.8140201569
+	Epochs seen: 118
+	train_objective: 21.8137168884
+	Epochs seen: 119
+	train_objective: 21.8136043549
+	Epochs seen: 120
+	train_objective: 21.8149452209
+	Epochs seen: 121
+	train_objective: 21.8130474091
+	Epochs seen: 122
+	train_objective: 21.8125171661
+	Epochs seen: 123
+	train_objective: 21.8121471405
+	Epochs seen: 124
+	train_objective: 21.8118743896
+	Epochs seen: 125
+	train_objective: 21.8115253448
+	Epochs seen: 126
+	train_objective: 21.8114356995
+	Epochs seen: 127
+	train_objective: 21.8114395142
+	Epochs seen: 128
+	train_objective: 21.8113574982
+	Epochs seen: 129
+	train_objective: 21.8118038177
+	Epochs seen: 130
+	train_objective: 21.8103923798
+	Epochs seen: 131
+	train_objective: 21.8104515076
+	Epochs seen: 132
+	train_objective: 21.8096313477
+	Epochs seen: 133
+	train_objective: 21.8098449707
+	Epochs seen: 134
+	train_objective: 21.8094959259
+	Epochs seen: 135
+	train_objective: 21.8092784882
+	Epochs seen: 136
+	train_objective: 21.8092269897
+	Epochs seen: 137
+	train_objective: 21.8087768555
+	Epochs seen: 138
+	train_objective: 21.8086891174
+	Epochs seen: 139
+	train_objective: 21.8081283569
+	Epochs seen: 140
+	train_objective: 21.807970047
+	Epochs seen: 141
+	train_objective: 21.8080425262
+	Epochs seen: 142
+	train_objective: 21.8079528809
+	Epochs seen: 143
+	train_objective: 21.8080711365
+	Epochs seen: 144
+	train_objective: 21.807346344
+	Epochs seen: 145
+	train_objective: 21.8070735931
+	Epochs seen: 146
+	train_objective: 21.8062324524
+	Epochs seen: 147
+	train_objective: 21.8109512329
+	Epochs seen: 148
+	train_objective: 21.8070869446
+	Epochs seen: 149
+	train_objective: 21.806936264
+	Epochs seen: 150
+	train_objective: 21.8051776886
+	Epochs seen: 151
+	train_objective: 21.8053512573
+	Epochs seen: 152
+	train_objective: 21.8049983978
+	Epochs seen: 153
+	train_objective: 21.8058242798
+	Epochs seen: 154
+	train_objective: 21.8044376373
+	Epochs seen: 155
+	train_objective: 21.8040657043
+	Epochs seen: 156
+	train_objective: 21.8046188354
+	Epochs seen: 157
+	train_objective: 21.804813385
+	Epochs seen: 158
+	train_objective: 21.8038654327
+	Epochs seen: 159
+	train_objective: 21.8044109344
+	Epochs seen: 160
+	train_objective: 21.8035831451
+	Epochs seen: 161
+	train_objective: 21.8034572601
+	Epochs seen: 162
+	train_objective: 21.8031520844
+	Epochs seen: 163
+	train_objective: 21.8028144836
+	Epochs seen: 164
+	train_objective: 21.8039608002
+	Epochs seen: 165
+	train_objective: 21.8018894196
+	Epochs seen: 166
+	train_objective: 21.8023090363
+	Epochs seen: 167
+	train_objective: 21.8017559052
+	Epochs seen: 168
+	train_objective: 21.8022518158
+	Epochs seen: 169
+	train_objective: 21.8012256622
+	Epochs seen: 170
+	train_objective: 21.8008651733
+	Epochs seen: 171
+	train_objective: 21.8014278412
+	Epochs seen: 172
+	train_objective: 21.8007316589
+	Epochs seen: 173
+	train_objective: 21.8004112244
+	Epochs seen: 174
+	train_objective: 21.8019695282
+	Epochs seen: 175
+	train_objective: 21.8029441833
+	Epochs seen: 176
+	train_objective: 21.8003616333
+	Epochs seen: 177
+	train_objective: 21.8000926971
+	Epochs seen: 178
+	train_objective: 21.8000640869
+	Epochs seen: 179
+	train_objective: 21.7993144989
+	Epochs seen: 180
+	train_objective: 21.7989692688
+	Epochs seen: 181
+	train_objective: 21.7998790741
+	Epochs seen: 182
+	train_objective: 21.7988357544
+	Epochs seen: 183
+	train_objective: 21.79845047
+	Epochs seen: 184
+	train_objective: 21.7985134125
+	Epochs seen: 185
+	train_objective: 21.7980480194
+	Epochs seen: 186
+	train_objective: 21.7983341217
+	Epochs seen: 187
+	train_objective: 21.798833847
+	Epochs seen: 188
+	train_objective: 21.7981948853
+	Epochs seen: 189
+	train_objective: 21.7977485657
+	Epochs seen: 190
+	train_objective: 21.7973175049
+	Epochs seen: 191
+	train_objective: 21.7981376648
+	Epochs seen: 192
+	train_objective: 21.7974033356
+	Epochs seen: 193
+	train_objective: 21.7969455719
+	Epochs seen: 194
+	train_objective: 21.7970237732
+	Epochs seen: 195
+	train_objective: 21.7962036133
+	Epochs seen: 196
+	train_objective: 21.796546936
+	Epochs seen: 197
+	train_objective: 21.7958679199
+	Epochs seen: 198
+	train_objective: 21.7960624695
+	Epochs seen: 199
+	train_objective: 21.7956199646
+	Epochs seen: 200
+	train_objective: 21.7952251434
+	Epochs seen: 201
+	train_objective: 21.7961750031
+	Epochs seen: 202
+	train_objective: 21.7950706482
+	Epochs seen: 203
+	train_objective: 21.7957820892
+	Epochs seen: 204
+	train_objective: 21.7950725555
+	Epochs seen: 205
+	train_objective: 21.7941646576
+	Epochs seen: 206
+	train_objective: 21.7937088013
+	Epochs seen: 207
+	train_objective: 21.7948951721
+	Epochs seen: 208
+	train_objective: 21.7953071594
+	Epochs seen: 209
+	train_objective: 21.7935676575
+	Epochs seen: 210
+	train_objective: 21.7930316925
+	Epochs seen: 211
+	train_objective: 21.7927627563
+	Epochs seen: 212
+	train_objective: 21.792842865
+	Epochs seen: 213
+	train_objective: 21.7940349579
+	Epochs seen: 214
+	train_objective: 21.7923278809
+	Epochs seen: 215
+	train_objective: 21.7927341461
+	Epochs seen: 216
+	train_objective: 21.7923984528
+	Epochs seen: 217
+	train_objective: 21.7919063568
+	Epochs seen: 218
+	train_objective: 21.7919807434
+	Epochs seen: 219
+	train_objective: 21.7919406891
+	Epochs seen: 220
+	train_objective: 21.7918052673
+	Epochs seen: 221
+	train_objective: 21.7915325165
+	Epochs seen: 222
+	train_objective: 21.7935447693
+	Epochs seen: 223
+	train_objective: 21.7905063629
+	Epochs seen: 224
+	train_objective: 21.7906017303
+	Epochs seen: 225
+	train_objective: 21.7907867432
+	Epochs seen: 226
+	train_objective: 21.7907123566
+	Epochs seen: 227
+	train_objective: 21.7911491394
+	Epochs seen: 228
+	train_objective: 21.7912273407
+	Epochs seen: 229
+	train_objective: 21.7909908295
+	Epochs seen: 230
+	train_objective: 21.7892875671
+	Epochs seen: 231
+	train_objective: 21.7917137146
+	Epochs seen: 232
+	train_objective: 21.7911205292
+	Epochs seen: 233
+	train_objective: 21.788684845
+	Epochs seen: 234
+	train_objective: 21.7883834839
+	Epochs seen: 235
+	train_objective: 21.788356781
+	Epochs seen: 236
+	train_objective: 21.7880096436
+	Epochs seen: 237
+	train_objective: 21.7880592346
+	Epochs seen: 238
+	train_objective: 21.7878055573
+	Epochs seen: 239
+	train_objective: 21.7880096436
+	Epochs seen: 240
+	train_objective: 21.7874622345
+	Epochs seen: 241
+	train_objective: 21.7874412537
+	Epochs seen: 242
+	train_objective: 21.7888336182
+	Epochs seen: 243
+	train_objective: 21.7869777679
+	Epochs seen: 244
+	train_objective: 21.7867469788
+	Epochs seen: 245
+	train_objective: 21.7862052917
+	Epochs seen: 246
+	train_objective: 21.7859649658
+	Epochs seen: 247
+	train_objective: 21.7862243652
+	Epochs seen: 248
+	train_objective: 21.7885723114
+	Epochs seen: 249
+	train_objective: 21.7861404419
+	Epochs seen: 250
+	train_objective: 21.7854785919
+	Epochs seen: 251
+	train_objective: 21.7866439819
+	Epochs seen: 252
+	train_objective: 21.7849330902
+	Epochs seen: 253
+	train_objective: 21.7852134705
+	Epochs seen: 254
+	train_objective: 21.7840499878
+	Epochs seen: 255
+	train_objective: 21.784198761
+	Epochs seen: 256
+	train_objective: 21.7846927643
+	Epochs seen: 257
+	train_objective: 21.7839183807
+	Epochs seen: 258
+	train_objective: 21.7838821411
+	Epochs seen: 259
+	train_objective: 21.7879276276
+	Epochs seen: 260
+	train_objective: 21.7833690643
+	Epochs seen: 261
+	train_objective: 21.7827110291
+	Epochs seen: 262
+	train_objective: 21.784488678
+	Epochs seen: 263
+	train_objective: 21.7839336395
+	Epochs seen: 264
+	train_objective: 21.7825508118
+	Epochs seen: 265
+	train_objective: 21.7856998444
+	Epochs seen: 266
+	train_objective: 21.7824363708
+	Epochs seen: 267
+	train_objective: 21.7811012268
+	Epochs seen: 268
+	train_objective: 21.7851104736
+	Epochs seen: 269
+	train_objective: 21.7815914154
+	Epochs seen: 270
+	train_objective: 21.7805042267
+	Epochs seen: 271
+	train_objective: 21.7807846069
+	Epochs seen: 272
+	train_objective: 21.7799453735
+	Epochs seen: 273
+	train_objective: 21.7800292969
+	Epochs seen: 274
+	train_objective: 21.7792549133
+	Epochs seen: 275
+	train_objective: 21.7803401947
+	Epochs seen: 276
+	train_objective: 21.7788391113
+	Epochs seen: 277
+	train_objective: 21.7784976959
+	Epochs seen: 278
+	train_objective: 21.7784919739
+	Epochs seen: 279
+	train_objective: 21.7785263062
+	Epochs seen: 280
+	train_objective: 21.778377533
+	Epochs seen: 281
+	train_objective: 21.7786197662
+	Epochs seen: 282
+	train_objective: 21.7767410278
+	Epochs seen: 283
+	train_objective: 21.7774505615
+	Epochs seen: 284
+	train_objective: 21.7766475677
+	Epochs seen: 285
+	train_objective: 21.7760047913
+	Epochs seen: 286
+	train_objective: 21.7761573792
+	Epochs seen: 287
+	train_objective: 21.7766342163
+	Epochs seen: 288
+	train_objective: 21.7756729126
+	Epochs seen: 289
+	train_objective: 21.7747211456
+	Epochs seen: 290
+	train_objective: 21.7773761749
+	Epochs seen: 291
+	train_objective: 21.7745399475
+	Epochs seen: 292
+	train_objective: 21.7733097076
+	Epochs seen: 293
+	train_objective: 21.7727298737
+	Epochs seen: 294
+	train_objective: 21.7729721069
+	Epochs seen: 295
+	train_objective: 21.7720375061
+	Epochs seen: 296
+	train_objective: 21.771478653
+	Epochs seen: 297
+	train_objective: 21.7707901001
+	Epochs seen: 298
+	train_objective: 21.771320343
+	Epochs seen: 299
+	train_objective: 21.7710609436
+	Epochs seen: 300
+	train_objective: 21.7705039978
+	Epochs seen: 301
+	train_objective: 21.7694377899
+	Epochs seen: 302
+	train_objective: 21.7695007324
+	Epochs seen: 303
+	train_objective: 21.767950058
+	Epochs seen: 304
+	train_objective: 21.7672863007
+	Epochs seen: 305
+	train_objective: 21.7677116394
+	Epochs seen: 306
+	train_objective: 21.7659130096
+	Epochs seen: 307
+	train_objective: 21.765499115
+	Epochs seen: 308
+	train_objective: 21.7644844055
+	Epochs seen: 309
+	train_objective: 21.7691841125
+	Epochs seen: 310
+	train_objective: 21.7633628845
+	Epochs seen: 311
+	train_objective: 21.7622261047
+	Epochs seen: 312
+	train_objective: 21.7623844147
+	Epochs seen: 313
+	train_objective: 21.7604427338
+	Epochs seen: 314
+	train_objective: 21.7618045807
+	Epochs seen: 315
+	train_objective: 21.7602081299
+	Epochs seen: 316
+	train_objective: 21.7574653625
+	Epochs seen: 317
+	train_objective: 21.7563228607
+	Epochs seen: 318
+	train_objective: 21.7550239563
+	Epochs seen: 319
+	train_objective: 21.7541618347
+	Epochs seen: 320
+	train_objective: 21.7539997101
+	Epochs seen: 321
+	train_objective: 21.751745224
+	Epochs seen: 322
+	train_objective: 21.7507209778
+	Epochs seen: 323
+	train_objective: 21.7485809326
+	Epochs seen: 324
+	train_objective: 21.7469654083
+	Epochs seen: 325
+	train_objective: 21.7453098297
+	Epochs seen: 326
+	train_objective: 21.7432613373
+	Epochs seen: 327
+	train_objective: 21.7426757812
+	Epochs seen: 328
+	train_objective: 21.7389755249
+	Epochs seen: 329
+	train_objective: 21.7383861542
+	Epochs seen: 330
+	train_objective: 21.7381858826
+	Epochs seen: 331
+	train_objective: 21.7327003479
+	Epochs seen: 332
+	train_objective: 21.7293739319
+	Epochs seen: 333
+	train_objective: 21.7261581421
+	Epochs seen: 334
+	train_objective: 21.7253055573
+	Epochs seen: 335
+	train_objective: 21.7196464539
+	Epochs seen: 336
+	train_objective: 21.7165966034
+	Epochs seen: 337
+	train_objective: 21.7124023438
+	Epochs seen: 338
+	train_objective: 21.7098903656
+	Epochs seen: 339
+	train_objective: 21.7039089203
+	Epochs seen: 340
+	train_objective: 21.6995124817
+	Epochs seen: 341
+	train_objective: 21.6940975189
+	Epochs seen: 342
+	train_objective: 21.6887588501
+	Epochs seen: 343
+	train_objective: 21.6820983887
+	Epochs seen: 344
+	train_objective: 21.675983429
+	Epochs seen: 345
+	train_objective: 21.6695404053
+	Epochs seen: 346
+	train_objective: 21.6631355286
+	Epochs seen: 347
+	train_objective: 21.6579208374
+	Epochs seen: 348
+	train_objective: 21.6514816284
+	Epochs seen: 349
+	train_objective: 21.6424770355
+	Epochs seen: 350
+	train_objective: 21.6354160309
+	Epochs seen: 351
+	train_objective: 21.6265716553
+	Epochs seen: 352
+	train_objective: 21.6200084686
+	Epochs seen: 353
+	train_objective: 21.6120758057
+	Epochs seen: 354
+	train_objective: 21.6020507812
+	Epochs seen: 355
+	train_objective: 21.5960350037
+	Epochs seen: 356
+	train_objective: 21.5875358582
+	Epochs seen: 357
+	train_objective: 21.5810279846
+	Epochs seen: 358
+	train_objective: 21.5773906708
+	Epochs seen: 359
+	train_objective: 21.5681304932
+	Epochs seen: 360
+	train_objective: 21.5809383392
+	Epochs seen: 361
+	train_objective: 21.6289634705
+	Epochs seen: 362
+	train_objective: 21.6702575684
+	Epochs seen: 363
+	train_objective: 21.7107200623
+	Epochs seen: 364
+	train_objective: 21.7127990723
+	Epochs seen: 365
+	train_objective: 21.8066425323
+	Epochs seen: 366
+	train_objective: 21.9526844025
+	Epochs seen: 367
+	train_objective: 22.5404815674
+	Epochs seen: 368
+	train_objective: 22.6247234344
+	Epochs seen: 369
+	train_objective: 22.3736686707
+	Epochs seen: 370
+	train_objective: 21.7860660553
+	Epochs seen: 371
+	train_objective: 21.6070461273
+	Epochs seen: 372
+	train_objective: 21.5544185638
+	Epochs seen: 373
+	train_objective: 21.5059566498
+	Epochs seen: 374
+	train_objective: 21.498840332
+	Epochs seen: 375
+	train_objective: 21.4995040894
+	Epochs seen: 376
+	train_objective: 21.4929218292
+	Epochs seen: 377
+	train_objective: 21.5005874634
+	Epochs seen: 378
+	train_objective: 21.5499687195
+	Epochs seen: 379
+	train_objective: 21.5487232208
+	Epochs seen: 380
+	train_objective: 21.6961402893
+	Epochs seen: 381
+	train_objective: 21.8127212524
+	Epochs seen: 382
+	train_objective: 21.8242073059
+	Epochs seen: 383
+	train_objective: 21.7788581848
+	Epochs seen: 384
+	train_objective: 21.6738796234
+	Epochs seen: 385
+	train_objective: 21.593755722
+	Epochs seen: 386
+	train_objective: 21.5410842896
+	Epochs seen: 387
+	train_objective: 21.6169605255
+	Epochs seen: 388
+	train_objective: 21.6306705475
+	Epochs seen: 389
+	train_objective: 21.644569397
+	Epochs seen: 390
+	train_objective: 21.7012233734
+	Epochs seen: 391
+	train_objective: 21.7123756409
+	Epochs seen: 392
+	train_objective: 21.8089046478
+	Epochs seen: 393
+	train_objective: 21.8060569763
+	Epochs seen: 394
+	train_objective: 21.8000869751
+	Epochs seen: 395
+	train_objective: 21.7206840515
+	Epochs seen: 396
+	train_objective: 21.6433048248
+	Epochs seen: 397
+	train_objective: 21.6055583954
+	Epochs seen: 398
+	train_objective: 21.5906257629
+	Epochs seen: 399
+	train_objective: 21.6351642609
+	Epochs seen: 400
+	train_objective: 21.6325855255
+	Epochs seen: 401
+	train_objective: 21.5591831207
+	Epochs seen: 402
+	train_objective: 21.547580719
+	Epochs seen: 403
+	train_objective: 21.5092487335
+	Epochs seen: 404
+	train_objective: 21.4764766693
+	Epochs seen: 405
+	train_objective: 21.4623184204
+	Epochs seen: 406
+	train_objective: 21.4657249451
+	Epochs seen: 407
+	train_objective: 21.4607982635
+	Epochs seen: 408
+	train_objective: 21.4782657623
+	Epochs seen: 409
+	train_objective: 21.5064792633
+	Epochs seen: 410
+	train_objective: 21.5881538391
+	Epochs seen: 411
+	train_objective: 21.5284290314
+	Epochs seen: 412
+	train_objective: 21.5928764343
+	Epochs seen: 413
+	train_objective: 21.6139068604
+	Epochs seen: 414
+	train_objective: 21.7467327118
+	Epochs seen: 415
+	train_objective: 21.8008613586
+	Epochs seen: 416
+	train_objective: 21.9409942627
+	Epochs seen: 417
+	train_objective: 21.9492435455
+	Epochs seen: 418
+	train_objective: 21.7748126984
+	Epochs seen: 419
+	train_objective: 21.6848621368
+	Epochs seen: 420
+	train_objective: 21.5548725128
+	Epochs seen: 421
+	train_objective: 21.5801105499
+	Epochs seen: 422
+	train_objective: 21.5280513763
+	Epochs seen: 423
+	train_objective: 21.4800453186
+	Epochs seen: 424
+	train_objective: 21.4498252869
+	Epochs seen: 425
+	train_objective: 21.4242935181
+	Epochs seen: 426
+	train_objective: 21.414434433
+	Epochs seen: 427
+	train_objective: 21.4177894592
+	Epochs seen: 428
+	train_objective: 21.4086322784
+	Epochs seen: 429
+	train_objective: 21.4178256989
+	Epochs seen: 430
+	train_objective: 21.4210910797
+	Epochs seen: 431
+	train_objective: 21.4246997833
+	Epochs seen: 432
+	train_objective: 21.4107456207
+	Epochs seen: 433
+	train_objective: 21.4222049713
+	Epochs seen: 434
+	train_objective: 21.41837883
+	Epochs seen: 435
+	train_objective: 21.4043960571
+	Epochs seen: 436
+	train_objective: 21.4298610687
+	Epochs seen: 437
+	train_objective: 21.4268684387
+	Epochs seen: 438
+	train_objective: 21.4055690765
+	Epochs seen: 439
+	train_objective: 21.4001655579
+	Epochs seen: 440
+	train_objective: 21.4253025055
+	Epochs seen: 441
+	train_objective: 21.4652519226
+	Epochs seen: 442
+	train_objective: 21.8429203033
+	Epochs seen: 443
+	train_objective: 22.1972770691
+	Epochs seen: 444
+	train_objective: 22.7645950317
+	Epochs seen: 445
+	train_objective: 22.9613876343
+	Epochs seen: 446
+	train_objective: 22.1054096222
+	Epochs seen: 447
+	train_objective: 21.6302680969
+	Epochs seen: 448
+	train_objective: 21.5355987549
+	Epochs seen: 449
+	train_objective: 21.4731750488
+	Epochs seen: 450
+	train_objective: 21.4622344971
+	Epochs seen: 451
+	train_objective: 21.4561843872
+	Epochs seen: 452
+	train_objective: 21.4240627289
+	Epochs seen: 453
+	train_objective: 21.4432029724
+	Epochs seen: 454
+	train_objective: 21.4337043762
+	Epochs seen: 455
+	train_objective: 21.4320888519
+	Epochs seen: 456
+	train_objective: 21.3820877075
+	Epochs seen: 457
+	train_objective: 21.3787345886
+	Epochs seen: 458
+	train_objective: 21.384765625
+	Epochs seen: 459
+	train_objective: 21.3880405426
+	Epochs seen: 460
+	train_objective: 21.3877220154
+	Epochs seen: 461
+	train_objective: 21.3795623779
+	Epochs seen: 462
+	train_objective: 21.3834953308
+	Epochs seen: 463
+	train_objective: 21.3846263885
+	Epochs seen: 464
+	train_objective: 21.3761882782
+	Epochs seen: 465
+	train_objective: 21.3886547089
+	Epochs seen: 466
+	train_objective: 21.4227428436
+	Epochs seen: 467
+	train_objective: 21.5131645203
+	Epochs seen: 468
+	train_objective: 21.5235519409
+	Epochs seen: 469
+	train_objective: 21.6229381561
+	Epochs seen: 470
+	train_objective: 22.1048374176
+	Epochs seen: 471
+	train_objective: 22.3951206207
+	Epochs seen: 472
+	train_objective: 22.2998390198
+	Epochs seen: 473
+	train_objective: 22.0932044983
+	Epochs seen: 474
+	train_objective: 21.8592815399
+	Epochs seen: 475
+	train_objective: 21.6601104736
+	Epochs seen: 476
+	train_objective: 21.5252075195
+	Epochs seen: 477
+	train_objective: 21.3881988525
+	Epochs seen: 478
+	train_objective: 21.3788909912
+	Epochs seen: 479
+	train_objective: 21.3726501465
+	Epochs seen: 480
+	train_objective: 21.3785247803
+	Epochs seen: 481
+	train_objective: 21.363067627
+	Epochs seen: 482
+	train_objective: 21.3566017151
+	Epochs seen: 483
+	train_objective: 21.3568744659
+	Epochs seen: 484
+	train_objective: 21.3685073853
+	Epochs seen: 485
+	train_objective: 21.3827877045
+	Epochs seen: 486
+	train_objective: 21.4513168335
+	Epochs seen: 487
+	train_objective: 21.4404964447
+	Epochs seen: 488
+	train_objective: 21.5059757233
+	Epochs seen: 489
+	train_objective: 21.4904747009
+	Epochs seen: 490
+	train_objective: 21.5341835022
+	Epochs seen: 491
+	train_objective: 21.6221446991
+	Epochs seen: 492
+	train_objective: 21.7518005371
+	Epochs seen: 493
+	train_objective: 22.0760231018
+	Epochs seen: 494
+	train_objective: 21.8329715729
+	Epochs seen: 495
+	train_objective: 21.6850566864
+	Epochs seen: 496
+	train_objective: 21.649394989
+	Epochs seen: 497
+	train_objective: 21.5862045288
+	Epochs seen: 498
+	train_objective: 21.5046062469
+	Epochs seen: 499
+	train_objective: 21.5102863312
+	Epochs seen: 500
+	train_objective: 21.4844360352
+	Epochs seen: 501
+	train_objective: 21.3831558228
+	Epochs seen: 502
+	train_objective: 21.3801937103
+	Epochs seen: 503
+	train_objective: 21.3832836151
+	Epochs seen: 504
+	train_objective: 21.458404541
+	Epochs seen: 505
+	train_objective: 21.5288887024
+	Epochs seen: 506
+	train_objective: 21.7141952515
+	Epochs seen: 507
+	train_objective: 21.763174057
+	Epochs seen: 508
+	train_objective: 21.9518299103
+	Epochs seen: 509
+	train_objective: 21.8389625549
+	Epochs seen: 510
+	train_objective: 21.7471160889
+	Epochs seen: 511
+	train_objective: 21.6084918976
+	Epochs seen: 512
+	train_objective: 21.5229244232
+	Epochs seen: 513
+	train_objective: 21.4788970947
+	Epochs seen: 514
+	train_objective: 21.4197864532
+	Epochs seen: 515
+	train_objective: 21.396030426
+	Epochs seen: 516
+	train_objective: 21.4277362823
+	Epochs seen: 517
+	train_objective: 21.4150276184
+	Epochs seen: 518
+	train_objective: 21.3912601471
+	Epochs seen: 519
+	train_objective: 21.4725494385
+	Epochs seen: 520
+	train_objective: 21.5698165894
+	Epochs seen: 521
+	train_objective: 21.4925899506
+	Epochs seen: 522
+	train_objective: 21.5294761658
+	Epochs seen: 523
+	train_objective: 21.4248027802
+	Epochs seen: 524
+	train_objective: 21.4150104523
+	Epochs seen: 525
+	train_objective: 21.5384883881
+	Epochs seen: 526
+	train_objective: 21.5790424347
+	Epochs seen: 527
+	train_objective: 21.6948299408
+	Epochs seen: 528
+	train_objective: 21.7779922485
+	Epochs seen: 529
+	train_objective: 21.6995277405
+	Epochs seen: 530
+	train_objective: 21.6643676758
+	Epochs seen: 531
+	train_objective: 21.8415718079
+	Epochs seen: 532
+	train_objective: 21.7511558533
+	Epochs seen: 533
+	train_objective: 21.6001873016
+	Epochs seen: 534
+	train_objective: 21.5783061981
+	Epochs seen: 535
+	train_objective: 21.490486145
+	Epochs seen: 536
+	train_objective: 21.3885726929
+	Epochs seen: 537
+	train_objective: 21.3534069061
+	Epochs seen: 538
+	train_objective: 21.3292789459
+	Epochs seen: 539
+	train_objective: 21.3342971802
+	Epochs seen: 540
+	train_objective: 21.3274993896
+	Epochs seen: 541
+	train_objective: 21.3179740906
+	Epochs seen: 542
+	train_objective: 21.3124961853
+	Epochs seen: 543
+	train_objective: 21.318441391
+	Epochs seen: 544
+	train_objective: 21.3102931976
+	Epochs seen: 545
+	train_objective: 21.3179779053
+	Epochs seen: 546
+	train_objective: 21.3452472687
+	Epochs seen: 547
+	train_objective: 21.3415660858
+	Epochs seen: 548
+	train_objective: 21.4608535767
+	Epochs seen: 549
+	train_objective: 21.7152385712
+	Epochs seen: 550
+	train_objective: 21.9606342316
+	Epochs seen: 551
+	train_objective: 22.3097324371
+	Epochs seen: 552
+	train_objective: 22.1583995819
+	Epochs seen: 553
+	train_objective: 22.1696376801
+	Epochs seen: 554
+	train_objective: 21.9731693268
+	Epochs seen: 555
+	train_objective: 21.5825805664
+	Epochs seen: 556
+	train_objective: 21.4789104462
+	Epochs seen: 557
+	train_objective: 21.4999237061
+	Epochs seen: 558
+	train_objective: 21.457485199
+	Epochs seen: 559
+	train_objective: 21.3817119598
+	Epochs seen: 560
+	train_objective: 21.401052475
+	Epochs seen: 561
+	train_objective: 21.3652877808
+	Epochs seen: 562
+	train_objective: 21.3274269104
+	Epochs seen: 563
+	train_objective: 21.3372154236
+	Epochs seen: 564
+	train_objective: 21.3256053925
+	Epochs seen: 565
+	train_objective: 21.3327579498
+	Epochs seen: 566
+	train_objective: 21.3739452362
+	Epochs seen: 567
+	train_objective: 21.3819847107
+	Epochs seen: 568
+	train_objective: 21.3600406647
+	Epochs seen: 569
+	train_objective: 21.4428787231
+	Epochs seen: 570
+	train_objective: 21.4191036224
+	Epochs seen: 571
+	train_objective: 21.4955749512
+	Epochs seen: 572
+	train_objective: 21.4535579681
+	Epochs seen: 573
+	train_objective: 21.4714984894
+	Epochs seen: 574
+	train_objective: 21.4068031311
+	Epochs seen: 575
+	train_objective: 21.4611568451
+	Epochs seen: 576
+	train_objective: 21.5113601685
+	Epochs seen: 577
+	train_objective: 21.7368030548
+	Epochs seen: 578
+	train_objective: 21.804353714
+	Epochs seen: 579
+	train_objective: 21.8752708435
+	Epochs seen: 580
+	train_objective: 21.8418083191
+	Epochs seen: 581
+	train_objective: 21.7081985474
+	Epochs seen: 582
+	train_objective: 21.6481742859
+	Epochs seen: 583
+	train_objective: 21.5526504517
+	Epochs seen: 584
+	train_objective: 21.5883159637
+	Epochs seen: 585
+	train_objective: 21.5751132965
+	Epochs seen: 586
+	train_objective: 21.4984607697
+	Epochs seen: 587
+	train_objective: 21.4058227539
+	Epochs seen: 588
+	train_objective: 21.4396762848
+	Epochs seen: 589
+	train_objective: 21.3303642273
+	Epochs seen: 590
+	train_objective: 21.3544044495
+	Epochs seen: 591
+	train_objective: 21.3425388336
+	Epochs seen: 592
+	train_objective: 21.2973461151
+	Epochs seen: 593
+	train_objective: 21.2836971283
+	Epochs seen: 594
+	train_objective: 21.2914733887
+	Epochs seen: 595
+	train_objective: 21.2912559509
+	Epochs seen: 596
+	train_objective: 21.2951107025
+	Epochs seen: 597
+	train_objective: 21.3194484711
+	Epochs seen: 598
+	train_objective: 21.4220714569
+	Epochs seen: 599
+	train_objective: 21.4010353088
+	Epochs seen: 600
+	train_objective: 21.4475402832
+	Epochs seen: 601
+	train_objective: 21.6580276489
+	Epochs seen: 602
+	train_objective: 21.68800354
+	Epochs seen: 603
+	train_objective: 21.9289836884
+	Epochs seen: 604
+	train_objective: 22.1569709778
+	Epochs seen: 605
+	train_objective: 22.0580425262
+	Epochs seen: 606
+	train_objective: 21.7873744965
+	Epochs seen: 607
+	train_objective: 21.6518287659
+	Epochs seen: 608
+	train_objective: 21.5052509308
+	Epochs seen: 609
+	train_objective: 21.3783931732
+	Epochs seen: 610
+	train_objective: 21.3376502991
+	Epochs seen: 611
+	train_objective: 21.2886791229
+	Epochs seen: 612
+	train_objective: 21.278213501
+	Epochs seen: 613
+	train_objective: 21.283624649
+	Epochs seen: 614
+	train_objective: 21.2606239319
+	Epochs seen: 615
+	train_objective: 21.2686233521
+	Epochs seen: 616
+	train_objective: 21.2663764954
+	Epochs seen: 617
+	train_objective: 21.2914905548
+	Epochs seen: 618
+	train_objective: 21.2910366058
+	Epochs seen: 619
+	train_objective: 21.3773002625
+	Epochs seen: 620
+	train_objective: 21.5866069794
+	Epochs seen: 621
+	train_objective: 21.687379837
+	Epochs seen: 622
+	train_objective: 21.8955478668
+	Epochs seen: 623
+	train_objective: 21.6905059814
+	Epochs seen: 624
+	train_objective: 21.7577056885
+	Epochs seen: 625
+	train_objective: 21.8459377289
+	Epochs seen: 626
+	train_objective: 21.786283493
+	Epochs seen: 627
+	train_objective: 21.7512245178
+	Epochs seen: 628
+	train_objective: 21.618598938
+	Epochs seen: 629
+	train_objective: 21.5971775055
+	Epochs seen: 630
+	train_objective: 21.4983825684
+	Epochs seen: 631
+	train_objective: 21.4415016174
+	Epochs seen: 632
+	train_objective: 21.3650760651
+	Epochs seen: 633
+	train_objective: 21.3458824158
+	Epochs seen: 634
+	train_objective: 21.3623332977
+	Epochs seen: 635
+	train_objective: 21.3049869537
+	Epochs seen: 636
+	train_objective: 21.2950286865
+	Epochs seen: 637
+	train_objective: 21.2828865051
+	Epochs seen: 638
+	train_objective: 21.2949123383
+	Epochs seen: 639
+	train_objective: 21.2790985107
+	Epochs seen: 640
+	train_objective: 21.273273468
+	Epochs seen: 641
+	train_objective: 21.2678833008
+	Epochs seen: 642
+	train_objective: 21.2687721252
+	Epochs seen: 643
+	train_objective: 21.2569179535
+	Epochs seen: 644
+	train_objective: 21.2642765045
+	Epochs seen: 645
+	train_objective: 21.3065071106
+	Epochs seen: 646
+	train_objective: 21.3769626617
+	Epochs seen: 647
+	train_objective: 21.6268348694
+	Epochs seen: 648
+	train_objective: 21.9871826172
+	Epochs seen: 649
+	train_objective: 22.5836200714
+	Epochs seen: 650
+	train_objective: 22.5077438354
+	Epochs seen: 651
+	train_objective: 22.1094741821
+	Epochs seen: 652
+	train_objective: 22.0330142975
+	Epochs seen: 653
+	train_objective: 21.6881580353
+	Epochs seen: 654
+	train_objective: 21.5336799622
+	Epochs seen: 655
+	train_objective: 21.4950332642
+	Epochs seen: 656
+	train_objective: 21.3472690582
+	Epochs seen: 657
+	train_objective: 21.3004188538
+	Epochs seen: 658
+	train_objective: 21.2699489594
+	Epochs seen: 659
+	train_objective: 21.2481193542
+	Epochs seen: 660
+	train_objective: 21.235408783
+	Epochs seen: 661
+	train_objective: 21.2467899323
+	Epochs seen: 662
+	train_objective: 21.2421283722
+	Epochs seen: 663
+	train_objective: 21.2692489624
+	Epochs seen: 664
+	train_objective: 21.2473125458
+	Epochs seen: 665
+	train_objective: 21.2529983521
+	Epochs seen: 666
+	train_objective: 21.2448291779
+	Epochs seen: 667
+	train_objective: 21.2634468079
+	Epochs seen: 668
+	train_objective: 21.2561988831
+	Epochs seen: 669
+	train_objective: 21.3193073273
+	Epochs seen: 670
+	train_objective: 21.4089736938
+	Epochs seen: 671
+	train_objective: 21.4888305664
+	Epochs seen: 672
+	train_objective: 21.5662212372
+	Epochs seen: 673
+	train_objective: 21.7344760895
+	Epochs seen: 674
+	train_objective: 21.9720401764
+	Epochs seen: 675
+	train_objective: 22.035112381
+	Epochs seen: 676
+	train_objective: 22.0814399719
+	Epochs seen: 677
+	train_objective: 22.1762809753
+	Epochs seen: 678
+	train_objective: 21.8685665131
+	Epochs seen: 679
+	train_objective: 21.5760650635
+	Epochs seen: 680
+	train_objective: 21.4548892975
+	Epochs seen: 681
+	train_objective: 21.3474349976
+	Epochs seen: 682
+	train_objective: 21.2704982758
+	Epochs seen: 683
+	train_objective: 21.3140850067
+	Epochs seen: 684
+	train_objective: 21.3011684418
+	Epochs seen: 685
+	train_objective: 21.3018550873
+	Epochs seen: 686
+	train_objective: 21.2660388947
+	Epochs seen: 687
+	train_objective: 21.2679214478
+	Epochs seen: 688
+	train_objective: 21.2467422485
+	Epochs seen: 689
+	train_objective: 21.2376594543
+	Epochs seen: 690
+	train_objective: 21.2687129974
+	Epochs seen: 691
+	train_objective: 21.3063831329
+	Epochs seen: 692
+	train_objective: 21.3370609283
+	Epochs seen: 693
+	train_objective: 21.3353900909
+	Epochs seen: 694
+	train_objective: 21.3138237
+	Epochs seen: 695
+	train_objective: 21.3436031342
+	Epochs seen: 696
+	train_objective: 21.4351139069
+	Epochs seen: 697
+	train_objective: 21.4603271484
+	Epochs seen: 698
+	train_objective: 21.4141998291
+	Epochs seen: 699
+	train_objective: 21.4934501648
+	Epochs seen: 700
+	train_objective: 21.6983375549
+	Epochs seen: 701
+	train_objective: 22.0342235565
+	Epochs seen: 702
+	train_objective: 22.17461586
+	Epochs seen: 703
+	train_objective: 22.1192035675
+	Epochs seen: 704
+	train_objective: 21.9082756042
+	Epochs seen: 705
+	train_objective: 21.6792793274
+	Epochs seen: 706
+	train_objective: 21.488740921
+	Epochs seen: 707
+	train_objective: 21.3657283783
+	Epochs seen: 708
+	train_objective: 21.4151420593
+	Epochs seen: 709
+	train_objective: 21.3164176941
+	Epochs seen: 710
+	train_objective: 21.2516517639
+	Epochs seen: 711
+	train_objective: 21.2600288391
+	Epochs seen: 712
+	train_objective: 21.2639522552
+	Epochs seen: 713
+	train_objective: 21.2887687683
+	Epochs seen: 714
+	train_objective: 21.3421478271
+	Epochs seen: 715
+	train_objective: 21.4296302795
+	Epochs seen: 716
+	train_objective: 21.3544273376
+	Epochs seen: 717
+	train_objective: 21.3790073395
+	Epochs seen: 718
+	train_objective: 21.3471355438
+	Epochs seen: 719
+	train_objective: 21.3764095306
+	Epochs seen: 720
+	train_objective: 21.4684276581
+	Epochs seen: 721
+	train_objective: 21.5725040436
+	Epochs seen: 722
+	train_objective: 21.7085723877
+	Epochs seen: 723
+	train_objective: 21.6774368286
+	Epochs seen: 724
+	train_objective: 21.6822357178
+	Epochs seen: 725
+	train_objective: 21.5724525452
+	Epochs seen: 726
+	train_objective: 21.5160388947
+	Epochs seen: 727
+	train_objective: 21.5068817139
+	Epochs seen: 728
+	train_objective: 21.4829406738
+	Epochs seen: 729
+	train_objective: 21.427022934
+	Epochs seen: 730
+	train_objective: 21.5529518127
+	Epochs seen: 731
+	train_objective: 21.4437561035
+	Epochs seen: 732
+	train_objective: 21.4682941437
+	Epochs seen: 733
+	train_objective: 21.4149227142
+	Epochs seen: 734
+	train_objective: 21.3465938568
+	Epochs seen: 735
+	train_objective: 21.4059467316
+	Epochs seen: 736
+	train_objective: 21.4546813965
+	Epochs seen: 737
+	train_objective: 21.4395847321
+	Epochs seen: 738
+	train_objective: 21.4433746338
+	Epochs seen: 739
+	train_objective: 21.4067287445
+	Epochs seen: 740
+	train_objective: 21.4404716492
+	Epochs seen: 741
+	train_objective: 21.5630435944
+	Epochs seen: 742
+	train_objective: 21.8767852783
+	Epochs seen: 743
+	train_objective: 21.8813838959
+	Epochs seen: 744
+	train_objective: 21.8690090179
+	Epochs seen: 745
+	train_objective: 21.8147239685
+	Epochs seen: 746
+	train_objective: 21.7012233734
+	Epochs seen: 747
+	train_objective: 21.6225337982
+	Epochs seen: 748
+	train_objective: 21.4237689972
+	Epochs seen: 749
+	train_objective: 21.4869976044
+	Epochs seen: 750
+	train_objective: 21.4330921173
+	Epochs seen: 751
+	train_objective: 21.4006385803
+	Epochs seen: 752
+	train_objective: 21.3187999725
+	Epochs seen: 753
+	train_objective: 21.2999477386
+	Epochs seen: 754
+	train_objective: 21.2824306488
+	Epochs seen: 755
+	train_objective: 21.2221164703
+	Epochs seen: 756
+	train_objective: 21.2146034241
+	Epochs seen: 757
+	train_objective: 21.2384605408
+	Epochs seen: 758
+	train_objective: 21.2567825317
+	Epochs seen: 759
+	train_objective: 21.3531532288
+	Epochs seen: 760
+	train_objective: 21.4055900574
+	Epochs seen: 761
+	train_objective: 21.5243911743
+	Epochs seen: 762
+	train_objective: 21.5384902954
+	Epochs seen: 763
+	train_objective: 21.4337062836
+	Epochs seen: 764
+	train_objective: 21.5350399017
+	Epochs seen: 765
+	train_objective: 21.6575145721
+	Epochs seen: 766
+	train_objective: 21.8123817444
+	Epochs seen: 767
+	train_objective: 21.9362468719
+	Epochs seen: 768
+	train_objective: 21.8232269287
+	Epochs seen: 769
+	train_objective: 21.7272891998
+	Epochs seen: 770
+	train_objective: 21.7623195648
+	Epochs seen: 771
+	train_objective: 21.5869445801
+	Epochs seen: 772
+	train_objective: 21.415222168
+	Epochs seen: 773
+	train_objective: 21.3842048645
+	Epochs seen: 774
+	train_objective: 21.3687782288
+	Epochs seen: 775
+	train_objective: 21.3833618164
+	Epochs seen: 776
+	train_objective: 21.4157657623
+	Epochs seen: 777
+	train_objective: 21.3074378967
+	Epochs seen: 778
+	train_objective: 21.3197727203
+	Epochs seen: 779
+	train_objective: 21.3216438293
+	Epochs seen: 780
+	train_objective: 21.2982883453
+	Epochs seen: 781
+	train_objective: 21.2710132599
+	Epochs seen: 782
+	train_objective: 21.2816123962
+	Epochs seen: 783
+	train_objective: 21.2688484192
+	Epochs seen: 784
+	train_objective: 21.2164974213
+	Epochs seen: 785
+	train_objective: 21.2896194458
+	Epochs seen: 786
+	train_objective: 21.302482605
+	Epochs seen: 787
+	train_objective: 21.3416996002
+	Epochs seen: 788
+	train_objective: 21.3606376648
+	Epochs seen: 789
+	train_objective: 21.4208812714
+	Epochs seen: 790
+	train_objective: 21.6400299072
+	Epochs seen: 791
+	train_objective: 21.9024906158
+	Epochs seen: 792
+	train_objective: 22.0708217621
+	Epochs seen: 793
+	train_objective: 22.264415741
+	Epochs seen: 794
+	train_objective: 22.208278656
+	Epochs seen: 795
+	train_objective: 21.7145938873
+	Epochs seen: 796
+	train_objective: 21.5738754272
+	Epochs seen: 797
+	train_objective: 21.5140838623
+	Epochs seen: 798
+	train_objective: 21.4440860748
+	Epochs seen: 799
+	train_objective: 21.5284690857
+	Epochs seen: 800
+	train_objective: 21.525724411
+	Epochs seen: 801
+	train_objective: 21.439031601
+	Epochs seen: 802
+	train_objective: 21.2960453033
+	Epochs seen: 803
+	train_objective: 21.3373622894
+	Epochs seen: 804
+	train_objective: 21.3020038605
+	Epochs seen: 805
+	train_objective: 21.3301753998
+	Epochs seen: 806
+	train_objective: 21.2826023102
+	Epochs seen: 807
+	train_objective: 21.2786178589
+	Epochs seen: 808
+	train_objective: 21.3200283051
+	Epochs seen: 809
+	train_objective: 21.3943710327
+	Epochs seen: 810
+	train_objective: 21.4225120544
+	Epochs seen: 811
+	train_objective: 21.7550640106
+	Epochs seen: 812
+	train_objective: 21.81042099
+	Epochs seen: 813
+	train_objective: 21.7487621307
+	Epochs seen: 814
+	train_objective: 21.5730876923
+	Epochs seen: 815
+	train_objective: 21.4229259491
+	Epochs seen: 816
+	train_objective: 21.4490909576
+	Epochs seen: 817
+	train_objective: 21.3365745544
+	Epochs seen: 818
+	train_objective: 21.3075256348
+	Epochs seen: 819
+	train_objective: 21.3614177704
+	Epochs seen: 820
+	train_objective: 21.4442634583
+	Epochs seen: 821
+	train_objective: 21.4317951202
+	Epochs seen: 822
+	train_objective: 21.3684864044
+	Epochs seen: 823
+	train_objective: 21.3098640442
+	Epochs seen: 824
+	train_objective: 21.365650177
+	Epochs seen: 825
+	train_objective: 21.383234024
+	Epochs seen: 826
+	train_objective: 21.4685382843
+	Epochs seen: 827
+	train_objective: 21.403678894
+	Epochs seen: 828
+	train_objective: 21.4610748291
+	Epochs seen: 829
+	train_objective: 21.524061203
+	Epochs seen: 830
+	train_objective: 21.6517333984
+	Epochs seen: 831
+	train_objective: 21.7668876648
+	Epochs seen: 832
+	train_objective: 22.0822601318
+	Epochs seen: 833
+	train_objective: 22.1595211029
+	Epochs seen: 834
+	train_objective: 21.8129653931
+	Epochs seen: 835
+	train_objective: 21.7948513031
+	Epochs seen: 836
+	train_objective: 21.6875972748
+	Epochs seen: 837
+	train_objective: 21.483543396
+	Epochs seen: 838
+	train_objective: 21.2971782684
+	Epochs seen: 839
+	train_objective: 21.3015842438
+	Epochs seen: 840
+	train_objective: 21.2108802795
+	Epochs seen: 841
+	train_objective: 21.2407436371
+	Epochs seen: 842
+	train_objective: 21.197927475
+	Epochs seen: 843
+	train_objective: 21.2364082336
+	Epochs seen: 844
+	train_objective: 21.2037410736
+	Epochs seen: 845
+	train_objective: 21.2311725616
+	Epochs seen: 846
+	train_objective: 21.2920913696
+	Epochs seen: 847
+	train_objective: 21.3490276337
+	Epochs seen: 848
+	train_objective: 21.4846286774
+	Epochs seen: 849
+	train_objective: 21.5328292847
+	Epochs seen: 850
+	train_objective: 21.7585315704
+	Epochs seen: 851
+	train_objective: 21.7797527313
+	Epochs seen: 852
+	train_objective: 21.7193946838
+	Epochs seen: 853
+	train_objective: 21.7160377502
+	Epochs seen: 854
+	train_objective: 21.6455039978
+	Epochs seen: 855
+	train_objective: 21.5295162201
+	Epochs seen: 856
+	train_objective: 21.5544986725
+	Epochs seen: 857
+	train_objective: 21.6438522339
+	Epochs seen: 858
+	train_objective: 21.4742736816
+	Epochs seen: 859
+	train_objective: 21.4955196381
+	Epochs seen: 860
+	train_objective: 21.3521633148
+	Epochs seen: 861
+	train_objective: 21.3055763245
+	Epochs seen: 862
+	train_objective: 21.2580757141
+	Epochs seen: 863
+	train_objective: 21.2339096069
+	Epochs seen: 864
+	train_objective: 21.3374271393
+	Epochs seen: 865
+	train_objective: 21.4577217102
+	Epochs seen: 866
+	train_objective: 21.5529842377
+	Epochs seen: 867
+	train_objective: 21.7390823364
+	Epochs seen: 868
+	train_objective: 21.7477436066
+	Epochs seen: 869
+	train_objective: 21.7996883392
+	Epochs seen: 870
+	train_objective: 21.7310962677
+	Epochs seen: 871
+	train_objective: 21.815908432
+	Epochs seen: 872
+	train_objective: 21.641708374
+	Epochs seen: 873
+	train_objective: 21.5150947571
+	Epochs seen: 874
+	train_objective: 21.3859596252
+	Epochs seen: 875
+	train_objective: 21.4450721741
+	Epochs seen: 876
+	train_objective: 21.3711566925
+	Epochs seen: 877
+	train_objective: 21.409450531
+	Epochs seen: 878
+	train_objective: 21.3717784882
+	Epochs seen: 879
+	train_objective: 21.3456001282
+	Epochs seen: 880
+	train_objective: 21.3593139648
+	Epochs seen: 881
+	train_objective: 21.3992290497
+	Epochs seen: 882
+	train_objective: 21.3195915222
+	Epochs seen: 883
+	train_objective: 21.2947673798
+	Epochs seen: 884
+	train_objective: 21.3284358978
+	Epochs seen: 885
+	train_objective: 21.3465652466
+	Epochs seen: 886
+	train_objective: 21.3286056519
+	Epochs seen: 887
+	train_objective: 21.3228969574
+	Epochs seen: 888
+	train_objective: 21.4707393646
+	Epochs seen: 889
+	train_objective: 21.4668617249
+	Epochs seen: 890
+	train_objective: 21.5354442596
+	Epochs seen: 891
+	train_objective: 21.5621166229
+	Epochs seen: 892
+	train_objective: 21.643289566
+	Epochs seen: 893
+	train_objective: 21.7097244263
+	Epochs seen: 894
+	train_objective: 21.7647705078
+	Epochs seen: 895
+	train_objective: 21.7825889587
+	Epochs seen: 896
+	train_objective: 21.6555080414
+	Epochs seen: 897
+	train_objective: 21.7220745087
+	Epochs seen: 898
+	train_objective: 21.5539360046
+	Epochs seen: 899
+	train_objective: 21.5360946655
+	Epochs seen: 900
+	train_objective: 21.3726501465
+	Epochs seen: 901
+	train_objective: 21.3566150665
+	Epochs seen: 902
+	train_objective: 21.2930011749
+	Epochs seen: 903
+	train_objective: 21.3450546265
+	Epochs seen: 904
+	train_objective: 21.3594474792
+	Epochs seen: 905
+	train_objective: 21.4106845856
+	Epochs seen: 906
+	train_objective: 21.4936504364
+	Epochs seen: 907
+	train_objective: 21.6136322021
+	Epochs seen: 908
+	train_objective: 21.7075710297
+	Epochs seen: 909
+	train_objective: 21.7246246338
+	Epochs seen: 910
+	train_objective: 21.8450832367
+	Epochs seen: 911
+	train_objective: 21.9100475311
+	Epochs seen: 912
+	train_objective: 21.7736244202
+	Epochs seen: 913
+	train_objective: 21.6572647095
+	Epochs seen: 914
+	train_objective: 21.5844078064
+	Epochs seen: 915
+	train_objective: 21.4935112
+	Epochs seen: 916
+	train_objective: 21.3195972443
+	Epochs seen: 917
+	train_objective: 21.2567481995
+	Epochs seen: 918
+	train_objective: 21.2026138306
+	Epochs seen: 919
+	train_objective: 21.2169513702
+	Epochs seen: 920
+	train_objective: 21.2393226624
+	Epochs seen: 921
+	train_objective: 21.1741809845
+	Epochs seen: 922
+	train_objective: 21.1558189392
+	Epochs seen: 923
+	train_objective: 21.16106987
+	Epochs seen: 924
+	train_objective: 21.1534080505
+	Epochs seen: 925
+	train_objective: 21.1576728821
+	Epochs seen: 926
+	train_objective: 21.1572933197
+	Epochs seen: 927
+	train_objective: 21.167011261
+	Epochs seen: 928
+	train_objective: 21.1586418152
+	Epochs seen: 929
+	train_objective: 21.1564292908
+	Epochs seen: 930
+	train_objective: 21.1491661072
+	Epochs seen: 931
+	train_objective: 21.1503620148
+	Epochs seen: 932
+	train_objective: 21.1643238068
+	Epochs seen: 933
+	train_objective: 21.1507396698
+	Epochs seen: 934
+	train_objective: 21.1690368652
+	Epochs seen: 935
+	train_objective: 21.2768363953
+	Epochs seen: 936
+	train_objective: 21.769071579
+	Epochs seen: 937
+	train_objective: 22.9952583313
+	Epochs seen: 938
+	train_objective: 25.1700572968
+	Epochs seen: 939
+	train_objective: 24.1129550934
+	Epochs seen: 940
+	train_objective: 22.086435318
+	Epochs seen: 941
+	train_objective: 21.3649597168
+	Epochs seen: 942
+	train_objective: 21.2652397156
+	Epochs seen: 943
+	train_objective: 21.1880645752
+	Epochs seen: 944
+	train_objective: 21.157333374
+	Epochs seen: 945
+	train_objective: 21.1681671143
+	Epochs seen: 946
+	train_objective: 21.168214798
+	Epochs seen: 947
+	train_objective: 21.1765022278
+	Epochs seen: 948
+	train_objective: 21.2073993683
+	Epochs seen: 949
+	train_objective: 21.2161388397
+	Epochs seen: 950
+	train_objective: 21.2103157043
+	Epochs seen: 951
+	train_objective: 21.1978492737
+	Epochs seen: 952
+	train_objective: 21.257982254
+	Epochs seen: 953
+	train_objective: 21.251581192
+	Epochs seen: 954
+	train_objective: 21.2333221436
+	Epochs seen: 955
+	train_objective: 21.2659645081
+	Epochs seen: 956
+	train_objective: 21.3171844482
+	Epochs seen: 957
+	train_objective: 21.3779811859
+	Epochs seen: 958
+	train_objective: 21.2763671875
+	Epochs seen: 959
+	train_objective: 21.2605762482
+	Epochs seen: 960
+	train_objective: 21.1865062714
+	Epochs seen: 961
+	train_objective: 21.285200119
+	Epochs seen: 962
+	train_objective: 21.2875461578
+	Epochs seen: 963
+	train_objective: 21.3896598816
+	Epochs seen: 964
+	train_objective: 21.6992378235
+	Epochs seen: 965
+	train_objective: 22.2849502563
+	Epochs seen: 966
+	train_objective: 22.7631587982
+	Epochs seen: 967
+	train_objective: 22.4602165222
+	Epochs seen: 968
+	train_objective: 22.1084899902
+	Epochs seen: 969
+	train_objective: 21.6898174286
+	Epochs seen: 970
+	train_objective: 21.5062351227
+	Epochs seen: 971
+	train_objective: 21.371263504
+	Epochs seen: 972
+	train_objective: 21.3142490387
+	Epochs seen: 973
+	train_objective: 21.2544403076
+	Epochs seen: 974
+	train_objective: 21.2886505127
+	Epochs seen: 975
+	train_objective: 21.2514190674
+	Epochs seen: 976
+	train_objective: 21.2445163727
+	Epochs seen: 977
+	train_objective: 21.2333660126
+	Epochs seen: 978
+	train_objective: 21.2101478577
+	Epochs seen: 979
+	train_objective: 21.2096672058
+	Epochs seen: 980
+	train_objective: 21.1977138519
+	Epochs seen: 981
+	train_objective: 21.2129993439
+	Epochs seen: 982
+	train_objective: 21.253282547
+	Epochs seen: 983
+	train_objective: 21.3175830841
+	Epochs seen: 984
+	train_objective: 21.5115089417
+	Epochs seen: 985
+	train_objective: 21.602935791
+	Epochs seen: 986
+	train_objective: 21.689332962
+	Epochs seen: 987
+	train_objective: 21.6875686646
+	Epochs seen: 988
+	train_objective: 21.6472320557
+	Epochs seen: 989
+	train_objective: 21.6187343597
+	Epochs seen: 990
+	train_objective: 21.753156662
+	Epochs seen: 991
+	train_objective: 21.8029079437
+	Epochs seen: 992
+	train_objective: 21.7684497833
+	Epochs seen: 993
+	train_objective: 21.699886322
+	Epochs seen: 994
+	train_objective: 21.6377391815
+	Epochs seen: 995
+	train_objective: 21.5842933655
+	Epochs seen: 996
+	train_objective: 21.4472236633
+	Epochs seen: 997
+	train_objective: 21.4237537384
+	Epochs seen: 998
+	train_objective: 21.3622188568
+	Epochs seen: 999
+	train_objective: 21.3777217865

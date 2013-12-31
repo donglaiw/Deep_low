@@ -6,12 +6,16 @@ system([VLIB 'Para/p_run.sh 2 1 1 30 "' PP '" "D_voc(" ");" "voc/dn_voc_" ".mat"
 % generate noise
 sig = 25;
 len = 17^2;
+V_DIR='data/VOC_patch/';
 for i = 1:30
-    load(['voc/dn_voc_p' num2str(i)],'pss');
+    %{
+    load([V_DIR 'dn_voc_p' num2str(i)],'pss');
     pss = 0.2989 * pss(1:len,:) + 0.5870 * pss(len+(1:len),:) + 0.1140 * pss(2*len+(1:len),:);
-    npss = uint8(single(pss)+single(rand(size(pss))*sig));
-    save(['voc/c_voc_p' num2str(i)],'pss');
-    save(['voc/n_voc_p' num2str(i)],'npss');
+    save([V_DIR 'c_voc_p' num2str(i)],'pss');
+    %}
+    load([V_DIR 'c_voc_p' num2str(i)],'pss');
+    npss = uint8(single(pss)+single(randn(size(pss))*sig));
+    save([V_DIR 'n_voc_p' num2str(i)],'npss');
     clear npss
 end
 %}
