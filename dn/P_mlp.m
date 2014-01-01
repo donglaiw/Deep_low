@@ -141,7 +141,7 @@ elseif (ll==2 || ll==3)
         param(2,:) = { single(W{2}), single(b{2})};
         param(3,:) = { [single(xx(1:end-1,:));zeros(num_h(3)-num_h(end),num_h(end),'single')], single(xx(end,:))};
         save(['init_p' num2str(ll)],'param');
-        peval=0;
+        peval=1;
         if peval
             %yhat = bsxfun(@plus,pp*param{2,1},param{2,2});
             %yhat = bsxfun(@plus,bsxfun(@plus,mat_x*param{1,1},param{1,2}) * param{2,1},param{2,2});
