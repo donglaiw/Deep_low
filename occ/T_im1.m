@@ -40,18 +40,5 @@ end
 save(str_dim(1:end-1),'rr')
 %save(str_dim(1:end-1),'rr','rr2')
 %{
-% evaluate
-addpath('~/Desktop/Edge/Hack')
-for i=1     
-[roc(i),re(i,:,:)] = U_occ(pb,dd.gt_bd);
-end
-
-re_m = squeeze(mean(re,1));
-r = re_m(:,2)./(re_m(:,1)+(re_m(:,1)==0));
-p = re_m(:,4)./(re_m(:,3)+(re_m(:,3)==0));
-bid = r+p==0; r(bid)=[]; p(bid)=[];
-f = 2.*r.*p./(r+p+((r+p)==0));
-[max(f),U_roc(r,p)]
-
 %}
 
