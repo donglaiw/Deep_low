@@ -1,30 +1,34 @@
+addpath('../')
 init
 addpath([VLIB 'Opt/Axb'])
 addpath(genpath([VLIB 'Low/Denoise']))
-ll = 3;
 
+ll = -1;
 if ~exist('train_im','var')
-    load('data/train_im')
+    load('data/train/train_im')
+end
+if ~exist('test_im','var')
+    load('data/test/test_im')
 end
 s = RandStream('mcg16807','Seed',0);
 RandStream.setGlobalStream(s);
 peval=1;
 
-num_in = size(train_im,2)-1;
+num_in = size(train_im,1)-1;
 num_out = 151;
 %num_train = 10000;
-%sub = randsample(size(train_im,1),num_train);
-sub = 1:3:size(train_im,1);
+%sub = randsample(size(train_im,2),num_train);
+sub = 1:3:size(train_im,2);
 num_train = numel(sub);
-mat_x = (train_im(sub,2:end)'/255-0.5)/0.2;
+mat_x = (train_im(2:end,sub)/255-0.5)/0.2;
 mat_y = zeros(num_train,num_out,'single');
-mat_y(sub2ind(size(mat_y),(1:num_train)',1+train_im(sub,1))) =1;
-mat_xx = (test_im(:,2:end)'/255-0.5)/0.2;
-num_test = size(mat_xx,2);
+mat_y(sub2ind(size(mat_y),1:num_train,1+train_im(1,sub))) =1;
+mat_xx = (test_im(2:end,:)/255-0.5)/0.2;
+num_test = size(mat_xx,1);
 mat_yy = zeros(num_test,num_out,'single');
-mat_yy(sub2ind(size(mat_yy),(1:num_test)',1+test_im(:,1))) =1;
-gt_yy = 1+test_im(:,1);
-gt_y = 1+train_im(:,1);
+mat_yy(sub2ind(size(mat_yy),1:num_test,1+test_im(1,:))) =1;
+gt_yy = 1+test_im(1,:);
+gt_y = 1+train_im(1,:);
 % numel(unique(gt_y(sub)))
 
 if ll==-1
@@ -37,13 +41,15 @@ if ll==-1
         load init_p-1
         xx = [param{1};param{2}];
 
-        mean(sum((yhat2 - mat_y).^2,2))
+        
         yhat2 = [mat_x;ones(1,size(mat_x,2))]' * xx;
+        mean(sum((yhat2 - mat_y).^2,2))
+
         [~,yid]=max(yhat2,[],2);
         yid(yid~=151) = 0;        
         gtid = gt_y(sub);
         gtid(gtid~=151) = 0;
-        sum(yid == gtid)/numel(gtid)
+        sum(yid == gtid')/numel(gtid)
 
         sum((yhat2(1,:) -mat_y(1,:)).^2)
         mean(sum((yhat2 -mat_y).^2,2))
@@ -54,7 +60,7 @@ if ll==-1
         yid(yid~=151) = 0;        
         gtid = gt_yy;
         gtid(gtid~=151) = 0;
-        sum(yid == gtid)/numel(gtid)
+        sum(yid == gtid')/numel(gtid)
         
         %}
     end

@@ -1,5 +1,6 @@
 # no data
 *.mat
+*.bin
 *.pkl
 *.npy
 *.png
@@ -7,6 +8,7 @@
 *.tif
 # no tmp
 *~
+log*
 .*.sw*
 # no configuration
 init.m

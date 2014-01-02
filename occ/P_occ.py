@@ -148,7 +148,7 @@ class Deep_low(DBL_model):
 # linear layer: test data/cost function
 python P_occ.py 0 -1 0 151 0
 # softmax layer: test data/cost function
-python P_occ.py 0 -2 10 151 0
+python P_occ.py 0 -2 100 151 0
 # test model 1
 python P_occ.py 0 1 1000 1000,289 0
 # test model 3

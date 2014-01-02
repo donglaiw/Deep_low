@@ -1,7 +1,8 @@
+addpath('../')
 init
 addpath([VLIB 'Opt/Axb'])
 addpath(genpath([VLIB 'Low/Denoise']))
-ll = 3;
+ll = -2;
 if ~exist('pss','var')
     load([VOC_DIR 'c_voc_p1'])
 end
