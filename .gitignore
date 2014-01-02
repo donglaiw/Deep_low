@@ -6,9 +6,11 @@
 *.png
 *.jpg
 *.tif
+*.bin
 # no tmp
 *~
 log*
 .*.sw*
+log*
 # no configuration
 init.m
