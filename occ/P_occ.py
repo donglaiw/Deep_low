@@ -44,6 +44,7 @@ class Deep_occ(DBL_model):
         elif self.test_id==0:
             # 1 0 300 500,151: 0.67485
             # 1 1 300 300,200,151: 0.6957
+            # 1 1 200 500,300,151: 0.7007
             # 1 1 300 500,300,151: 0.6957
 
             self.loadData(self.path_test,'test',options={'data_id':1,'data':'test_im.mat'})
