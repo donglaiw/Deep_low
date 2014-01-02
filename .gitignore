@@ -5,8 +5,10 @@
 *.png
 *.jpg
 *.tif
+*.bin
 # no tmp
 *~
 .*.sw*
+log*
 # no configuration
 init.m
