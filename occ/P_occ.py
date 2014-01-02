@@ -1,4 +1,4 @@
-import sys
+import sys,os
 import cPickle 
 import numpy as np
 from pylearn2.space import Conv2DSpace
@@ -19,7 +19,12 @@ class Deep_occ(DBL_model):
         self.p_data = 0   # occ data         
         self.batch_size = 10000
     def loadData_train(self):        
-        self.loadData(self.path_train,'train',range(0,31000))
+        valid_id = range(0,31000,10)
+        train_id = list(set(range(0,31000)).difference(set(valid_id)))
+        self.loadData(self.path_train,'train',train_id)
+        self.loadData(self.path_train,'valid',valid_id)
+        self.p_monitor['channel'] = ['train_objective','train_sm0_misclass','valid_sm0_misclass']
+        self.p_monitor['save'] = 'log'+self.dl_id
     def train(self):
         db = 0
         if not db:
@@ -37,18 +42,24 @@ class Deep_occ(DBL_model):
             self.loadData(self.path_test,'test',options={'data_id':1,'data':'test_im.mat'})
             self.test_sketchtoken(np.ones(self.DataLoader.data['test'].y.shape[0]))
         elif self.test_id==0:
+            # 1 0 300 500,151: 0.67485
+            # 1 1 300 300,200,151: 0.6957
+            # 1 1 300 500,300,151: 0.6957
+
             self.loadData(self.path_test,'test',options={'data_id':1,'data':'test_im.mat'})
-            result = self.runTest(self.batch_size,0)
+            result = self.runTest(metric=0)
             self.test_sketchtoken(result[0][0])
             #scipy.io.savemat(self.result_mat,mdict={'result':result})
         elif self.test_id==1:
+            if not os.path.exists('result/'+self.dl_id):
+                os.mkdir('result/'+self.dl_id)
             pre =self.result_mat[:-4]
-            for i in range(100):
+            for i in range(1,200):
                 print "do: image "+str(i)
-                self.loadData(self.path_test,'test',options={'data_id':2,'data':'berk_test.mat','im_id':i})
-                result = self.test(self.batch_size,1)
-                scipy.io.savemat(pre+str(i)+'.mat',mdict={'result':result})
-            scipy.io.savemat(self.result_mat,mdict={'done':1})
+                self.loadData(self.path_test,'test',options={'data_id':2,'data':'dn_ucb.mat','im_id':i})
+                result = self.runTest(metric=-1)
+                scipy.io.savemat(pre+'_'+str(i)+'.mat',mdict={'result':result})
+            #scipy.io.savemat(self.result_mat,mdict={'done':1})
     def buildModel(self):
         if self.model_id<=4:
             self.ishape = Conv2DSpace(shape = (1,3675),num_channels = 1)
@@ -94,7 +105,6 @@ class Deep_occ(DBL_model):
             elif self.model_id ==3:
                 algo_lr = 3*1e-5
                 algo_mom = 1e-4
-            print self.num_epoch
             self.p_algo = self.param.param_algo(batch_size = self.batch_size,                    
                      termination_criterion=EpochCounter(max_epochs=self.num_epoch),
                      monitoring_dataset = self.DataLoader.data,
@@ -102,7 +112,6 @@ class Deep_occ(DBL_model):
                      learning_rule = Momentum(algo_mom),    
                      algo_type = self.algo_id)    
         else:
-            print "bgd"
             algo_lsm = 'exhaustive'
             algo_cg = True # False
             algo_sstep = 1.0#1e-1,1e1

@@ -6,7 +6,7 @@ algo = 1;
 if ~exist('data','var')
     switch did
     case 1
-        fid = fopen('data/st_test.bin');
+        fid = fopen('data/test/st_test.bin');
         data = fread(fid, [7000 inf], 'single');
         fclose(fid);
     end

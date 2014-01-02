@@ -31,7 +31,13 @@ class Deep_dn(DBL_model):
             self.test_valid()
 
     def test(self):
-        if self.test_id==0:
+        if self.test_id==-1:
+            self.loadData(self.path_train,'valid',int(1e5)+range(int(1e5)),options={'data_id':-1,'mat_id':[1]})
+            self.DataLoader.data['test'] = self.DataLoader.data['valid']
+            result = self.runTest(metric = 2)
+            print result[1]
+            print result[0][0].shape
+        elif self.test_id==0:
             self.loadData(self.path_test,'test',options={'data_id':1,'data':'test_p10010.mat'})
             result = self.test(self.batch_size,1)
             scipy.io.savemat(self.result_mat,mdict={'result':result})
@@ -47,6 +53,10 @@ class Deep_dn(DBL_model):
     def loadData_train(self):
         np.random.seed(100)
         self.loadData(self.path_train,'train',range(int(1e5)),options={'data_id':-1,'mat_id':[1]})
+        self.loadData(self.path_train,'valid',range(int(1e4)),options={'data_id':-1,'mat_id':[2]})
+        #self.p_monitor['channel'] = ['train_objective','train_sm0_misclass','valid_sm0_misclass']
+        self.p_monitor['channel'] = ['train_objective','valid_objective']
+        self.p_monitor['save'] = 'log'+self.dl_id
 
     def buildModel(self):
         if self.model_id<=4:
@@ -56,23 +66,22 @@ class Deep_dn(DBL_model):
             # no hidden layer (linear)
             self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.01,layer_type=2)]]
         elif self.model_id ==0:
-            # 1 tanh + 1 softmax
+            # 1 tanh + 1 linear
             self.p_layers = [
-                [self.param.param_model_fc(dim = self.num_dim[0],irange=0.1,layer_type=1),
-                self.param.param_model_fc(n_classes = self.num_dim[1],irange=0.01,layer_type=0)]
+                [self.param.param_model_fc(dim = self.num_dim[0],irange=0.01,layer_type=0),
+                self.param.param_model_fc(dim = self.num_dim[1],irange=0.01,layer_type=2)]
                 ]
-        elif self.model_id ==1:        
-             # 1 tanh + 1 softmax
+        elif self.model_id ==1:
+            # 1 tanh + 1 linear
             self.p_layers = [
-                [self.param.param_model_fc(dim = self.num_dim[0],irange=0.5,layer_type=1),
-                 self.param.param_model_fc(dim = self.num_dim[1],irange=0.1,layer_type=1),
-                self.param.param_model_cf(n_classes = self.num_dim[2],irange=0.01,layer_type=0)]
+                [self.param.param_model_fc(dim = self.num_dim[0],irange=0.01,layer_type=1),
+                self.param.param_model_fc(dim = self.num_dim[1],irange=0.01,layer_type=2)]
                 ]
         elif self.model_id ==2:
             # train 2 sigmoid layer            
-            self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.1,layer_type=0),
-                    self.param.param_model_fc(dim = self.num_dim[1],irange=0.1,layer_type=0),
-                    self.param.param_model_fc(dim = self.num_dim[2],irange=0.1,layer_type=2)]]
+            self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.01,layer_type=0),
+                    self.param.param_model_fc(dim = self.num_dim[1],irange=0.01,layer_type=0),
+                    self.param.param_model_fc(dim = self.num_dim[2],irange=0.01,layer_type=2)]]
         elif self.model_id ==3:        
             # train 2 tanh layer
             self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.1,layer_type=1),
@@ -92,13 +101,13 @@ class Deep_dn(DBL_model):
                 algo_lr = 3*1e-5
                 algo_mom = 1e-4
             self.p_algo = self.param.param_algo(batch_size = self.batch_size,                    
+                     monitoring_dataset = self.DataLoader.data,
                      termination_criterion=EpochCounter(max_epochs=self.num_epoch),
                      #cost=Dropout(input_include_probs={'l1': .8},input_scales={'l1': 1.}),
                      learning_rate = algo_lr,
                      learning_rule = Momentum(algo_mom),    
                      algo_type = self.algo_id)    
         else:
-            print "bgd"
             algo_lsm = 'exhaustive'
             algo_cg = True # False
             algo_sstep = 1.0#1e-1,1e1
@@ -110,6 +119,7 @@ class Deep_dn(DBL_model):
                 algo_cg = True
             self.p_algo = self.param.param_algo(
                      batch_size = self.batch_size,                    
+                     monitoring_dataset = self.DataLoader.data,
                      termination_criterion=EpochCounter(max_epochs=self.num_epoch),
                      conjugate = algo_cg,
                      scale_step = algo_sstep,
@@ -120,11 +130,6 @@ class Deep_dn(DBL_model):
                      algo_type = self.algo_id)    
 
     
-    def test_valid(self,metric=2):
-        self.DataLoader.data['test'] = self.DataLoader.data['valid']
-        result = self.test(self.batch_size,metric)        
-        print result[1]
-        print result[0][0].shape
 """
 # test data/cost function
 python P_MLP.py 0 -1 0 289 0
