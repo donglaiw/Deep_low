@@ -21,8 +21,8 @@ class Deep_occ(DBL_model):
     def loadData_train(self):        
         valid_id = range(0,31000,10)
         train_id = list(set(range(0,31000)).difference(set(valid_id)))
-        self.loadData(self.path_train,'train',train_id)
-        self.loadData(self.path_train,'valid',valid_id)
+        self.loadData(self.path_train,'train',train_id,options={'data_id':self.test_id})
+        self.loadData(self.path_train,'valid',valid_id,options={'data_id':self.test_id})
         self.p_monitor['channel'] = ['train_objective','train_sm0_misclass','valid_sm0_misclass']
         self.p_monitor['save'] = 'log'+self.dl_id
     def train(self):
@@ -45,7 +45,7 @@ class Deep_occ(DBL_model):
             # 1 0 300 500,151: 0.67485
             # 1 1 300 300,200,151: 0.6957
             # 1 1 200 500,300,151: 0.7007
-            # 1 1 300 500,300,151: 0.6957
+            # 1 1 300 500,300,151: 0.7097
 
             self.loadData(self.path_test,'test',options={'data_id':1,'data':'test_im.mat'})
             result = self.runTest(metric=0)
@@ -55,15 +55,18 @@ class Deep_occ(DBL_model):
             if not os.path.exists('result/'+self.dl_id):
                 os.mkdir('result/'+self.dl_id)
             pre =self.result_mat[:-4]
-            for i in range(1,200):
+            for i in range(0,2):
                 print "do: image "+str(i)
                 self.loadData(self.path_test,'test',options={'data_id':2,'data':'dn_ucb.mat','im_id':i})
                 result = self.runTest(metric=-1)
                 scipy.io.savemat(pre+'_'+str(i)+'.mat',mdict={'result':result})
             #scipy.io.savemat(self.result_mat,mdict={'done':1})
     def buildModel(self):
-        if self.model_id<=4:
+        if self.model_id<=2:
             self.ishape = Conv2DSpace(shape = (1,3675),num_channels = 1)
+        elif self.model_id<=3:
+            self.ishape = Conv2DSpace(shape = (35,35),num_channels = 3)
+
         # 1. parameter        
         if self.model_id ==-1:
             # no hidden layer (linear)
@@ -78,16 +81,32 @@ class Deep_occ(DBL_model):
                 [self.param.param_model_cf(n_classes = self.num_dim[1],irange=0.01,layer_type=0)]
                 ]
         elif self.model_id ==1:        
-             # 1 tanh + 1 softmax
+             # 2 tanh + 1 softmax
             self.p_layers = [
                 [self.param.param_model_fc(dim = self.num_dim[0],irange=0.5,layer_type=1),
                  self.param.param_model_fc(dim = self.num_dim[1],irange=0.1,layer_type=1)],
                 [self.param.param_model_cf(n_classes = self.num_dim[2],irange=0.01,layer_type=0)]
                 ]
+        elif self.model_id ==2:        
+             # 2 tanh + 1 softmax
+            self.p_layers = [
+                [self.param.param_model_fc(dim = self.num_dim[0],irange=0.5,layer_type=1),
+                 self.param.param_model_fc(dim = self.num_dim[1],irange=0.1,layer_type=1),
+                 self.param.param_model_fc(dim = self.num_dim[2],irange=0.1,layer_type=1)],
+                [self.param.param_model_cf(n_classes = self.num_dim[3],irange=0.01,layer_type=0)]
+                ]
         elif self.model_id ==2:
-            # train 2 sigmoid layer            
-            self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.1,layer_type=0),
-                    self.param.param_model_fc(dim = self.num_dim[1],irange=0.1,layer_type=0)]]
+            # 1 conv + 1 tanh + 1 softmax            
+            nk = [self.num_dim[0],30,20]
+            ks = [[8,8],[5,5],[3,3]]
+            ir = [0.05,0.05,0.05]
+            ps = [[4,4],[4,4],[2,2]]
+            pd = [[2,2],[2,2],[2,2]]
+            self.p_layers = [
+                [self.param.param_model_conv(nk[0],ks[0],ps[0],pd[0],ir[0],layer_type=0)],
+                [self.param.param_model_fc(dim = self.num_dim[1],irange=0.1,layer_type=1)],
+                [self.param.param_model_cf(n_classes = self.num_dim[2],irange=0.01,layer_type=0)]
+                    ]
         elif self.model_id ==3:        
             # train 2 tanh layer
             self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.1,layer_type=1),

@@ -1,6 +1,16 @@
-DATA_UCB = '/home/Stephen/Desktop/Data/Seg/BSR/BSDS500/data/';
+addpath('../util');init
+if ~exist('did','var')
+ assert('need variable : did')
+end
+switch did
+case 2
 tstImgDir = [DATA_UCB '/images/test/'];
 tstGtDir = [DATA_UCB '/groundTruth/test/'];
+case 1
+tstImgDir = [DATA_UCB '/images/train/'];
+tstGtDir = [DATA_UCB '/groundTruth/train/'];
+end
+
 imgIds=dir([tstImgDir '*.jpg']);
 
 imgIds={imgIds.name};
@@ -21,15 +31,8 @@ for i = 1:nImgs
     for j=1:nGt
         gts{i}{j} = gt{j}.Boundaries;
     end
-    %{
-    gt_m = single(gt{1}.Boundaries);
-    for j=2:nGt
-        gt_m = gt_m+ single(gt{j}.Boundaries);
-    end
-    gts{i} = gt_m/nGt;
-    %}
 end
 
-save dn_ucb Is Is2 gts
+save(['dn_ucb' num2str(did)],'Is','Is2','gts')
 
  

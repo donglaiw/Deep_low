@@ -1,7 +1,6 @@
 % evaluate
 addpath('../util');init
 addpath([VLIB 'Mid/Boundary/Bd_eval'])
-addpath('~/Desktop/Edge/Hack')
 if ~exist('gts','var')
     load data/test/dn_ucb
 end
@@ -13,26 +12,21 @@ end
 num = numel(gts);
 switch tid
     case 1
-        % st
+        % st: 0.7178,0.7419
         tmp=load('st_bd');
         pb = tmp.Es;
     case 2
-        % python
-        tmp = load('300_200_151.mat');
-        if ~exist('tmp.pb','var')
-            pb = tmp.pb;
-            rr = tmp.rr;
-            parfor i=1:num
-                pb{i} = stToEdges( rr{i}, 1 );
-            end
-            save('300_200_151.mat','pb','rr')
-        end
+        % python: 0.4725  0.3539
+        tmp = load('500_300_151.mat');
         pb=tmp.pb;
 end
+num = 200;
 roc = zeros(1,num);
-re = zeros(num,51,4);
-for i=1:num     
-    [roc(i),re(i,:,:)] = U_occ(pb{i},gts{i});
+thres= 0:0.05:1;
+re = zeros(num,numel(thres),4);
+%for i=1:num     
+parfor i=1:num     
+    [roc(i),re(i,:,:)] = U_occ(double(pb{i}),gts{i},thres);
 end
 
 re_m = squeeze(mean(re,1));
