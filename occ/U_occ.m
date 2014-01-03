@@ -1,9 +1,10 @@
 function [y,cc] = U_occ(pb,gt_bd,thresh)
+
 if ~exist('thresh','var')
 thresh = 0:0.02:1;
 end
 sz = size(pb);
-sz2 = size(gt_bd);
+sz2 = size(gt_bd{1});
 if sum(sz~=sz2)>0
     pb = imresize(pb,sz2,'nearest');
 end
@@ -20,14 +21,18 @@ sumR = zeros(1,nthres);
         % accumulate machine matches, since the machine pixels are
         % allowed to match with any segmentation
         accP = zeros(size(pb));
+        % gt: also pb
         % compare to each seg in turn
+    for i = 1:numel(gt_bd)
         % compute the correspondence
-        [match1,match2] = correspondPixels(bmap,gt_bd);
+        [match1,match2] = correspondPixels(bmap, double(gt_bd{i}));
         % accumulate machine matches
         accP = accP | match1;
         % compute recall
-        sumR(t) = sum(gt_bd(:));
-        cntR(t) = sum(match2(:)>0);
+        sumR(t) = sumR(t) + sum(gt_bd{i}(:));
+        cntR(t) = cntR(t) + sum(match2(:)>0);
+    end        
+        % compute recall
         % compute precision
         sumP(t) = sumP(t) + sum(bmap(:));
         cntP(t) = cntP(t) + sum(accP(:));
