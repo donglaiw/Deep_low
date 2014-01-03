@@ -1,21 +1,39 @@
-addpath('../')
-init
-addpath(genpath([VLIB 'Donglai/Mid/Boundary/SketchTokens']))
-P_DIR = [VLIB 'Piotr'];
+addpath('../util');init
+addpath(genpath([VLIB 'Mid/Boundary/SketchTokens']))
+P_DIR = [VLIB '../Piotr'];
 addpath(genpath(P_DIR))
-
-
-% from stTrain
-opts=struct('nPos',120,'nNeg',100,'modelFnm','modelSmall','nTrees',20);
-
-dfs={'nClusters',150, 'nTrees',25, 'radius',17, 'nPos',1000, 'nNeg',800,...
+opts={};
+dfs={'nClusters',150, 'nTrees',25, 'radius',17, 'nPos',100, 'nNeg',80,...
     'negDist',2, 'minCount',4, 'nCells',5, 'normRad',5, 'normConst',0.01, ...
     'nOrients',[4 4 0], 'sigmas',[0 1.5 5], 'chnsSmooth',2, 'fracFtrs',1, ...
     'seed',1, 'modelDir','models/', 'modelFnm','model', ...
     'clusterFnm',[VLIB 'Mid/Boundary/SketchTokens/st_data/clusters.mat'], 'bsdsDir','/home/Stephen/Desktop/Data/Seg/BSR/BSDS500/data/'};
 opts = getPrmDflt(opts,dfs,1);
+if ~exist('did','var')
+did = 1;
+end
+switch did
+case 1
+    % train
+    opts.nPos=100;
+    opts.nNeg=80;
+    trnImgDir = [opts.bsdsDir '/images/train/'];
+    trnGtDir = [opts.bsdsDir '/groundTruth/train/'];
+case 2
+    % test
+    opts.nPos=100;
+    opts.nNeg=160;
+    trnImgDir = [opts.bsdsDir '/images/val/'];
+    trnGtDir = [opts.bsdsDir '/groundTruth/val/'];
+end
 
 stream=RandStream('mrg32k3a','Seed',opts.seed);
+% set global stream to stream with given substream (will undo at end)
+streamOrig = RandStream.getGlobalStream();
+treeInd = 2013;
+set(stream,'Substream',treeInd);
+RandStream.setGlobalStream( stream );
+
 
 % if forest exists load it and return
 
@@ -38,12 +56,6 @@ opts.cellStep = tmp-ceil((nCells*tmp-patchSiz)/(nCells-1)); disp(opts);
 assert( (nCells == 0) || (mod(nCells,2)==1 && (nCells-1)*opts.cellStep+tmp <= patchSiz ));
 
 
-
-
-
-
-trnImgDir = [opts.bsdsDir '/images/train/'];
-trnGtDir = [opts.bsdsDir '/groundTruth/train/'];
 imgIds=dir([trnImgDir '*.jpg']);
 imgIds={imgIds.name};
 nImgs=length(imgIds);
@@ -62,12 +74,6 @@ nNeg=opts.nNeg;
 
 % finalize setup
 
-% set global stream to stream with given substream (will undo at end)
-streamOrig = RandStream.getGlobalStream();
-treeInd = 2013;
-set(stream,'Substream',treeInd);
-RandStream.setGlobalStream( stream );
-
 % sample nPos positive patch locations per cluster
 clstr=load(opts.clusterFnm);
 clstr=clstr.clusters;
@@ -80,7 +86,12 @@ for i = 1:nClusters
     centers = [centers; [clstr.x(ids),clstr.y(ids),clstr.imId(ids),...
         clstr.clusterId(ids),clstr.gtId(ids)]]; %#ok<AGROW>
 end
+%{
+    i=1;
+    ids = find(clstr.imId == i);
+    plot(clstr.x(ids),clstr.y(ids),'b.')
 
+%}
 % collect positive and negative patches and compute features
 fids=sort(randperm(nTotFtrs,round(nTotFtrs*opts.fracFtrs)));
 k = size(centers,1)+nNeg*nImgs;
@@ -89,7 +100,7 @@ ftrs_bd = zeros(k,patchSiz^2,'single');
 ftrs_rgb = zeros(k,patchSiz^2*3,'single');
 labels = zeros(k,1); k = 0;
 tid = ticStatus('Collecting data',1,1);
-for i = 1:;;nImgs
+for i = 1:nImgs
     % get image and compute channels
     gt=load([trnGtDir imgIds{i} '.mat']);
     gt=gt.groundTruth;
@@ -135,7 +146,7 @@ for i = 1:;;nImgs
         gt_m = gt_m+ single(gt{j}.Boundaries);
     end
     gt_m = imPad(gt_m/nGt,radius,'symmetric');
-    gt_im = imPad(I,radius,'symmetric');
+    gt_im = I;
     ps_bd=zeros(k1,patchSiz^2,'single');
     ps_rgb=zeros(k1,3*patchSiz^2,'single');
     
@@ -163,6 +174,8 @@ if k<size(ftrs,1)
     labels=labels(1:k);
 end
 
+
+%{
 train_id = zeros(1,31000);
 test_id = zeros(1,7000);
 for i=1:150
@@ -176,7 +189,6 @@ end
 
 intersect(train_id,test_id)
 numel(unique(train_id))+numel(unique(test_id))
-
 
 % for python
 train_im = single([labels(train_id)-1 ftrs(train_id,1:3*35^2)])';
@@ -195,6 +207,35 @@ fclose(fid);
 fid = fopen('st_test.bin', 'w');
 fwrite(fid,[labels(test_id)-1 ftrs(test_id,:)], 'single');
 fclose(fid);
+%}
+switch did
+case 1
+    % train
+    train_im = single([labels-1 ftrs_rgb])';
+    save train_im train_im
+    %train_feat = single([labels-1 ftrs])';
+    %save -v7.3 train_feat train_feat
+    train_bd = single([ftrs_bd]);
+    save train_bd train_bd
+    % for matlab
+    fid = fopen('st_train.bin', 'w');
+    fwrite(fid,[labels-1 ftrs], 'single');
+    fclose(fid);
+case 2
+    % valid
+    test_im = single([labels-1 ftrs_rgb]);
+    save test_im test_im
+    test_bd = single([ftrs_bd])';
+    save test_bd test_bd
+    %test_feat = single([labels-1 ftrs])';
+    %save -v7.3 test_feat test_feat
+    % for matlab
+    fid = fopen('st_test.bin', 'w');
+    fwrite(fid,[labels-1 ftrs], 'single');
+    fclose(fid);
+end
+
+
 
 %{
 % 31,000 * (35^2*3)+1

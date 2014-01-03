@@ -31,7 +31,7 @@ switch tid
 end
 roc = zeros(1,num);
 re = zeros(num,51,4);
-parfor i=1:num     
+for i=1:num     
     [roc(i),re(i,:,:)] = U_occ(pb{i},gts{i});
 end
 
