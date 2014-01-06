@@ -215,7 +215,7 @@ case 1
     save train_im train_im
     %train_feat = single([labels-1 ftrs])';
     %save -v7.3 train_feat train_feat
-    train_bd = single([ftrs_bd]);
+    train_bd = single([ftrs_bd])';
     save train_bd train_bd
     % for matlab
     fid = fopen('st_train.bin', 'w');
@@ -252,4 +252,48 @@ num=10000;
 fid = fopen('occ_train2.bin', 'w');
 fwrite(fid,[labels(1:num)-1 ftrs(1:num,:)], 'single');
 fclose(fid);
+
+
+% check data
+load data/train/train_im
+load data/train/train_bd
+id=10;
+subplot(211),imagesc(reshape(train_bd(:,id),[35 35]))
+subplot(212),imagesc(uint8(reshape(train_im(2:end,id),[35 35 3])))
+
+% rgb data
+ndim=psz^2;
+ntrain=size(train_im,2);
+train_imc = reshape(permute(reshape(train_im(2:end,:),[ndim,3 ntrain]),[2 1 3]),3*ndim,[]);
+ppsz =[psz,psz];
+imagesc(uint8(cat(3,reshape(train_imc(1:3:end,1),ppsz),reshape(train_imc(2:3:end,1),ppsz),reshape(train_imc(3:3:end,1),ppsz))))
+
+%pca
+ndim = 3000;
+% scale to 0-1
+fid = fopen('data/test/st_test.bin');
+data = fread(fid, [7000 inf], 'single');
+fclose(fid);
+lb = data(:,1);
+data = data(:,2:end);
+min_d = min(data);
+max_d = max(data);
+data = bsxfun(@minus,data,min_d);
+data = bsxfun(@rdivide,data,max_d);
+tmp_cov = cov(data);
+[aa,bb]= eigs(tmp_cov,ndim);
+
+test_feat_s = [lb data*aa];
+save test_feat_s test_feat_s
+save eigen_feat aa bb
+
+fid = fopen('data/train/st_train.bin');
+data = fread(fid, [31000 inf], 'single');
+fclose(fid);
+lb = data(:,1);
+data = data(:,2:end);
+data = bsxfun(@minus,data,min_d);
+data = bsxfun(@rdivide,data,max_d);
+train_feat_s = [lb data*aa]; 
+save train_feat_s train_feat_s
 %}

@@ -18,8 +18,19 @@ class Deep_dn(DBL_model):
         self.path_test = 'data/test/'
         self.dataset_id = 2            
         self.batch_size = 10000
-        self.p_data = 2   # dn data         
-    
+        self.p_data = {'ds_id':2}   # dn data        
+
+    def loadData_train(self):
+        if self.test_id==0:
+            self.p_data['mat_id']=[1]
+            self.loadData(self.path_train,'train',range(int(1e6)))
+            self.p_data['mat_id']=[2]
+            self.loadData(self.path_train,'valid',range(int(1e5)))
+
+        self.p_monitor['channel'] = ['train_objective','valid_objective']
+        self.p_monitor['save'] = 'log'+self.dl_id
+
+   
     def train(self):
         db = 0
         if not db:
@@ -50,17 +61,9 @@ class Deep_dn(DBL_model):
                 scipy.io.savemat(pre+str(i)+'.mat',mdict={'result':result})
             scipy.io.savemat(self.result_mat,mdict={'done':1})
 
-    def loadData_train(self):
-        np.random.seed(100)
-        self.loadData(self.path_train,'train',range(int(1e5)),options={'data_id':-1,'mat_id':[1]})
-        self.loadData(self.path_train,'valid',range(int(1e4)),options={'data_id':-1,'mat_id':[2]})
-        #self.p_monitor['channel'] = ['train_objective','train_sm0_misclass','valid_sm0_misclass']
-        self.p_monitor['channel'] = ['train_objective','valid_objective']
-        self.p_monitor['save'] = 'log'+self.dl_id
-
     def buildModel(self):
-        if self.model_id<=4:
-            self.ishape = Conv2DSpace(shape = (17,17),num_channels = 1)
+        self.ishape = Conv2DSpace(shape = (17,17),num_channels = 1)
+
         # 1. parameter        
         if self.model_id ==-1:
             # no hidden layer (linear)
@@ -84,9 +87,16 @@ class Deep_dn(DBL_model):
                     self.param.param_model_fc(dim = self.num_dim[2],irange=0.01,layer_type=2)]]
         elif self.model_id ==3:        
             # train 2 tanh layer
-            self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.1,layer_type=1),
-                    self.param.param_model_fc(dim = self.num_dim[1],irange=0.1,layer_type=1),
+            self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.01,layer_type=1),
+                    self.param.param_model_fc(dim = self.num_dim[1],irange=0.01,layer_type=1),
                     self.param.param_model_fc(dim = self.num_dim[2],irange=0.1,layer_type=2)]]
+        elif self.model_id ==4:
+            # train 3 tanh layer
+            self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.05,layer_type=1),
+                    self.param.param_model_fc(dim = self.num_dim[1],irange=0.05,layer_type=1),
+                    self.param.param_model_fc(dim = self.num_dim[2],irange=0.05,layer_type=1),
+                    self.param.param_model_fc(dim = self.num_dim[3],irange=0.05,layer_type=2)]]
+
     def buildAlgo(self):
         if self.algo_id == 0:
             algo_lr = 1e-4

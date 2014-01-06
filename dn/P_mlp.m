@@ -2,42 +2,47 @@ addpath('../')
 init
 addpath([VLIB 'Opt/Axb'])
 addpath(genpath([VLIB 'Low/Denoise']))
-if ~exist('nn','var')
-    ll = '289';
+if ~exist('ll','var')
+    ll = -1;
 end
-if ~exist('pss','var')
+
+num_train = 1e6;%size(pss,2);
+num_test = 1e5;%size(pss,2);
+if ~exist('mat_x','var')
     load([VOC_DIR 'c_voc_p1'])
-end
-if ~exist('npss','var')
     load([VOC_DIR 'n_voc_p1'])
+    mat_x = (double(npss(:,1:num_train)')/255-0.5)/0.2;
+    mat_y = (double(pss(:,1:num_train)')/255-0.5)/0.2;
 end
-s = RandStream('mcg16807','Seed',0);
-RandStream.setGlobalStream(s);
+if ~exist('mat_xx','var')
+    load([VOC_DIR 'c_voc_p2'])
+    load([VOC_DIR 'n_voc_p2'])
+    mat_xx = (double(npss(:,1:num_test)')/255-0.5)/0.2;
+    mat_yy = (double(pss(:,1:num_test)')/255-0.5)/0.2;
+end
+
+%s = RandStream('mcg16807','Seed',0);
+%RandStream.setGlobalStream(s);
 sz = size(pss);
 p_eval=1;
-
 num_in = size(npss,1);
 num_out = size(pss,1);
-num_train = 1e5;%size(pss,2);
-num_test = 1e5;%size(pss,2);
-mat_x = (double(npss(:,1:num_train))/255-0.5)/0.2;
-mat_y = (double(pss(:,1:num_train)')/255-0.5)/0.2;
-mat_xx = (double(npss(:,num_train+(1:num_test)))/255-0.5)/0.2;
-mat_yy = double(pss(:,num_train+(1:num_test))')/255;
 if ll==-2
       load([VLIB 'DeepL/dn_mlp/weights_cvpr.mat']);
-      part = mat_xx;
+      part = mat_xx';
+      %part = mat_x';
       for i=1:length(w)
-      part = [part;ones(1,size(mat_xx,2))];
+      part = [part;ones(1,size(part,2))];
       if (i<length(w))
         part = tanh(w{i}*part);
       else
         p_final = w{i}*part;
       end
     end
-        err = ((p_final*0.2+0.5 - mat_yy)).^2; 
+        err = ((p_final' - mat_yy)).^2; 
+        %err = ((p_final' - mat_y)).^2; 
         % 0.5325
-        mean(sum(err,1))
+        mean(sum(err,2))/25
 
 elseif ll==-1
     if ~exist('init_p-1.mat','file')
@@ -49,7 +54,7 @@ elseif ll==-1
         opt = 'backslash';
         xx= U_axb(A,b,x0,opt);
         %}
-        xx = [mat_x;ones(1,size(mat_x,2))]'\mat_y;
+        xx = [mat_x,ones(size(mat_x,1),1)]\mat_y;
         param ={ single(xx(1:end-1,:)), single(xx(end,:))};
         save init_p-1 param
         %{
@@ -63,27 +68,17 @@ elseif ll==-1
         %}
     end
     if p_eval
-        load init_p-1
-        xx = [param{1};param{2}];
-        yhat = [mat_x;ones(1,size(mat_x,2))]' * xx;
-        err = (yhat - mat_y).^2; 
-        % training error: 0.9066 per patch
-        mean(sum(err,2))/25
-
-        yhat2 = [mat_xx;ones(1,size(mat_xx,2))]' * xx;
-        err2 = (yhat2*0.2+0.5 - mat_yy).^2; 
-        % valid error: 0.8241 per patch
-        mean(sum(err2,2))
-    end 
+        U_eval(-1,mat_x,mat_y);
+   end 
 elseif(ll==1 || ll==0)
     if ~exist(['init_p' num2str(ll) '.mat'],'file')
-        num_h = 500;
-        init_id = 1;
+        num_h = 1000;
+        init_id = 0;
         switch init_id
         case 0
-            std_W0 = 0.006; mu_W0 = 0;
+            std_W0 = 0.01; mu_W0 = 0;
             W0 = single(rand(num_in,num_h)*std_W0+mu_W0);
-            std_b0 = 0.8; mu_b0 = -0.4;
+            std_b0 = 0.01; mu_b0 = 0;
             b0 = single(rand(1,num_h)*std_b0+mu_b0);
         case 1
             W0 = zeros(num_in,num_h,'single');
