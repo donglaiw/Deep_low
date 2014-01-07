@@ -18,16 +18,32 @@ class Deep_occ(DBL_model):
         self.path_test = 'data/test/'            
         self.p_data = {'ds_id':0}   # occ data         
         self.batch_size = 3000
+        if self.test_id<=4:
+            self.p_data['data']='train_im.mat'
+            self.p_data['data_id']=self.test_id 
+            if self.model_id<=4:
+                self.ishape = Conv2DSpace(shape = (1,3675),num_channels = 1)
+            else:
+                self.ishape = Conv2DSpace(shape = (35,35),num_channels = 3)
+        elif self.test_id<=7:
+            self.p_data['data']='train_feat_s.mat'
+            self.p_data['data_id']=0
+            self.ishape = Conv2DSpace(shape = (1,3000),num_channels = 1)
+        elif self.test_id==9:
+            self.p_data['data']='train_img.mat'
+            self.p_data['data_id']=0
+            self.ishape = Conv2DSpace(shape = (1,1225),num_channels = 1)
+        if self.ishape.num_channels != 1:
+            self.p_data['ishape']=self.ishape.shape
+        else:
+            self.p_data['ishape']= np.append(self.ishape.shape,self.ishape.num_channels)
+
 
     def loadData_train(self):        
         valid_id = range(0,31000,10)
         train_id = list(set(range(0,31000)).difference(set(valid_id)))
         #train_id = range(1,31000,3)
-        if self.test_id<=4:
-            self.p_data['data']='train_im.mat'
-        elif self.test_id<=7:
-            self.p_data['data']='train_feat_s.mat'
-        self.p_data['data_id']=self.test_id
+
         self.loadData(self.path_train,'train',train_id)
         self.loadData(self.path_train,'valid',valid_id)
         #print "ds:",self.DataLoader.data['train'].X.shape,self.DataLoader.data['train'].y.shape
@@ -85,13 +101,6 @@ class Deep_occ(DBL_model):
             result = self.runTest(metric=0)
  
     def buildModel(self):
-        if self.model_id<=6:
-            self.ishape = Conv2DSpace(shape = (1,3675),num_channels = 1)
-        elif self.model_id<=7:
-            # axes=('b',0, 1,'c')
-            self.ishape = Conv2DSpace(shape = (35,35),num_channels = 3)
-        elif self.model_id<=7:
-            self.ishape = Conv2DSpace(shape = (1,3000),num_channels = 1)
 
         # 1. parameter        
         if self.model_id ==-1:

@@ -135,3 +135,9 @@ elseif (ll==2 || ll==3)
         end
     end
 
+%{
+dim = 35^2;
+train_img = [train_im(1,:); 0.2989 * train_im(1:dim,:) + 0.5870 * train_im(dim+(1:dim),:) + 0.1140 * train_im(2*dim+(1:dim),:)];
+save data/train/train_img train_img
+
+}
