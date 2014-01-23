@@ -61,6 +61,7 @@ elseif ll==-1
         % initial  error: 2.53 per patch
         mean(sum(((single(npss) - single(pss))/255).^2,1))
         % training error: 0.9066 per patch
+        % training error: 0.8890 per patch
        mean(sum(err,2))
         mean(sum(err(1:10,:),2))
         yhat(1:10,1)
@@ -73,7 +74,7 @@ elseif ll==-1
 elseif(ll==1 || ll==0)
     if ~exist(['init_p' num2str(ll) '.mat'],'file')
         num_h = 1000;
-        init_id = 0;
+        init_id = 1;
         switch init_id
         case 0
             std_W0 = 0.01; mu_W0 = 0;
@@ -90,7 +91,7 @@ elseif(ll==1 || ll==0)
             std_b0 = 0.01; mu_b0 = 0;
             b0 = single(randn(1,num_h)*std_b0+mu_b0);
         end
-        pp = bsxfun(@plus,mat_x'*W0,b0);
+        pp = bsxfun(@plus,mat_x*W0,b0);
         if ll==0
             mat_x2 = sigmf(pp,[1 0]);
         else
@@ -118,58 +119,49 @@ elseif(ll==1 || ll==0)
         save(['init_p' num2str(ll)],'param');
     end
     if p_eval
-        load(['init_p' num2str(ll)],'param');
-        pp = bsxfun(@plus,mat_x'*param{1,1},param{1,2});
-        pp2 = bsxfun(@plus,mat_xx'*param{1,1},param{1,2});
-        if ll==0
-            mat_x2 = sigmf(pp,[1 0]);
-            mat_xx2 = sigmf(pp2,[1 0]);
-        else
-            mat_x2 = tanh(pp);
-            mat_xx2 = tanh(pp2);
-        end
-        yhat = [mat_x2,ones(size(mat_x2,1),1,'single')] * [param{2,1}; param{2,2}];
-        yhat2 = [mat_xx2,ones(size(mat_xx2,1),1,'single')] * [param{2,1}; param{2,2}];
-        err = (yhat - mat_y).^2; 
-        % training error: 0.9170 per patch
-        mean(sum(err,2))/25
-
-        err2 = (yhat2*0.2+0.5 - mat_yy).^2; 
-        % valid error: 0.8364 per patch
-        mean(sum(err2,2))
-
+        % ll=1: 0.9169; 0.8980
+        U_eval(ll,mat_x,mat_y)/25
+        U_eval(ll,mat_xx,mat_yy)/25
     end
 elseif (ll==2 || ll==3)
-        num_h = [num_in,500,500,num_out];
-        W=cell(1,2);
-        b=cell(1,2);
-        mat_x = mat_x';
-        for i=1:2
-            W{i} = zeros(num_h(i),num_h(i+1),'single');
-            W{i}(1:num_h(i)+1:end) = 0.2;
-            b{i} = zeros(1,num_h(i+1),'single');
-            mat_x = bsxfun(@plus,mat_x*W{i},b{i});
-            if ll==2
-                mat_x = sigmf(mat_x,[1 0]);
-            else
-                mat_x = tanh(mat_x);
+        num_h = [num_in,1000,1000,num_out];
+        num_h = [289,1000,1000,289];
+        init_d=1;
+        param = cell(3,2);
+        switch init_d
+        case 1
+            for i=1:3
+                param{i,1} = 1/sqrt(num_h(i))*randn(num_h(i),num_h(i+1),'single');
+                param{i,2} = 1/sqrt(num_h(i))*randn(1,num_h(i+1),'single');
             end
-        end
+        case 2
+            W=cell(1,2);
+            b=cell(1,2);
+            tmp_x = mat_x;        
+            for i=1:2
+                W{i} = zeros(num_h(i),num_h(i+1),'single');
+                W{i}(1:num_h(i)+1:end) = 0.2;
+                b{i} = zeros(1,num_h(i+1),'single');
+                mat_x = bsxfun(@plus,tmp_x*W{i},b{i});
+                if ll==2
+                    mat_x = sigmf(tmp_x,[1 0]);
+                else
+                    mat_x = tanh(tmp_x);
+                end
+            end
 
-        tmp_one = ones(num_train,1,'single');
-        param = cell(2);
-        xx = ([mat_x(:,1:num_h(end)), tmp_one])\mat_y;
-        param(1,:) = { single(W{1}), single(b{1})};
-        param(2,:) = { single(W{2}), single(b{2})};
-        param(3,:) = { [single(xx(1:end-1,:));zeros(num_h(3)-num_h(end),num_h(end),'single')], single(xx(end,:))};
+            tmp_one = ones(num_train,1,'single');
+            xx = ([tmp_x(:,1:num_h(end)), tmp_one])\mat_y;
+            param(1,:) = { single(W{1}), single(b{1})};
+            param(2,:) = { single(W{2}), single(b{2})};
+            param(3,:) = { [single(xx(1:end-1,:));zeros(num_h(3)-num_h(end),num_h(end),'single')], single(xx(end,:))};
+        end
         save(['init_p' num2str(ll)],'param');
         p_eval=1;
         if p_eval
-            % 0.2065
-            %yhat = bsxfun(@plus,pp*param{2,1},param{2,2});
-            %yhat = bsxfun(@plus,bsxfun(@plus,mat_x*param{1,1},param{1,2}) * param{2,1},param{2,2});
-            yhat = [mat_x(:,1:num_h(end)),tmp_one] * xx;
-            err = sum(((yhat*0.2+0.5) - single(pss)'/255).^2,2); 
+            % ll=1: 0.9174; 0.8985
+            U_eval(ll,mat_x,mat_y)/25
+            U_eval(ll,mat_xx,mat_yy)/25
         end
     end
 

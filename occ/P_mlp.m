@@ -22,10 +22,11 @@ mat_x = (single(train_im(2:end,ind_train))/255-0.5)/0.2;
 mat_y = single(train_bd(:,ind_train)');
 mat_xx = (single(train_im(2:end,ind_test))/255-0.5)/0.2;
 mat_yy = single(train_bd(:,ind_test)');
+
 crop = 1;
 if crop
     x =4;y=4;
-    sz1=35;sz2=28;
+    sz1=35;sz2=17;
     crop_id = bsxfun(@plus,x+(1:sz2)-1,(y+(1:sz2)'-1-1)*sz1)'; 
     crop_id = crop_id(:);
     mat_y = mat_y(:,crop_id);
@@ -39,21 +40,23 @@ if ll==-1
         save init_p-1 param
         %{
         % baseline: 
-        % all 0: (sparse) 11.4722
+        % all 0 (35*35): (sparse) 11.4722
+        % all 0 (17*17): (sparse) 3.7520/3.7785
         mean(sum(mat_y.^2,2))
         %}
     end
     if p_eval
         load init_p-1
         xx = [param{1};param{2}];
-        % training error: 9.4196
+        % training error (151): 9.4196
+        % training error (2): 2.7652
         yhat = [mat_x;ones(1,size(mat_x,2))]' * xx;
         err = (yhat - mat_y).^2; 
         mean(sum(err,2))
 
         yhat2 = [mat_xx;ones(1,size(mat_xx,2))]' * xx;
         err2 = (yhat2 - mat_yy).^2; 
-        % valid error: 13.3616
+        % valid error: 3.9050
         mean(sum(err2,2))
     end 
 elseif(ll==3)
@@ -140,4 +143,4 @@ dim = 35^2;
 train_img = [train_im(1,:); 0.2989 * train_im(1:dim,:) + 0.5870 * train_im(dim+(1:dim),:) + 0.1140 * train_im(2*dim+(1:dim),:)];
 save data/train/train_img train_img
 
-}
+%}

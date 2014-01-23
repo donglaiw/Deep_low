@@ -35,4 +35,11 @@ end
 
 save(['dn_ucb' num2str(did)],'Is','Is2','gts')
 
- 
+%{
+load(['data/test/dn_ucb' num2str(did)])
+parfor i=1:numel(Is)
+    Is2{i} = rgb2gray(Is2{i});
+    Is{i} = rgb2gray(Is{i});
+end
+save(['data/test/dn_ucbg' num2str(did)],'Is','Is2','gts')
+%} 
