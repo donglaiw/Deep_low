@@ -58,6 +58,12 @@ class Deep_occ(DBL_model):
                     crop_len = (17,17)
                     crop_cen = [(pshape[k]-crop_len[k])/2 for k in [0,1] ]
                     self.p_data['crop_y'] = U_centerind(pshape,crop_cen,crop_len)
+        elif self.train_id ==13:
+            # python P_occ.py 0 -1 0 1 13 0
+            # regression on filter response
+            self.p_data['data']='decaf_5_0_im.mat'
+            self.p_data['data_id']=5
+            self.ishape = Conv2DSpace(shape = (1,96),num_channels = 1)
         if self.ishape.num_channels != 1:
             self.p_data['ishape']=self.ishape.shape
         else:
@@ -65,14 +71,19 @@ class Deep_occ(DBL_model):
 
 
     def loadData_train(self):        
-        """
-        """
-        valid_id = range(0,31000,10)
-        train_id = list(set(range(0,31000)).difference(set(valid_id)))
-        #train_id = range(1,31000,3)
-        self.loadData(self.path_train,'train',train_id)
-        self.loadData(self.path_train,'valid',valid_id)
-        #print "ds:",self.DataLoader.data['train'].X.shape,self.DataLoader.data['train'].y.shape
+        if self.train_id<=12:
+            valid_id = range(0,31000,10)
+            train_id = list(set(range(0,31000)).difference(set(valid_id)))
+            #train_id = range(1,31000,3)
+            self.loadData(self.path_train,'train',train_id)
+            self.loadData(self.path_train,'valid',valid_id)
+            #print "ds:",self.DataLoader.data['train'].X.shape,self.DataLoader.data['train'].y.shape
+        elif self.train_id==13:
+            self.p_data['mat_id']=[0]
+            self.loadData(self.path_train,'train')
+            self.p_data['mat_id']=[1]
+            self.loadData(self.path_train,'valid')
+
         self.p_monitor['channel'] = ['train_objective','valid_objective','train_sm0_misclass','valid_sm0_misclass']
         self.p_monitor['save'] = 'log'+self.dl_id
     def train(self):
@@ -188,6 +199,8 @@ class Deep_occ(DBL_model):
             # 1 tanh +1 linear
             n1 = np.sqrt(6.0/(num_in+num_dim[0]))
             n2 = np.sqrt(6.0/(num_dim[1]+num_dim[0]))
+            if self.train_id==13:
+                n1 = 1e-3;n2 = 1e-3
             #print "init:",n1,n2
             self.p_layers = [
                     [self.param.param_model_fc(dim = self.num_dim[0],irange=n1,layer_type=1),
@@ -195,7 +208,7 @@ class Deep_occ(DBL_model):
                     ]
 
         elif self.model_id ==4:        
-            # 1 tanh +1 linear
+            # 2 tanh +1 linear
             n1 = np.sqrt(6.0/(num_in+num_dim[0]))
             n2 = np.sqrt(6.0/(num_dim[1]+num_dim[0]))
             n3 = np.sqrt(6.0/(num_dim[1]+num_dim[2]))
@@ -206,7 +219,7 @@ class Deep_occ(DBL_model):
                     ]
 
         elif self.model_id ==5:        
-            # 1 tanh +1 linear
+            # 3 tanh +1 linear
             n1 = np.sqrt(6.0/(num_in+num_dim[0]))
             n2 = np.sqrt(6.0/(num_dim[1]+num_dim[0]))
             n3 = np.sqrt(6.0/(num_dim[1]+num_dim[2]))
