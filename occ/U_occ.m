@@ -2,6 +2,7 @@ function [y,cc] = U_occ(pb,gt_bd,thresh)
 
 if ~exist('thresh','var')
 thresh = 0:0.02:1;
+thresh(end)=[];
 end
 sz = size(pb);
 sz2 = size(gt_bd{1});
