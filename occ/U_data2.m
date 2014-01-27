@@ -108,7 +108,7 @@ end
 % collect positive and negative patches and compute features
 fids=sort(randperm(nTotFtrs,round(nTotFtrs*opts.fracFtrs)));
 k = size(centers,1)+nNeg*nImgs;
-ftrs = zeros(k,length(fids),'single');
+%ftrs = zeros(k,length(fids),'single');
 ftrs_bd = zeros(k,patchSiz^2,'single');
 ftrs_rgb = zeros(k,patchSiz^2*3,'single');
 labels = zeros(k,1); k = 0;
@@ -153,7 +153,7 @@ for i = 1:nImgs
     xy=[xy1; xy0];
     lbls=[lbls1; lbls0];
     k1=length(lbls);
-    ps=zeros(patchSiz,patchSiz,nChns,k1,'single');
+    %ps=zeros(patchSiz,patchSiz,nChns,k1,'single');
     gt_m = single(gt{1}.Boundaries);
     for j=2:nGt
         gt_m = gt_m+ single(gt{j}.Boundaries);
@@ -164,8 +164,8 @@ for i = 1:nImgs
     ps_rgb=zeros(k1,3*patchSiz^2,'single');
     
     p=patchSiz-1;
-    for j=1:k1
-        ps(:,:,:,j)=chns(xy(j,2):xy(j,2)+p,xy(j,1):xy(j,1)+p,:);
+    parfor j=1:k1
+        %ps(:,:,:,j)=chns(xy(j,2):xy(j,2)+p,xy(j,1):xy(j,1)+p,:);
         ps_bd(j,:) = reshape(gt_m(xy(j,2):xy(j,2)+p,xy(j,1):xy(j,1)+p),1,[]);
         ps_rgb(j,:) = reshape(gt_im(xy(j,2):xy(j,2)+p,xy(j,1):xy(j,1)+p,:),1,[]);        
     end
@@ -173,17 +173,19 @@ for i = 1:nImgs
     if(0), montage2(squeeze(ps(:,:,1,:))); drawnow; end
     
     % compute features and store
-    ftrs1=[reshape(ps,[],k1)' U_stComputeSimFtrs(ps,opts)];
-    ftrs(k+1:k+k1,:) = ftrs1(:,fids);
+    %ftrs1=[reshape(ps,[],k1)' U_stComputeSimFtrs(ps,opts)];
+    %ftrs(k+1:k+k1,:) = ftrs1(:,fids);
     ftrs_bd(k+1:k+k1,:) = ps_bd;
     ftrs_rgb(k+1:k+k1,:) = ps_rgb;
     labels(k+1:k+k1) = lbls;
     k=k+k1;
     tocStatus(tid,i/nImgs);
 end
+
 if k<size(ftrs,1)
-    ftrs=ftrs(1:k,:);
+    %ftrs=ftrs(1:k,:);
     ftrs_bd=ftrs_bd(1:k,:);
+    ftrs_rgb=ftrs_rgb(1:k,:);
     labels=labels(1:k);
 end
 
@@ -221,37 +223,45 @@ fid = fopen('st_test.bin', 'w');
 fwrite(fid,[labels(test_id)-1 ftrs(test_id,:)], 'single');
 fclose(fid);
 %}
+labels = labels -1;
 switch did
 case -1
     % train
-    train_im = single([labels-1 ftrs_rgb])';
+    %train_im = single([labels-1 ftrs_rgb])';
     %p_save(train_im,1,10,'train_im_bp');    
-    save(['train_im_bn' num2str(nid)],'train_im')
+    save(['train_im_bn' num2str(nid)],'-v7.3','labels','ftrs_rgb')
+    %save(['train_im_bn' num2str(nid)],'-v7.3','labels')
     %train_feat = single([labels-1 ftrs])';
     %save -v7.3 train_feat train_feat
-    train_bd = single([ftrs_bd])';
+    %train_bd = single([ftrs_bd])';
     %p_save(train_b,1,10,'train_bd_bp');    
-    save(['train_bd_bn' num2str(nid)],'train_bd')
+    save(['train_bd_bn' num2str(nid)],'-v7.3','ftrs_bd')
     
+    %{
     % for matlab
     fid = fopen(['st_train_bp.bin' num2str(nid)], 'w');
     fwrite(fid,[labels-1 ftrs], 'single');
     fclose(fid);
+    %}
     case 0
     % train
-    train_im = single([labels-1 ftrs_rgb])';
+    %train_im = single([labels-1 ftrs_rgb])';
     %p_save(train_im,1,10,'train_im_bp');    
-    save train_im_bp train_im
+    %save -v7.3 train_im_bp train_im
+    save -v7.3 train_im_bp labels ftrs_rgb
+
     %train_feat = single([labels-1 ftrs])';
     %save -v7.3 train_feat train_feat
-    train_bd = single([ftrs_bd])';
+    %train_bd = single([ftrs_bd])';
     %p_save(train_b,1,10,'train_bd_bp');
-    save train_bd_bp train_bd
-    
+    %save -v7.3 train_bd_bp train_bd
+    save -v7.3 train_bd_bp ftrs_bd
+    %{
     % for matlab
     fid = fopen('st_train_bp.bin', 'w');
     fwrite(fid,[labels-1 ftrs], 'single');
     fclose(fid);
+    %}
 case 1
     % train
     train_im = single([labels-1 ftrs_rgb])';
@@ -341,8 +351,8 @@ train_feat_s = [lb data*aa];
 save train_feat_s train_feat_s
 
 
-id=0;U_data;
-id=-1;for nid=1:8;U_data;end
+did=0;U_data;
+did=-1;for nid=1:8;U_data;end
 
 
 %}
