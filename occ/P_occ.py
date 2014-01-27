@@ -273,13 +273,13 @@ class Deep_occ(DBL_model):
                 algo_lr = 2*1e-5
                 algo_mom = 1e-4
             elif self.model_id ==4:
-                if self.train_id ==13:
-                    algo_lr = 1e-2
-                    algo_mom = 1e-1
+                if self.train_id >=13:
+                    algo_lr = 1e-3
+                    algo_mom = 1e-2
             elif self.model_id ==5:
-                if self.train_id ==13:
-                    algo_lr = 1e-2
-                    algo_mom = 1e-1
+                if self.train_id >=13:
+                    algo_lr = 1e-3
+                    algo_mom = 1e-2
 
             self.p_algo = self.param.param_algo(batch_size = self.batch_size,                    
                      termination_criterion=EpochCounter(max_epochs=self.num_epoch),
