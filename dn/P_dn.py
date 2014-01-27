@@ -6,10 +6,10 @@ from pylearn2.termination_criteria import EpochCounter
 from pylearn2.training_algorithms.learning_rule import Momentum
 from DBL_model import DBL_model
 from DBL_util import paramSet
-
+import scipy.io        
 class Deep_dn(DBL_model):
-    def __init__(self,algo_id,model_id,num_epoch,num_dim,test_id): 
-       super(Deep_dn, self).__init__(algo_id,model_id,num_epoch,num_dim,test_id)
+    def __init__(self,algo_id,model_id,num_epoch,num_dim,train_id,test_id): 
+       super(Deep_dn, self).__init__(algo_id,model_id,num_epoch,num_dim,train_id,test_id)
        self.setup()
         
     def setupParam(self):        
@@ -17,11 +17,12 @@ class Deep_dn(DBL_model):
         self.path_train = 'data/VOC_patch/'
         self.path_test = 'data/test/'
         self.dataset_id = 2            
-        self.batch_size = 10000
+        self.batch_size = 100
+        #self.batch_size = 10000
         self.p_data = {'ds_id':2}   # dn data        
 
     def loadData_train(self):
-        if self.test_id==0:
+        if self.train_id==0:
             self.p_data['mat_id']=[1]
             self.loadData(self.path_train,'train',range(int(1e6)))
             self.p_data['mat_id']=[2]
@@ -42,6 +43,8 @@ class Deep_dn(DBL_model):
             self.test_valid()
 
     def test(self):
+        if not os.path.exists('result/'+self.dl_id):
+            os.mkdir('result/'+self.dl_id)
         if self.test_id==-1:
             self.loadData(self.path_train,'valid',int(1e5)+range(int(1e5)),options={'data_id':-1,'mat_id':[1]})
             self.DataLoader.data['test'] = self.DataLoader.data['valid']
@@ -53,13 +56,22 @@ class Deep_dn(DBL_model):
             result = self.test(self.batch_size,1)
             scipy.io.savemat(self.result_mat,mdict={'result':result})
         elif self.test_id==1:
-            pre =self.result_mat[:-4]
-            for i in range(100):
-                print "do: image "+str(i)
-                self.loadData(self.path_test,'test',options={'data_id':2,'data':'berk_test.mat','im_id':i})
-                result = self.test(self.batch_size,1)
-                scipy.io.savemat(pre+str(i)+'.mat',mdict={'result':result})
-            scipy.io.savemat(self.result_mat,mdict={'done':1})
+            self.p_data['data_id'] = 2
+            self.p_data['data'] = 'berk_test.mat'
+            self.test_multi(range(100))
+        elif self.test_id==2:
+            self.p_data['data_id'] = 2
+            self.p_data['data'] = 'pop_test.mat'
+            self.test_multi(range(7))
+
+    def test_multi(self,ran):
+        pre =self.result_mat[:-4]
+        for i in ran:
+            print "do: image "+str(i)
+            self.p_data['im_id'] = i
+            self.loadData(self.path_test,'test')
+            result = self.runTest()
+            scipy.io.savemat(pre+'_'+str(i)+'.mat',mdict={'result':result})
 
     def buildModel(self):
         self.ishape = Conv2DSpace(shape = (17,17),num_channels = 1)
@@ -96,19 +108,30 @@ class Deep_dn(DBL_model):
                     self.param.param_model_fc(dim = self.num_dim[1],irange=0.05,layer_type=1),
                     self.param.param_model_fc(dim = self.num_dim[2],irange=0.05,layer_type=1),
                     self.param.param_model_fc(dim = self.num_dim[3],irange=0.05,layer_type=2)]]
+        elif self.model_id ==5:
+            # train 3 tanh layer
+            self.p_layers = [[self.param.param_model_fc(dim = self.num_dim[0],irange=0.07,layer_type=1),
+                    self.param.param_model_fc(dim = self.num_dim[1],irange=0.05,layer_type=1),
+                    self.param.param_model_fc(dim = self.num_dim[2],irange=0.05,layer_type=1),
+                    self.param.param_model_fc(dim = self.num_dim[3],irange=0.05,layer_type=1),
+                    self.param.param_model_fc(dim = self.num_dim[4],irange=0.07,layer_type=2)]]
 
     def buildAlgo(self):
+        print "epoch remaining:",self.num_epoch
         if self.algo_id == 0:
-            algo_lr = 1e-4
-            algo_mom = 1e-3
+            algo_lr = 2*1e-5
+            algo_mom = 1e-4
             if self.model_id == -2:
                 algo_lr = 1e-3
                 algo_mom = 1e-3
             elif self.model_id ==1:
-                algo_lr = 1*1e-4
+                algo_lr = 2*1e-5
                 algo_mom = 1e-3
             elif self.model_id ==3:
-                algo_lr = 3*1e-5
+                algo_lr = 2*1e-5
+                algo_mom = 1e-4
+            elif self.model_id ==4:
+                algo_lr = 2*1e-5
                 algo_mom = 1e-4
             self.p_algo = self.param.param_algo(batch_size = self.batch_size,                    
                      monitoring_dataset = self.DataLoader.data,
@@ -151,11 +174,11 @@ python P_MLP.py 0 3 1000 500,500,289 0
 
 
 if __name__ == "__main__":             
-    if len(sys.argv) != 6:
-        raise('need six inputs: algo_id, model_id epoch_num layer test_id')
+    if len(sys.argv) != 7:
+        raise('need six inputs: algo_id, model_id epoch_num layer train_id test_id')
     num_dim = sys.argv[4].split(',')
     num_dim = [int(x) for x in num_dim]
-    exp = Deep_dn(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),num_dim,int(sys.argv[5]))
+    exp = Deep_dn(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),num_dim,int(sys.argv[5]),int(sys.argv[6]))
     exp.run()
     """
     import cPickle

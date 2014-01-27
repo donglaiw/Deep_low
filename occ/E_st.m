@@ -1,7 +1,7 @@
 addpath('../util')
 init
 if ~exist('Is','var')
-    load data/test/dn_ucb
+    load data/test/dn_ucb2
 end
 num_I = numel(Is);
 sts = cell(1,num_I);
@@ -11,19 +11,14 @@ ntree = 2;
 if ~exist('model','var')
     load([VLIB 'Mid/Boundary/SketchTokens/models/forest/modelSmall.mat']);
     if ntree
-        model.opts.nTrees = ntree;
-        model.thrs(:,(ntree+1):end) = [];
-        model.fids(:,(ntree+1):end) = [];
-        model.child(:,(ntree+1):end) = [];
-        model.count(:,(ntree+1):end) = [];
-        model.depth(:,(ntree+1):end) = [];
-        model.distr(:,:,(ntree+1):end) = [];
+        model = U_st1(model);
     end
 end
+
 addpath([VLIB 'Mid/Boundary/SketchTokens'])
 addpath(genpath([VLIB '../Piotr']))
-for i=1:1%num_I
-%parfor i=1:num_I
+%for i=1:1%num_I
+parfor i=1:num_I
     st = stDetect( Is{i}, model );
     [~,sts{i}] = max(st,[],3);
     Es{i} = stToEdges( st, 1 ); 
