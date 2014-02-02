@@ -18,11 +18,15 @@ class Deep_occ(DBL_model):
         self.path_train = '../data/train/'
         self.path_test = '../data/test/'            
         self.p_data = {'ds_id':0}   # occ data         
-        self.batch_size = 200
-        if self.train_id==0:
-            self.p_data['data']='conv_11_0.mat'
+        self.batch_size = 100
+        if self.train_id == 0:
             self.p_data['data_id'] = 6
-            self.ishape = Conv2DSpace(shape = (11,11),num_channels = 3)
+            if self.model_id<=1:
+                psz = 11
+            elif self.model_id<=3:
+                psz = 35
+            self.p_data['data']='conv_'+str(psz)+'_0.mat'
+            self.ishape = Conv2DSpace(shape = (psz,psz),num_channels = 3)
             num_im = 200000
             self.valid_set = range(0,num_im,10)
             self.train_set = list(set(range(0,num_im)).difference(set(self.valid_set)))
@@ -148,26 +152,33 @@ class Deep_occ(DBL_model):
             n1 = 0.01
             self.p_layers = [
                 [self.param.param_model_conv(self.num_dim[1],ks[kid],ps[kid],pd[kid],ir[kid],layer_type=0)],
-                [self.param.param_model_fc(dim = self.num_dim[2],irange=n1,layer_type=2),
+                [self.param.param_model_fc(dim = self.num_dim[2],irange=n1,layer_type=1),
                 self.param.param_model_fc(dim = self.num_dim[3],irange=n1,layer_type=2)]
                 ]
         elif self.model_id ==2:        
-             # 2 tanh + 1 softmax
+            ks = [[11,11],[5,5]]
+            ir = [0.05,0.05]
+            ps = [[3,3],[1,1]]
+            pd = [[2,2],[1,1]]
+            n1 = 0.01
             self.p_layers = [
-                [self.param.param_model_fc(dim = self.num_dim[0],irange=0.05,layer_type=1),
-                 self.param.param_model_fc(dim = self.num_dim[1],irange=0.05,layer_type=1),
-                 self.param.param_model_fc(dim = self.num_dim[2],irange=0.05,layer_type=1)],
-                [self.param.param_model_cf(n_classes = self.num_dim[3],irange=0.05,layer_type=0)]
+                [self.param.param_model_conv(self.num_dim[1],ks[0],ps[0],pd[0],ir[0],layer_type=0),
+                self.param.param_model_conv(self.num_dim[2],ks[1],ps[1],pd[1],ir[1],layer_type=0)],
+                [self.param.param_model_fc(dim = self.num_dim[4],irange=n1,layer_type=2)]
                 ]
+
         elif self.model_id ==3:        
-            # 1 tanh +1 linear
-            n1 = np.sqrt(6.0/(num_in+num_dim[0]))
-            n2 = np.sqrt(6.0/(num_dim[1]+num_dim[0]))
-            #print "init:",n1,n2
+            ks = [[11,11],[5,5]]
+            ir = [0.05,0.05]
+            ps = [[1,1],[1,1]]
+            pd = [[1,1],[1,1]]
+            n1 = 0.01
             self.p_layers = [
-                    [self.param.param_model_fc(dim = self.num_dim[0],irange=n1,layer_type=1),
-                    self.param.param_model_fc(dim = self.num_dim[1],irange=n2,layer_type=2)]
-                    ]
+                [self.param.param_model_conv(self.num_dim[1],ks[0],ps[0],pd[0],ir[0],layer_type=0),
+                self.param.param_model_conv(self.num_dim[2],ks[1],ps[1],pd[1],ir[1],layer_type=0)],
+                [self.param.param_model_fc(dim = self.num_dim[3],irange=n1,layer_type=1),
+                self.param.param_model_fc(dim = self.num_dim[4],irange=n1,layer_type=2)]
+                ]
 
         elif self.model_id ==4:        
             # 1 tanh +1 linear
@@ -218,11 +229,11 @@ class Deep_occ(DBL_model):
                 algo_lr = 1e-3
                 algo_mom = 1e-3
             elif self.model_id ==1:
-                algo_lr = 1e-4
-                algo_mom = 1e-3
+                algo_lr = 1e-2
+                algo_mom = 1e-1
             elif self.model_id == 2:
-                algo_lr = 1e-4
-                algo_mom = 1e-3
+                algo_lr = 1e-2
+                algo_mom = 1e-1
             elif self.model_id ==3:
                 algo_lr = 2*1e-5
                 algo_mom = 1e-4

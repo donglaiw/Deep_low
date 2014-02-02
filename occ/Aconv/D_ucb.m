@@ -6,7 +6,7 @@ end
 load([DATA_UCB 'dn_ucb' num2str(did)]) 
 num_p = 1000;
 num_im = numel(Is);
-psz = 11;
+psz = 35;
 psz_h = (1+psz)/2;
 mat_x= zeros(3*psz^2,num_p*num_im,'single');
 mat_y= zeros(1,num_p*num_im,'single');
