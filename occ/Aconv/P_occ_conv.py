@@ -19,17 +19,17 @@ class Deep_occ(DBL_model):
         self.path_test = '../data/test/'            
         self.p_data = {'ds_id':0}   # occ data         
         self.batch_size = 100
-        if self.train_id == 0:
+        if self.train_id <= 1:
             self.p_data['data_id'] = 6
             if self.model_id<=1:
-                psz = 11
+                self.psz = 11
             elif self.model_id<=3:
-                psz = 35
-            self.p_data['data']='conv_'+str(psz)+'_0.mat'
-            self.ishape = Conv2DSpace(shape = (psz,psz),num_channels = 3)
-            num_im = 200000
-            self.valid_set = range(0,num_im,10)
-            self.train_set = list(set(range(0,num_im)).difference(set(self.valid_set)))
+                self.psz = 15
+            self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 3)
+            if self.train_id ==0:
+                num_im = 200000
+                self.valid_set = range(0,num_im,10)
+                self.train_set = list(set(range(0,num_im)).difference(set(self.valid_set)))
 
         if self.ishape.num_channels == 1:
             self.p_data['ishape']=self.ishape.shape
@@ -40,8 +40,14 @@ class Deep_occ(DBL_model):
 
     def loadData_train(self):        
         #train_id = range(1,31000,3)
-        self.loadData(self.path_train,'train',self.train_set)
-        self.loadData(self.path_train,'valid',self.valid_set)
+        self.p_data['data']='conv_'+str(self.psz)+'_0.mat'
+        if self.train_id==0:
+            self.loadData(self.path_train,'train',self.train_set)
+            self.loadData(self.path_train,'valid',self.valid_set)
+        elif self.train_id==1:
+            self.loadData(self.path_train,'train')
+            self.p_data['data']='conv_'+str(self.psz)+'_1.mat'
+            self.loadData(self.path_train,'valid')
         #print "ds:",self.DataLoader.data['train'].X.shape,self.DataLoader.data['train'].y.shape
         self.p_monitor['channel'] = ['train_objective','valid_objective','train_sm0_misclass','valid_sm0_misclass']
         self.p_monitor['save'] = 'log'+self.dl_id
@@ -158,13 +164,13 @@ class Deep_occ(DBL_model):
         elif self.model_id ==2:        
             ks = [[11,11],[5,5]]
             ir = [0.05,0.05]
-            ps = [[3,3],[1,1]]
-            pd = [[2,2],[1,1]]
+            ps = [[1,1],[1,1]]
+            pd = [[1,1],[1,1]]
             n1 = 0.01
             self.p_layers = [
-                [self.param.param_model_conv(self.num_dim[1],ks[0],ps[0],pd[0],ir[0],layer_type=0),
-                self.param.param_model_conv(self.num_dim[2],ks[1],ps[1],pd[1],ir[1],layer_type=0)],
-                [self.param.param_model_fc(dim = self.num_dim[4],irange=n1,layer_type=2)]
+                [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=0),
+                self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=0)],
+                [self.param.param_model_fc(dim = self.num_dim[2],irange=n1,layer_type=2)]
                 ]
 
         elif self.model_id ==3:        
