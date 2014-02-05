@@ -30,12 +30,17 @@ class Deep_occ(DBL_model):
                 num_im = 200000
                 self.valid_set = range(0,num_im,10)
                 self.train_set = list(set(range(0,num_im)).difference(set(self.valid_set)))
+        elif self.train_id <= 4:
+            # contour completion
+            if self.train_id==3:
+                self.p_data['data_id'] = 7
+            elif self.train_id==4:
+                self.p_data['data_id'] = 8
+            self.psz = 17
+            self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 1)
 
-        if self.ishape.num_channels == 1:
-            self.p_data['ishape']=self.ishape.shape
-        else:
-            self.p_data['ishape']= np.append(self.ishape.shape,self.ishape.num_channels)
-            #print self.p_data['ishape']
+
+        self.p_data['ishape']= np.append(self.ishape.shape,self.ishape.num_channels)
 
 
     def loadData_train(self):        
@@ -48,6 +53,17 @@ class Deep_occ(DBL_model):
             self.loadData(self.path_train,'train')
             self.p_data['data']='conv_'+str(self.psz)+'_1.mat'
             self.loadData(self.path_train,'valid')
+        elif self.train_id==3:
+            self.p_data['data']='mlp_st_0x.bin'
+            self.loadData(self.path_train,'train')
+            self.p_data['data']='mlp_st_1x.bin'
+            self.loadData(self.path_train,'valid')
+        elif self.train_id==4:
+            self.p_data['data']='mlp_st_0sx.bin'
+            self.loadData(self.path_train,'train')
+            self.p_data['data']='mlp_st_1sx.bin'
+            self.loadData(self.path_train,'valid')
+
         #print "ds:",self.DataLoader.data['train'].X.shape,self.DataLoader.data['train'].y.shape
         self.p_monitor['channel'] = ['train_objective','valid_objective','train_sm0_misclass','valid_sm0_misclass']
         self.p_monitor['save'] = 'log'+self.dl_id
@@ -123,9 +139,35 @@ class Deep_occ(DBL_model):
  
     def buildModel(self):
         num_in = np.prod(self.ishape.shape)*self.ishape.num_channels
-        if self.model_id ==0:
+        if self.model_id == -2:
+            # python P_occ_conv.py 0 -2 1000 81 4 0            
+            n1 = 0.005
+            self.p_layers = [
+                [self.param.param_model_fc(dim = self.num_dim[0],irange=n1,layer_type=1)]
+                ]
+
+        elif self.model_id == -1:
             # 1 tanh + 1 softmax            
-            ks = [[11,11],[1,1],[3,3]]
+            ks = [[11,11],[9,9],[3,3]]
+            ir = [0.5,0.05,0.05]
+            ps = [[1,1],[1,1],[2,2]]
+            pd = [[1,1],[1,1],[2,2]]
+            kid = self.num_dim[0]
+            n1 = 0.03
+            crop_len = [(1+(self.ishape.shape[k]-ks[kid][k])/pd[kid][k])/ps[kid][k]  for k in [0,1] ]
+            #print self.ishape.shape,ks[kid]
+            if max(crop_len)>1:
+                crop_cen = [(self.ishape.shape[k]-crop_len[k])/2 for k in [0,1] ]
+                #print crop_len,crop_cen
+                self.p_data['crop_y'] = U_centerind(self.ishape.shape,crop_cen,crop_len)
+                #print self.p_data['crop_y'].size,self.p_data['crop_y'] 
+            self.p_layers = [
+                [self.param.param_model_conv(self.num_dim[1],ks[kid],ps[kid],pd[kid],ir[kid],layer_type=2)]
+                ]
+
+        elif self.model_id ==0:
+            # 1 tanh + 1 softmax            
+            ks = [[11,11],[9,9],[3,3]]
             ir = [0.5,0.05,0.05]
             ps = [[1,1],[1,1],[2,2]]
             pd = [[1,1],[1,1],[2,2]]
