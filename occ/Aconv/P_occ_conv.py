@@ -24,10 +24,9 @@ class Deep_occ(DBL_model):
             if self.model_id<=1:
                 self.psz = 11
             elif self.model_id<=3:
-                self.psz = 35
+                self.psz = 15
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 3)
-            if self.train_id==0:
-                self.p_data['data']='conv_'+str(self.psz)+'_0.mat'
+            if self.train_id ==0:
                 num_im = 200000
                 self.valid_set = range(0,num_im,10)
                 self.train_set = list(set(range(0,num_im)).difference(set(self.valid_set)))
