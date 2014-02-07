@@ -148,6 +148,7 @@ class Deep_occ(DBL_model):
 
         elif self.model_id == -1:
             # 1 tanh + 1 softmax            
+            # python P_occ_conv.py 0 -1 1000 1,1 4 0
             ks = [[11,11],[9,9],[3,3]]
             ir = [0.5,0.05,0.05]
             ps = [[1,1],[1,1],[2,2]]
@@ -162,7 +163,7 @@ class Deep_occ(DBL_model):
                 self.p_data['crop_y'] = U_centerind(self.ishape.shape,crop_cen,crop_len)
                 #print self.p_data['crop_y'].size,self.p_data['crop_y'] 
             self.p_layers = [
-                [self.param.param_model_conv(self.num_dim[1],ks[kid],ps[kid],pd[kid],ir[kid],layer_type=2)]
+                [self.param.param_model_conv(self.num_dim[1],ks[kid],ps[kid],pd[kid],ir[kid],layer_type=4)]
                 ]
 
         elif self.model_id ==0:
