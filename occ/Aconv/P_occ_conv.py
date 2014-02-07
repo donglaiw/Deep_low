@@ -19,17 +19,13 @@ class Deep_occ(DBL_model):
         self.path_test = '../data/test/'            
         self.p_data = {'ds_id':0}   # occ data         
         self.batch_size = 100
-        if self.train_id <= 1:
+        if self.train_id <= 2:
             self.p_data['data_id'] = 6
             if self.model_id<=1:
                 self.psz = 11
             elif self.model_id<=3:
                 self.psz = 15
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 3)
-            if self.train_id ==0:
-                num_im = 200000
-                self.valid_set = range(0,num_im,10)
-                self.train_set = list(set(range(0,num_im)).difference(set(self.valid_set)))
         elif self.train_id <= 4:
             # contour completion
             if self.train_id==3:
@@ -46,12 +42,20 @@ class Deep_occ(DBL_model):
     def loadData_train(self):        
         #train_id = range(1,31000,3)
         if self.train_id==0:
-            self.loadData(self.path_train,'train',self.train_set)
-            self.loadData(self.path_train,'valid',self.valid_set)
+            num_im = 200000
+            valid_set = range(0,num_im,10)
+            train_set = list(set(range(0,num_im)).difference(set(self.valid_set)))
+            self.loadData(self.path_train,'train',train_set)
+            self.loadData(self.path_train,'valid',valid_set)
         elif self.train_id==1:
             self.p_data['data']='conv_'+str(self.psz)+'_0.mat'
             self.loadData(self.path_train,'train')
             self.p_data['data']='conv_'+str(self.psz)+'_1.mat'
+            self.loadData(self.path_train,'valid')
+        elif self.train_id==2:
+            self.p_data['data']='ucb_0_11_2_3.mat'
+            self.loadData(self.path_train,'train')
+            self.p_data['data']='ucb_1_11_2_3.mat'
             self.loadData(self.path_train,'valid')
         elif self.train_id==3:
             self.p_data['data']='mlp_st_0x.bin'
