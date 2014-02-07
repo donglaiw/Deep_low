@@ -95,15 +95,14 @@ class Deep_occ(DBL_model):
             #scipy.io.savemat('db.mat',mdict={'result':result})
            #single mat
         elif self.test_id==0:
-            num_im = 2000
-            #self.valid_set = range(0,num_im,10)
-            #self.train_set = list(set(range(0,num_im)).difference(set(self.valid_set)))
-            #print len(self.valid_set), len(self.train_set)
-            self.loadData(self.path_train,'train',self.valid_set)
-            self.loadData(self.path_train,'valid',self.train_set)
+            self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1.mat','ucb_0_'+str(self.psz)+'_2_3.mat']
+            self.loadData(self.path_train,'train')
+            self.p_data['data']=['ucb_1_'+str(self.psz)+'_2_1.mat','ucb_1_'+str(self.psz)+'_2_3.mat']
+            self.loadData(self.path_train,'valid')
+
             result = self.runTest(self.DataLoader.data['train'],2)
-            result = self.runTest(self.DataLoader.data['valid'],2)
-            #scipy.io.savemat(self.result_mat,mdict={'result':result})
+            result2 = self.runTest(self.DataLoader.data['valid'],2)
+            scipy.io.savemat('ha.mat',mdict={'r1':result,'r2':result2})
         elif self.test_id==1:
             # e.g.  python P_occ_conv.py 0 0 1000 0,96,1 2 1
             if not os.path.exists('result/'+self.dl_id):
@@ -111,8 +110,8 @@ class Deep_occ(DBL_model):
             # train
             pre =self.result_mat[:-4]
             self.p_data['data_id'] = 9
-            self.p_data['data'] = 'dn_ucb2.mat'
-            for i in range(200):
+            self.p_data['data'] = ['dn_ucb2.mat']
+            for i in range(10,200):
                 print "do: image "+str(i)
                 self.p_data['im_id'] = i
                 self.loadData(self.path_test,'test')
