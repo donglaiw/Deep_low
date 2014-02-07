@@ -168,6 +168,14 @@ class Deep_occ(DBL_model):
         elif self.test_id==3:
             self.loadData(self.path_test,'test',options={'data_id':3,'data':'test_im.mat'})
             result = self.runTest(metric=0)
+        elif self.test_id==4:
+            self.p_data['data']='decaf_5_'+str(self.train_id-12)+'.mat'
+            self.p_data['data_id'] =5
+            self.p_data['mat_id']=[2]
+            self.loadData(self.path_test,'test')
+            result = self.runTest(metric=2)
+            scipy.io.savemat(self.result_mat,mdict={'result':result})
+ 
  
     def buildModel(self):
         num_in = np.prod(self.ishape.shape)*self.ishape.num_channels
