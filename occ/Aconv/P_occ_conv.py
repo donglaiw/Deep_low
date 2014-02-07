@@ -23,7 +23,7 @@ class Deep_occ(DBL_model):
             self.p_data['data_id'] = 6
             if self.model_id<=1:
                 self.psz = 11
-            elif self.model_id<=3:
+            elif self.model_id<=2:
                 self.psz = 15
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 3)
         elif self.train_id <= 4:
@@ -53,9 +53,9 @@ class Deep_occ(DBL_model):
             self.p_data['data']='conv_'+str(self.psz)+'_1.mat'
             self.loadData(self.path_train,'valid')
         elif self.train_id==2:
-            self.p_data['data']='ucb_0_11_2_3.mat'
+            self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1.mat','ucb_0_'+str(self.psz)+'_2_3.mat']
             self.loadData(self.path_train,'train')
-            self.p_data['data']='ucb_1_11_2_3.mat'
+            self.p_data['data']=['ucb_1_'+str(self.psz)+'_2_1.mat','ucb_1_'+str(self.psz)+'_2_3.mat']
             self.loadData(self.path_train,'valid')
         elif self.train_id==3:
             self.p_data['data']='mlp_st_0x.bin'
