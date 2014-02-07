@@ -45,11 +45,11 @@ class Deep_occ(DBL_model):
 
     def loadData_train(self):        
         #train_id = range(1,31000,3)
-        self.p_data['data']='conv_'+str(self.psz)+'_0.mat'
         if self.train_id==0:
             self.loadData(self.path_train,'train',self.train_set)
             self.loadData(self.path_train,'valid',self.valid_set)
         elif self.train_id==1:
+            self.p_data['data']='conv_'+str(self.psz)+'_0.mat'
             self.loadData(self.path_train,'train')
             self.p_data['data']='conv_'+str(self.psz)+'_1.mat'
             self.loadData(self.path_train,'valid')
