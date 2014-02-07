@@ -26,10 +26,6 @@ class Deep_occ(DBL_model):
             elif self.model_id<=3:
                 self.psz = 15
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 3)
-            if self.train_id ==0:
-                num_im = 200000
-                self.valid_set = range(0,num_im,10)
-                self.train_set = list(set(range(0,num_im)).difference(set(self.valid_set)))
         elif self.train_id <= 4:
             # contour completion
             if self.train_id==3:
@@ -46,12 +42,20 @@ class Deep_occ(DBL_model):
     def loadData_train(self):        
         #train_id = range(1,31000,3)
         if self.train_id==0:
-            self.loadData(self.path_train,'train',self.train_set)
-            self.loadData(self.path_train,'valid',self.valid_set)
+            num_im = 200000
+            valid_set = range(0,num_im,10)
+            train_set = list(set(range(0,num_im)).difference(set(self.valid_set)))
+            self.loadData(self.path_train,'train',train_set)
+            self.loadData(self.path_train,'valid',valid_set)
         elif self.train_id==1:
             self.p_data['data']='conv_'+str(self.psz)+'_0.mat'
             self.loadData(self.path_train,'train')
             self.p_data['data']='conv_'+str(self.psz)+'_1.mat'
+            self.loadData(self.path_train,'valid')
+        elif self.train_id==2:
+            self.p_data['data']='ucb_0_11_2_3.mat'
+            self.loadData(self.path_train,'train')
+            self.p_data['data']='ucb_1_11_2_3.mat'
             self.loadData(self.path_train,'valid')
         elif self.train_id==3:
             self.p_data['data']='mlp_st_0x.bin'
@@ -148,6 +152,7 @@ class Deep_occ(DBL_model):
 
         elif self.model_id == -1:
             # 1 tanh + 1 softmax            
+            # python P_occ_conv.py 0 -1 1000 1,1 4 0
             ks = [[11,11],[9,9],[3,3]]
             ir = [0.5,0.05,0.05]
             ps = [[1,1],[1,1],[2,2]]
@@ -162,7 +167,7 @@ class Deep_occ(DBL_model):
                 self.p_data['crop_y'] = U_centerind(self.ishape.shape,crop_cen,crop_len)
                 #print self.p_data['crop_y'].size,self.p_data['crop_y'] 
             self.p_layers = [
-                [self.param.param_model_conv(self.num_dim[1],ks[kid],ps[kid],pd[kid],ir[kid],layer_type=2)]
+                [self.param.param_model_conv(self.num_dim[1],ks[kid],ps[kid],pd[kid],ir[kid],layer_type=4)]
                 ]
 
         elif self.model_id ==0:
