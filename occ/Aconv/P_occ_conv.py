@@ -19,7 +19,7 @@ class Deep_occ(DBL_model):
         self.path_test = '../data/test/'            
         self.p_data = {'ds_id':0}   # occ data         
         self.batch_size = 100
-        if self.train_id <= 1:
+        if self.train_id <= 2:
             self.p_data['data_id'] = 6
             if self.model_id<=1:
                 self.psz = 11
