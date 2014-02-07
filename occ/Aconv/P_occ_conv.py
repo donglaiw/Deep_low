@@ -105,16 +105,14 @@ class Deep_occ(DBL_model):
             result = self.runTest(self.DataLoader.data['valid'],2)
             #scipy.io.savemat(self.result_mat,mdict={'result':result})
         elif self.test_id==1:
+            # e.g.  python P_occ_conv.py 0 0 1000 0,96,1 2 1
             if not os.path.exists('result/'+self.dl_id):
                 os.mkdir('result/'+self.dl_id)
             # train
             pre =self.result_mat[:-4]
-            self.p_data['data_id'] =2
-            if self.train_id>=9:
-                self.p_data['data'] = 'dn_ucbg1.mat'
-            else:
-                self.p_data['data'] = 'dn_ucb1.mat'
-            for i in range(1,10):
+            self.p_data['data_id'] = 9
+            self.p_data['data'] = 'dn_ucb2.mat'
+            for i in range(200):
                 print "do: image "+str(i)
                 self.p_data['im_id'] = i
                 self.loadData(self.path_test,'test')
