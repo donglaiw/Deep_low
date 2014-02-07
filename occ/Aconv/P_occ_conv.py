@@ -23,8 +23,10 @@ class Deep_occ(DBL_model):
             self.p_data['data_id'] = 6
             if self.model_id<=1:
                 self.psz = 11
-            elif self.model_id<=2:
+            elif self.model_id<=3:
                 self.psz = 15
+            elif self.model_id<=4:
+                self.psz = 17
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 3)
         elif self.train_id <= 4:
             # contour completion
@@ -218,78 +220,33 @@ class Deep_occ(DBL_model):
                 ]
 
         elif self.model_id ==3:        
-            ks = [[11,11],[5,5]]
-            ir = [0.05,0.05]
-            ps = [[1,1],[1,1]]
-            pd = [[1,1],[1,1]]
+            ks = [[11,11],[5,5],[1,1]]
+            ir = [0.05,0.05,0.05]
+            ps = [[1,1],[1,1],[1,1]]
+            pd = [[1,1],[1,1],[1,1]]
             n1 = 0.01
             self.p_layers = [
-                [self.param.param_model_conv(self.num_dim[1],ks[0],ps[0],pd[0],ir[0],layer_type=0),
-                self.param.param_model_conv(self.num_dim[2],ks[1],ps[1],pd[1],ir[1],layer_type=0)],
-                [self.param.param_model_fc(dim = self.num_dim[3],irange=n1,layer_type=1),
-                self.param.param_model_fc(dim = self.num_dim[4],irange=n1,layer_type=2)]
+                [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=0),
+                self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=0),
+                self.param.param_model_conv(self.num_dim[2],ks[2],ps[2],pd[2],ir[2],layer_type=2)]
+                ]
+        elif self.model_id ==4:        
+            ks = [[11,11],[5,5],[3,3]]
+            ir = [0.05,0.05,0.05]
+            ps = [[1,1],[1,1],[1,1]]
+            pd = [[1,1],[1,1],[1,1]]
+            n1 = 0.01
+            self.p_layers = [
+                [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=0),
+                self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=0),
+                self.param.param_model_conv(self.num_dim[2],ks[2],ps[2],pd[2],ir[2],layer_type=0)],
+                [self.param.param_model_fc(dim = self.num_dim[3],irange=n1,layer_type=2)]
                 ]
 
-        elif self.model_id ==4:        
-            # 1 tanh +1 linear
-            n1 = np.sqrt(6.0/(num_in+num_dim[0]))
-            n2 = np.sqrt(6.0/(num_dim[1]+num_dim[0]))
-            n3 = np.sqrt(6.0/(num_dim[1]+num_dim[2]))
-            self.p_layers = [
-                    [self.param.param_model_fc(dim = self.num_dim[0],irange=n1,layer_type=1),
-                    self.param.param_model_fc(dim = self.num_dim[1],irange=n2,layer_type=1),
-                    self.param.param_model_fc(dim = self.num_dim[2],irange=n3,layer_type=2)]
-                    ]
-
-        elif self.model_id ==5:        
-            # 1 tanh +1 linear
-            n1 = np.sqrt(6.0/(num_in+num_dim[0]))
-            n2 = np.sqrt(6.0/(num_dim[1]+num_dim[0]))
-            n3 = np.sqrt(6.0/(num_dim[1]+num_dim[2]))
-            n4 = np.sqrt(6.0/(num_dim[3]+num_dim[2]))
-            self.p_layers = [
-                    [self.param.param_model_fc(dim = self.num_dim[0],irange=n1,layer_type=1),
-                    self.param.param_model_fc(dim = self.num_dim[1],irange=n2,layer_type=1),
-                    self.param.param_model_fc(dim = self.num_dim[2],irange=n3,layer_type=1),
-                    self.param.param_model_fc(dim = self.num_dim[3],irange=n4,layer_type=2)]
-                    ]
-        elif self.model_id ==6:
-            # 1 conv + 1 tanh + 1 linear
-            # feature extraction + regression
-            nk = [self.num_dim[0],30,20]
-            ks = [[8,8],[5,5],[3,3]]
-            ir = [0.05,0.05,0.05]
-            ps = [[1,1],[4,4],[2,2]]
-            pd = [[1,1],[2,2],[2,2]]
-            crop_len = [(1+(self.ishape.shape[k]-ks[0][k])/pd[0][k])/ps[0][k]  for k in [0,1] ]
-            crop_cen = [(self.ishape.shape[k]-crop_len[k])/2 for k in [0,1] ]
-            #print crop_len,crop_cen
-            self.p_data['crop_y'] = U_centerind(self.ishape.shape,crop_cen,crop_len)
-            #print self.p_data['crop_y'].size,self.p_data['crop_y'] 
-            self.p_layers = [
-                [self.param.param_model_conv(nk[0],ks[0],ps[0],pd[0],ir[0],layer_type=0)],
-                [self.param.param_model_fc(dim = self.num_dim[1],irange=0.1,layer_type=1),
-                self.param.param_model_fc(dim = self.num_dim[2],irange=0.1,layer_type=2)]
-                    ]
     def buildAlgo(self):
         if self.algo_id == 0:
             algo_lr = 1e-2
             algo_mom = 1e-1
-            if self.model_id == -2:
-                algo_lr = 1e-3
-                algo_mom = 1e-3
-            elif self.model_id ==1:
-                algo_lr = 1e-2
-                algo_mom = 1e-1
-            elif self.model_id == 2:
-                algo_lr = 1e-2
-                algo_mom = 1e-1
-            elif self.model_id ==3:
-                algo_lr = 2*1e-5
-                algo_mom = 1e-4
-            elif self.model_id ==5:
-                algo_lr = 1e-4
-                algo_mom = 1e-3
 
             self.p_algo = self.param.param_algo(batch_size = self.batch_size,                    
                      termination_criterion=EpochCounter(max_epochs=self.num_epoch),
