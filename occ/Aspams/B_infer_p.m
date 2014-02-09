@@ -1,4 +1,3 @@
-
 function B_infer_p(id)
 addpath('../../util');init
 load /data/vision/billf/manifold-learning/DL/Data/BSD/dn_ucb_pb2
@@ -57,5 +56,7 @@ system([VLIB 'Para/p_run.sh 2 1 1 200 "' PP '" "B_infer_p(" ");" "' PP '/sc" ".m
 sp1 = cell(1,200);
 for i=1:200;try;load(sprintf('sc%d',i));sp1{i}=rr{1,1};end
 save sp1 sp1
+
+
 
 %}
