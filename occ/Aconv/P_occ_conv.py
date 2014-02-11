@@ -111,41 +111,24 @@ class Deep_occ(DBL_model):
             result = self.runTest(self.DataLoader.data['train'],2)
             result2 = self.runTest(self.DataLoader.data['valid'],2)
             scipy.io.savemat('ha.mat',mdict={'r1':result,'r2':result2})
-        elif self.test_id==1:
+        elif self.test_id<=4:
+            self.path_test = '../data/train/'+str(self.psz)+'/'
+            #self.path_test = '../data/test/'+str(self.psz)+'/'
             # e.g.  python P_occ_conv.py 0 0 1000 0,96,1 2 1
             if not os.path.exists('result/'+self.dl_id):
                 os.mkdir('result/'+self.dl_id)
             # train
-            pre =self.result_mat[:-4]
+            pre =self.result_mat[:-5]
             self.p_data['data_id'] = 9
-            self.p_data['data'] = ['dn_ucb2.mat']
-            for i in range(10,200):
+            self.p_data['data'] = ['dn_ucb0.mat']
+            tid = self.test_id-1
+            for i in range(50*tid,50*(tid+1)):
                 print "do: image "+str(i)
                 self.p_data['im_id'] = i
                 self.loadData(self.path_test,'test')
                 result = self.runTest(metric=-1)
                 scipy.io.savemat(pre+'_'+str(i)+'.mat',mdict={'result':result})
-        elif self.test_id==2:
-            if not os.path.exists('result/'+self.dl_id):
-                os.mkdir('result/'+self.dl_id)
-            # test
-            self.p_data['data_id'] =2
-            if self.train_id>=9:
-                self.p_data['data'] = 'dn_ucbg2.mat'
-            else:
-                self.p_data['data'] = 'dn_ucb2.mat'
-            pre =self.result_mat[:-4]
-            for i in range(1,10):
-                print "do: image "+str(i)
-                self.p_data['im_id'] = i
-                self.loadData(self.path_test,'test')
-                result = self.runTest()
-                scipy.io.savemat(pre+'_'+str(i)+'.mat',mdict={'result':result})
-            #scipy.io.savemat(self.result_mat,mdict={'done':1})
-        elif self.test_id==3:
-            self.loadData(self.path_test,'test',options={'data_id':3,'data':'test_im.mat'})
-            result = self.runTest(metric=0)
- 
+
     def buildModel(self):
         num_in = np.prod(self.ishape.shape)*self.ishape.num_channels
         if self.model_id == -2:
