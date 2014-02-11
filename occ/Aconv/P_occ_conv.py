@@ -66,13 +66,16 @@ class Deep_occ(DBL_model):
             self.p_data['data']='conv_'+str(self.psz)+'_1.mat'
             self.loadData(self.path_train,'valid')
         elif self.train_id==2:
-            self.nump = 1000
+            self.nump = 5000
             self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_0_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             if self.psz==11:
                 del self.p_data['data'][0]
             self.loadData(self.path_train,'train')
             if self.DataLoader.data['train'].X.dtype==np.uint8:
                 self.DataLoader.data['train'].X = self.DataLoader.data['train'].X.astype('float32')/255
+
+            # no need for large validation ... 
+            self.nump = 1000
             self.p_data['data']=['ucb_1_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_1_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             if self.psz==11:
                 del self.p_data['data'][0]
@@ -124,13 +127,16 @@ class Deep_occ(DBL_model):
             #scipy.io.savemat('db.mat',mdict={'result':result})
            #single mat
         elif self.test_id==0:
-            self.nump = 5000
+            self.nump = 1000
             self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_0_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             #self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1.mat','ucb_0_'+str(self.psz)+'_2_3.mat']
             self.loadData(self.path_train,'train')
+            if self.DataLoader.data['train'].X.dtype==np.uint8:
+                self.DataLoader.data['train'].X = self.DataLoader.data['train'].X.astype('float32')/255
             self.p_data['data']=['ucb_1_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_1_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             self.loadData(self.path_train,'valid')
-
+            if self.DataLoader.data['valid'].X.dtype==np.uint8:
+                self.DataLoader.data['valid'].X = self.DataLoader.data['valid'].X.astype('float32')/255
             result = self.runTest(self.DataLoader.data['train'],2)
             result2 = self.runTest(self.DataLoader.data['valid'],2)
             scipy.io.savemat('ha.mat',mdict={'r1':result,'r2':result2})
