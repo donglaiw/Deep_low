@@ -77,9 +77,9 @@ class Deep_occ(DBL_model):
             if self.psz==11:
                 del self.p_data['data'][0]
             self.loadData(self.path_train,'valid')
-            if self.DataLoader.data['train'].X.dtype==np.uint8:
+            if self.DataLoader.data['valid'].X.dtype==np.uint8:
                 self.DataLoader.data['valid'].X = self.DataLoader.data['valid'].X.astype('float32')/255
-            print "yoyo:",self.DataLoader.data['valid'].X.shape
+            #print "yoyo:",self.DataLoader.data['valid'].X.shape
         elif self.train_id==3:
             self.p_data['data']='mlp_st_0x.bin'
             self.loadData(self.path_train,'train')

@@ -5,7 +5,7 @@ end
 
 pb=cell(1,10);
 test_id =1;
-psz=11;
+psz=15;
 psz_h = (1+psz)/2;
 do_pre = 0;
 parfor id = 1:200;
@@ -16,7 +16,8 @@ sz = size(I);
 %nn = sprintf('result/0_3_20_20_1_4_2_115/dl_r%d_%d.mat',test_id,id-1);
 %nn = sprintf('result/0_2_20_20_1_2_1000/dl_r%d_%d.mat',test_id,id-1);
 %nn = sprintf('result/0_0_0_96_1_0_1000/dl_r%d_%d.mat',test_id,id-1);
-nn = sprintf('result/0_0_0_96_1_2_1000/dl_r%d_%d.mat',test_id,id-1);
+%nn = sprintf('result/0_0_0_96_1_2_1000/dl_r%d_%d.mat',test_id,id-1);
+nn = sprintf('result/0_3_20_20_1_4_5_200/dl_r_%d.mat',id-1);
             tmp=load(nn) 
             
             yhat = zeros(sz(1:2));
