@@ -133,21 +133,24 @@ class Deep_occ(DBL_model):
             result2 = self.runTest(self.DataLoader.data['valid'],2)
             scipy.io.savemat('ha.mat',mdict={'r1':result,'r2':result2})
         elif self.test_id<=4:
-            self.path_test = '../data/train/'
+            #self.path_test = '../data/train/'
             #self.path_test = '../data/test/'+str(self.psz)+'/'
+            self.path_test = '../data/test/'
             # e.g.  python P_occ_conv.py 0 0 1000 0,96,1 2 1
             if not os.path.exists('result/'+self.dl_id):
                 os.mkdir('result/'+self.dl_id)
             # train
             pre =self.result_mat[:-5]
-            self.p_data['data_id'] = 9
-            self.p_data['data'] = ['dn_ucb0.mat']
+            self.p_data['data_id'] = 11
+            self.p_data['data'] = ['bd_st2.mat']
+            #self.p_data['data_id'] = 9
+            #self.p_data['data'] = ['dn_ucb0.mat']
             tid = self.test_id-1
             for i in range(50*tid,50*(tid+1)):
                 print "do: image "+str(i)
                 self.p_data['im_id'] = i
                 self.loadData(self.path_test,'test')
-                self.DataLoader.data['test'].X = self.DataLoader.data['test'].X.astype('float32')/255
+                #self.DataLoader.data['test'].X = self.DataLoader.data['test'].X.astype('float32')/255
                 result = self.runTest(metric=-1)
                 scipy.io.savemat(pre+'_'+str(i)+'.mat',mdict={'result':result})
 
