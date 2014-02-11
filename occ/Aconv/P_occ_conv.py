@@ -124,9 +124,11 @@ class Deep_occ(DBL_model):
             #scipy.io.savemat('db.mat',mdict={'result':result})
            #single mat
         elif self.test_id==0:
-            self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1.mat','ucb_0_'+str(self.psz)+'_2_3.mat']
+            self.nump = 5000
+            self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_0_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
+            #self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1.mat','ucb_0_'+str(self.psz)+'_2_3.mat']
             self.loadData(self.path_train,'train')
-            self.p_data['data']=['ucb_1_'+str(self.psz)+'_2_1.mat','ucb_1_'+str(self.psz)+'_2_3.mat']
+            self.p_data['data']=['ucb_1_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_1_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             self.loadData(self.path_train,'valid')
 
             result = self.runTest(self.DataLoader.data['train'],2)
