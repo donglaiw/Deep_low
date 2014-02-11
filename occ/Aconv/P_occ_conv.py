@@ -284,6 +284,14 @@ class Deep_occ(DBL_model):
                 self.param.param_model_conv(self.num_dim[3],ks[3],ps[3],pd[3],ir[3],layer_type=self.num_dim[5]),
                 self.param.param_model_conv(self.num_dim[4],ks[4],ps[4],pd[4],ir[4],layer_type=self.num_dim[5])]
                 ]
+        elif self.model_id == 7:
+            # python P_occ_conv.py 0 -2 1000 81 4 0            
+            n1 = 0.01
+            self.p_layers = [
+                [self.param.param_model_fc(dim = self.num_dim[0],irange=n1,layer_type=1),
+                self.param.param_model_fc(dim = self.num_dim[1],irange=n1,layer_type=1),
+                self.param.param_model_fc(dim = self.num_dim[2],irange=n1,layer_type=1)]
+                ]
 
 
     def buildAlgo(self):
