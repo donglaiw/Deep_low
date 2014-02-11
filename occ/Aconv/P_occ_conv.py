@@ -42,6 +42,11 @@ class Deep_occ(DBL_model):
                 self.p_data['data_id'] = 8
             self.psz = 17
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 1)
+        elif self.train_id == 5:
+            # pb + cnn 
+            self.p_data['data_id'] = 10
+            self.psz = 15
+            self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 1)
 
 
         self.p_data['ishape']= np.append(self.ishape.shape,self.ishape.num_channels)
@@ -61,17 +66,20 @@ class Deep_occ(DBL_model):
             self.p_data['data']='conv_'+str(self.psz)+'_1.mat'
             self.loadData(self.path_train,'valid')
         elif self.train_id==2:
-            self.nump = 5000
+            self.nump = 1000
             self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_0_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             if self.psz==11:
                 del self.p_data['data'][0]
             self.loadData(self.path_train,'train')
-            self.DataLoader.data['train'].X = self.DataLoader.data['train'].X.astype('float32')/255
+            if self.DataLoader.data['train'].X.dtype==np.uint8:
+                self.DataLoader.data['train'].X = self.DataLoader.data['train'].X.astype('float32')/255
             self.p_data['data']=['ucb_1_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_1_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             if self.psz==11:
                 del self.p_data['data'][0]
             self.loadData(self.path_train,'valid')
-            self.DataLoader.data['valid'].X = self.DataLoader.data['valid'].X.astype('float32')/255
+            if self.DataLoader.data['train'].X.dtype==np.uint8:
+                self.DataLoader.data['valid'].X = self.DataLoader.data['valid'].X.astype('float32')/255
+            print "yoyo:",self.DataLoader.data['valid'].X.shape
         elif self.train_id==3:
             self.p_data['data']='mlp_st_0x.bin'
             self.loadData(self.path_train,'train')
@@ -81,6 +89,12 @@ class Deep_occ(DBL_model):
             self.p_data['data']='mlp_st_0sx.bin'
             self.loadData(self.path_train,'train')
             self.p_data['data']='mlp_st_1sx.bin'
+            self.loadData(self.path_train,'valid')
+        elif self.train_id==5:
+            self.nump = 1000
+            self.p_data['data']=['ucb_0_'+str(self.psz)+'_3_1_'+str(self.nump)+'.mat','ucb_0_'+str(self.psz)+'_3_3_'+str(self.nump)+'.mat']
+            self.loadData(self.path_train,'train')
+            self.p_data['data']=['ucb_1_'+str(self.psz)+'_3_1_'+str(self.nump)+'.mat','ucb_1_'+str(self.psz)+'_3_3_'+str(self.nump)+'.mat']
             self.loadData(self.path_train,'valid')
 
         #print "ds:",self.DataLoader.data['train'].X.shape,self.DataLoader.data['train'].y.shape
@@ -119,7 +133,7 @@ class Deep_occ(DBL_model):
             result2 = self.runTest(self.DataLoader.data['valid'],2)
             scipy.io.savemat('ha.mat',mdict={'r1':result,'r2':result2})
         elif self.test_id<=4:
-            self.path_test = '../data/train/'+str(self.psz)+'/'
+            self.path_test = '../data/train/'
             #self.path_test = '../data/test/'+str(self.psz)+'/'
             # e.g.  python P_occ_conv.py 0 0 1000 0,96,1 2 1
             if not os.path.exists('result/'+self.dl_id):
@@ -133,6 +147,7 @@ class Deep_occ(DBL_model):
                 print "do: image "+str(i)
                 self.p_data['im_id'] = i
                 self.loadData(self.path_test,'test')
+                self.DataLoader.data['test'].X = self.DataLoader.data['test'].X.astype('float32')/255
                 result = self.runTest(metric=-1)
                 scipy.io.savemat(pre+'_'+str(i)+'.mat',mdict={'result':result})
 
