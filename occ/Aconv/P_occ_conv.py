@@ -83,7 +83,7 @@ class Deep_occ(DBL_model):
             self.p_data['data']='conv_'+str(self.psz)+'_1.mat'
             self.loadData(self.path_train,'valid')
         elif self.train_id==2:
-            self.nump = 1000
+            self.nump = 2500
             self.cc = ''
             self.bd = '1' #4: all edge, #1: strong edge
             if self.cc == 'l':
@@ -227,9 +227,12 @@ class Deep_occ(DBL_model):
                 os.mkdir('result/'+self.dl_id)
             # train
             pre =self.result_mat[:-5]
-            self.p_data['data_id'] = 11
-            self.p_data['data'] = ['bd_st2.mat']
+            #self.p_data['data_id'] = 11
+            #self.p_data['data'] = ['bd_st2.mat']
+            self.p_data['data_id'] = 12
+            self.p_data['data'] = ['dn_ucb_Is2.mat']
             #self.p_data['data_id'] = 9
+            #self.p_data['data'] = ['dn_ucb2.mat']
             #self.p_data['data'] = ['dn_ucb0.mat']
             tid = self.test_id-1
             for i in range(50*tid,50*(tid+1)):
