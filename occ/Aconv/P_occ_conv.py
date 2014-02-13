@@ -37,7 +37,7 @@ class Deep_occ(DBL_model):
                 self.p_data['data_id'] = 6
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 3)
 
-            if (self.model_id==9) or (self.model_id==6 and self.num_dim[-1]==4) or (self.model_id==3 and self.num_dim[-1]==4) or (self.model_id in [2,5] and self.num_dim[-1]==1):
+            if (self.model_id==9) or (self.model_id in [3,4,6] and self.num_dim[-1]==4) or (self.model_id in [2,5] and self.num_dim[-1]==1):
                 self.p_data['pre_id'] = 1
                 self.p_data['im_id'] = 1
         elif self.train_id <= 4:
@@ -85,9 +85,9 @@ class Deep_occ(DBL_model):
         elif self.train_id==2:
             self.nump = 1000
             self.cc = ''
+            self.bd = '1' #4: all edge, #1: strong edge
             if self.cc == 'l':
                 self.p_data['data_id'] = 10
-            self.bd = '1' #4: all edge, #1: strong edge
             
             self.p_data['data']=[self.cc+'ucb_0_'+str(self.psz)+'_2_'+self.bd+'_'+str(self.nump)+'.mat',self.cc+'ucb_0_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             if self.psz==11:
@@ -306,8 +306,8 @@ class Deep_occ(DBL_model):
             self.p_layers = [
                 [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=0),
                 self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=0),
-                self.param.param_model_conv(self.num_dim[2],ks[2],ps[2],pd[2],ir[2],layer_type=2),
-                self.param.param_model_conv(self.num_dim[3],ks[3],ps[3],pd[3],ir[3],layer_type=2)]
+                self.param.param_model_conv(self.num_dim[2],ks[2],ps[2],pd[2],ir[2],layer_type=self.num_dim[4]),
+                self.param.param_model_conv(self.num_dim[3],ks[3],ps[3],pd[3],ir[3],layer_type=self.num_dim[4])]
                 ]
 
         elif self.model_id ==5:        
