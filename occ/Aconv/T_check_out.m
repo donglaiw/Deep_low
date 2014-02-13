@@ -12,7 +12,7 @@ psz=15;
 psz_h = (1+psz)/2;
 do_pre = 1;
 
-do_s=2;
+do_s=0;
 parfor id = 1:200;
 switch do_s
 case 0
@@ -30,7 +30,8 @@ end
 %nn = sprintf('result/0_0_0_96_1_2_1000/dl_r%d_%d.mat',test_id,id-1);
 %nn = sprintf('result/0_3_20_20_1_4_5_200/dl_r_%d.mat',id-1);
 %nn = sprintf('result/0_11_50_50_1_2_4_2_100_0/dl_r_%d.mat',id-1);
-nn = sprintf('result/0_11_50_50_1_2_4_2_100/dl_r_%d.mat',id-1);
+%nn = sprintf('result/0_11_50_50_1_2_4_2_100/dl_r_%d.mat',id-1);
+nn = sprintf('result/0_11_50_50_1_2_4_9_100_0/dl_r_%d.mat',id-1);
             tmp=load(nn) 
            if do_s~=2 
             yhat = zeros(sz(1:2),'single');
