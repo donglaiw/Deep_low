@@ -18,7 +18,7 @@ class Deep_occ(DBL_model):
         self.path_train = '../data/train/'
         self.path_test = '../data/test/'            
         self.p_data = {'ds_id':0}   # occ data         
-        self.batch_size = 100
+        self.batch_size = 200
         if self.train_id <= 2:
             self.p_data['data_id'] = 6
             if self.model_id<=1:
@@ -83,7 +83,7 @@ class Deep_occ(DBL_model):
             self.p_data['data']='conv_'+str(self.psz)+'_1.mat'
             self.loadData(self.path_train,'valid')
         elif self.train_id==2:
-            self.nump = 1000
+            self.nump = 2500
             self.cc = ''
             self.bd = '1' #4: all edge, #1: strong edge
             if self.cc == 'l':
@@ -404,8 +404,8 @@ class Deep_occ(DBL_model):
 
     def buildAlgo(self):
         if self.algo_id == 0:
-            algo_lr = 1e-2
-            algo_mom = 1e-1
+            algo_lr = 1e-3
+            algo_mom = 1e-2
             self.p_algo = self.param.param_algo(batch_size = self.batch_size,                    
                      termination_criterion=EpochCounter(max_epochs=self.num_epoch),
                      monitoring_dataset = self.DataLoader.data,
