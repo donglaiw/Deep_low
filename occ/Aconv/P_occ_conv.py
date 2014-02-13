@@ -29,9 +29,15 @@ class Deep_occ(DBL_model):
                 self.psz = 17
             elif self.model_id<=6:
                 self.psz = 15
+            elif self.model_id==9:
+                self.psz = 17
+                self.p_data['data_id'] = 10
+            elif self.model_id==10:
+                self.psz = 25
+                self.p_data['data_id'] = 6
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 3)
 
-            if (self.model_id==6 and self.num_dim[-1]==4) or (self.model_id==3 and self.num_dim[-1]==4) or (self.model_id in [2,5] and self.num_dim[-1]==1):
+            if (self.model_id==9) or (self.model_id==6 and self.num_dim[-1]==4) or (self.model_id==3 and self.num_dim[-1]==4) or (self.model_id in [2,5] and self.num_dim[-1]==1):
                 self.p_data['pre_id'] = 1
                 self.p_data['im_id'] = 1
         elif self.train_id <= 4:
@@ -47,7 +53,18 @@ class Deep_occ(DBL_model):
             self.p_data['data_id'] = 10
             self.psz = 15
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 1)
+        elif self.train_id == 6:
+            # pb + cnn 
+            self.p_data['data_id'] = 10
+            self.psz = 17
+            self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 1)
 
+        elif self.train_id <= 8:
+            self.path_train = '../Atoy/'
+            self.path_test = '../Atoy/'            
+            self.p_data['data_id'] = 10
+            self.psz = 17
+            self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 1)
 
         self.p_data['ishape']= np.append(self.ishape.shape,self.ishape.num_channels)
 
@@ -66,23 +83,36 @@ class Deep_occ(DBL_model):
             self.p_data['data']='conv_'+str(self.psz)+'_1.mat'
             self.loadData(self.path_train,'valid')
         elif self.train_id==2:
-            self.nump = 5000
-            self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_0_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
+            self.nump = 1000
+            self.cc = ''
+            if self.cc == 'l':
+                self.p_data['data_id'] = 10
+            self.bd = '1' #4: all edge, #1: strong edge
+            
+            self.p_data['data']=[self.cc+'ucb_0_'+str(self.psz)+'_2_'+self.bd+'_'+str(self.nump)+'.mat',self.cc+'ucb_0_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             if self.psz==11:
                 del self.p_data['data'][0]
             self.loadData(self.path_train,'train')
             if self.DataLoader.data['train'].X.dtype==np.uint8:
                 self.DataLoader.data['train'].X = self.DataLoader.data['train'].X.astype('float32')/255
+            
+            #self.DataLoader.data['train'].y[:978965,0] = 1
+            #print self.DataLoader.data['train'].y
+            #print "yoyo:",self.DataLoader.data['train'].y.shape
 
             # no need for large validation ... 
             self.nump = 1000
-            self.p_data['data']=['ucb_1_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_1_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
+            self.p_data['data']=[self.cc+'ucb_1_'+str(self.psz)+'_2_'+self.bd+'_'+str(self.nump)+'.mat',self.cc+'ucb_1_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             if self.psz==11:
                 del self.p_data['data'][0]
             self.loadData(self.path_train,'valid')
             if self.DataLoader.data['valid'].X.dtype==np.uint8:
                 self.DataLoader.data['valid'].X = self.DataLoader.data['valid'].X.astype('float32')/255
-            #print "yoyo:",self.DataLoader.data['valid'].X.shape
+
+            print "yoyo:",self.DataLoader.data['valid'].X
+            print "yoyo:",self.DataLoader.data['valid'].y
+            print "yoyo:",self.DataLoader.data['train'].X
+            print "yoyo:",self.DataLoader.data['train'].y
         elif self.train_id==3:
             self.p_data['data']='mlp_st_0x.bin'
             self.loadData(self.path_train,'train')
@@ -93,12 +123,17 @@ class Deep_occ(DBL_model):
             self.loadData(self.path_train,'train')
             self.p_data['data']='mlp_st_1sx.bin'
             self.loadData(self.path_train,'valid')
-        elif self.train_id==5:
+        elif self.train_id<=6:
+            self.bd = '4' #4: all edge, #1: strong edge
             self.nump = 1000
-            self.p_data['data']=['ucb_0_'+str(self.psz)+'_3_1_'+str(self.nump)+'.mat','ucb_0_'+str(self.psz)+'_3_3_'+str(self.nump)+'.mat']
+            self.p_data['data']=['ucb_0_'+str(self.psz)+'_3_'+self.bd+'_'+str(self.nump)+'.mat','ucb_0_'+str(self.psz)+'_3_3_'+str(self.nump)+'.mat']
             self.loadData(self.path_train,'train')
-            self.p_data['data']=['ucb_1_'+str(self.psz)+'_3_1_'+str(self.nump)+'.mat','ucb_1_'+str(self.psz)+'_3_3_'+str(self.nump)+'.mat']
+            self.p_data['data']=['ucb_1_'+str(self.psz)+'_3_'+self.bd+'_'+str(self.nump)+'.mat','ucb_1_'+str(self.psz)+'_3_3_'+str(self.nump)+'.mat']
             self.loadData(self.path_train,'valid')
+        elif self.train_id<=8:
+            self.p_data['data']=['toy_'+str(self.train_id-8)+'.mat']
+            self.loadData(self.path_train,'train')
+            self.DataLoader.data['train'].y =self.DataLoader.data['train'].y*2-1
 
         #print "ds:",self.DataLoader.data['train'].X.shape,self.DataLoader.data['train'].y.shape
         self.p_monitor['channel'] = ['train_objective','valid_objective','train_sm0_misclass','valid_sm0_misclass']
@@ -127,18 +162,22 @@ class Deep_occ(DBL_model):
             #scipy.io.savemat('db.mat',mdict={'result':result})
            #single mat
         elif self.test_id==0:
-            self.nump = 1000
+            self.nump = 5000
             self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_0_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             #self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1.mat','ucb_0_'+str(self.psz)+'_2_3.mat']
             self.loadData(self.path_train,'train')
             if self.DataLoader.data['train'].X.dtype==np.uint8:
                 self.DataLoader.data['train'].X = self.DataLoader.data['train'].X.astype('float32')/255
+            result = self.runTest(self.DataLoader.data['train'],2)
+
+            """
             self.p_data['data']=['ucb_1_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_1_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             self.loadData(self.path_train,'valid')
             if self.DataLoader.data['valid'].X.dtype==np.uint8:
                 self.DataLoader.data['valid'].X = self.DataLoader.data['valid'].X.astype('float32')/255
-            result = self.runTest(self.DataLoader.data['train'],2)
             result2 = self.runTest(self.DataLoader.data['valid'],2)
+            """
+            result2 = 1
             scipy.io.savemat('ha.mat',mdict={'r1':result,'r2':result2})
         elif self.test_id<=4:
             #self.path_test = '../data/train/'
@@ -161,7 +200,13 @@ class Deep_occ(DBL_model):
                 #self.DataLoader.data['test'].X = self.DataLoader.data['test'].X.astype('float32')/255
                 result = self.runTest(metric=-1)
                 scipy.io.savemat(pre+'_'+str(i)+'.mat',mdict={'result':result})
-
+        elif self.test_id<=7:
+            pre =self.result_mat[:-5]
+            self.p_data['data']=['toy_'+str(self.test_id-6)+'.mat']
+            self.loadData(self.path_train,'train')
+            self.DataLoader.data['train'].y =self.DataLoader.data['train'].y*2-1
+            result = self.runTest(self.DataLoader.data['train'],metric=2)
+            scipy.io.savemat('../Atoy/t'+str(self.test_id-6)+'.mat',mdict={'result':result})
     def buildModel(self):
         num_in = np.prod(self.ishape.shape)*self.ishape.num_channels
         if self.model_id == -2:
@@ -248,8 +293,8 @@ class Deep_occ(DBL_model):
             pd = [[1,1],[1,1],[1,1]]
             n1 = 0.01
             self.p_layers = [
-                [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=0),
-                self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=0),
+                [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=4),
+                self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=4),
                 self.param.param_model_conv(self.num_dim[2],ks[2],ps[2],pd[2],ir[2],layer_type=self.num_dim[3])]
                 ]
         elif self.model_id ==4:        
@@ -300,13 +345,65 @@ class Deep_occ(DBL_model):
                 self.param.param_model_fc(dim = self.num_dim[1],irange=n1,layer_type=1),
                 self.param.param_model_fc(dim = self.num_dim[2],irange=n1,layer_type=1)]
                 ]
+        elif self.model_id ==8:        
+            ks = [[11,11],[3,3],[1,1]]
+            ir = [0.05,0.05,0.05]
+            ps = [[3,3],[1,1],[1,1]]
+            pd = [[2,2],[1,1],[1,1]]
+            n1 = 0.01
+            self.p_layers = [
+                [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=0),
+                self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=0)],
+                [self.param.param_model_fc(dim = self.num_dim[2],irange=n1,layer_type=1)]
+                #[self.param.param_model_fc(dim = self.num_dim[2],irange=n1,layer_type=1),
+                #self.param.param_model_fc(dim = self.num_dim[3],irange=n1,layer_type=1)],
+                #[self.param.param_model_cf(n_classes = self.num_dim[3],irange=n1,layer_type=0)],
+                ]
+        elif self.model_id ==9:        
+            ks = [[11,11],[5,5],[1,1]]
+            ir = [0.05,0.05,0.05]
+            ps = [[1,1],[1,1],[1,1]]
+            pd = [[1,1],[1,1],[1,1]]
+            n1 = 0.01
+            if len(self.num_dim)==3:
+                self.p_layers = [
+                    [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=0),
+                    self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=0)],
+                    #[self.param.param_model_fc(dim = self.num_dim[2],irange=n1,layer_type=1),
+                    #self.param.param_model_fc(dim = self.num_dim[3],irange=n1,layer_type=1)]
+                    [self.param.param_model_fc(dim = self.num_dim[2],irange=n1,layer_type=1)]
+                    #self.param.param_model_fc(dim = self.num_dim[3],irange=n1,layer_type=1)],
+                    #[self.param.param_model_cf(n_classes = self.num_dim[3],irange=n1,layer_type=0)],
+                    ]
+            else:
+                self.p_layers = [
+                    [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=0),
+                    self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=0)],
+                    [self.param.param_model_fc(dim = self.num_dim[2],irange=n1,layer_type=1),
+                    self.param.param_model_fc(dim = self.num_dim[3],irange=n1,layer_type=1)]
+                    #self.param.param_model_fc(dim = self.num_dim[3],irange=n1,layer_type=1)],
+                    #[self.param.param_model_cf(n_classes = self.num_dim[3],irange=n1,layer_type=0)],
+                    ]
+        elif self.model_id ==10:        
+            ks = [[11,11],[5,5],[1,1]]
+            ir = [0.05,0.05,0.05]
+            ps = [[3,3],[3,3],[1,1]]
+            pd = [[2,2],[1,1],[1,1]]
+            n1 = 0.01
+            self.p_layers = [
+                [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=0),
+                self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=0)],
+                [self.param.param_model_fc(dim = self.num_dim[2],irange=n1,layer_type=1)]
+                #[self.param.param_model_fc(dim = self.num_dim[2],irange=n1,layer_type=1),
+                #self.param.param_model_fc(dim = self.num_dim[3],irange=n1,layer_type=1)],
+                #[self.param.param_model_cf(n_classes = self.num_dim[3],irange=n1,layer_type=0)],
+                ]
 
 
     def buildAlgo(self):
         if self.algo_id == 0:
             algo_lr = 1e-2
             algo_mom = 1e-1
-
             self.p_algo = self.param.param_algo(batch_size = self.batch_size,                    
                      termination_criterion=EpochCounter(max_epochs=self.num_epoch),
                      monitoring_dataset = self.DataLoader.data,
