@@ -168,6 +168,8 @@ class Deep_occ(DBL_model):
             self.loadData(self.path_train,'train')
             if self.DataLoader.data['train'].X.dtype==np.uint8:
                 self.DataLoader.data['train'].X = self.DataLoader.data['train'].X.astype('float32')/255
+            print self.DataLoader.data['train'].X
+            print self.DataLoader.data['train'].y
             result = self.runTest(self.DataLoader.data['train'],2)
 
             """
@@ -293,9 +295,9 @@ class Deep_occ(DBL_model):
             pd = [[1,1],[1,1],[1,1]]
             n1 = 0.01
             self.p_layers = [
-                [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=4),
-                self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=4),
-                self.param.param_model_conv(self.num_dim[2],ks[2],ps[2],pd[2],ir[2],layer_type=self.num_dim[3])]
+                [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=self.num_dim[3]),
+                self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=self.num_dim[3]),
+                self.param.param_model_conv(self.num_dim[2],ks[2],ps[2],pd[2],ir[2],layer_type=self.num_dim[4])]
                 ]
         elif self.model_id ==4:        
             ks = [[11,11],[5,5],[1,1],[1,1]]
