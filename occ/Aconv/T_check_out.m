@@ -10,13 +10,12 @@ pb=cell(1,200);
 test_id =1;
 psz=15;
 psz_h = (1+psz)/2;
-do_pre = 1;
+do_pre = 0;
 
-do_s=0;
+do_s=3;
 parfor id = 1:200;
-switch do_s
-case 0
 sz = size(Is{id});
+switch do_s
 case 1
 sz = size(Iss{id}{1});
 case 2
@@ -31,7 +30,8 @@ end
 %nn = sprintf('result/0_3_20_20_1_4_5_200/dl_r_%d.mat',id-1);
 %nn = sprintf('result/0_11_50_50_1_2_4_2_100_0/dl_r_%d.mat',id-1);
 %nn = sprintf('result/0_11_50_50_1_2_4_2_100/dl_r_%d.mat',id-1);
-nn = sprintf('result/0_11_50_50_1_2_4_9_100_0/dl_r_%d.mat',id-1);
+%nn = sprintf('result/0_11_50_50_1_2_4_9_100_0/dl_r_%d.mat',id-1);
+nn = sprintf('result/0_13_50_50_151_2_0_200/dl_r_%d.mat',id-1);
             tmp=load(nn) 
            if do_s~=2 
             yhat = zeros(sz(1:2),'single');
@@ -49,6 +49,8 @@ nn = sprintf('result/0_11_50_50_1_2_4_9_100_0/dl_r_%d.mat',id-1);
             yhat(psz_h:(end-psz_h+1),psz_h:(end-psz_h+1)) = reshape(tmp.result{1}(1:prod(sz(1:2)-psz+1)),sz([2 1])-psz+1)';
         case 2
             yhat(psz_h:(end-psz_h+1),psz_h:(end-psz_h+1)) = reshape(tmp.result{1}((1+prod(sz(1:2)-psz+1)):end),sz2([2 1])-psz+1)';
+        case 3
+            yhat(psz_h:(end-psz_h+1),psz_h:(end-psz_h+1)) = reshape(1-tmp.result{1}(:,end),sz([2 1])-psz+1)';
         end
             if do_pre
                 yhat = yhat/2+0.5;

@@ -19,7 +19,7 @@ class Deep_occ(DBL_model):
         self.path_test = '../data/test/'            
         self.p_data = {'ds_id':0}   # occ data         
         self.batch_size = 100
-        if self.train_id in [0,1,2,9]:
+        if self.train_id in [-1,0,1,2,9]:
             self.p_data['data_id'] = 6
             if self.model_id<=1:
                 self.psz = 11
@@ -39,8 +39,10 @@ class Deep_occ(DBL_model):
                 self.psz = 15
                 self.p_data['data_id'] = 6
                 self.p_data['data']=['ucb_st_15.mat']
-                self.p_data['pre_id'] = 2
-                self.p_data['im_id'] = 151
+                if self.train_id==0:
+                    self.p_data['pre_id'] = 2;self.p_data['im_id'] = 151
+                else:
+                    self.p_data['pre_id'] = 3;self.p_data['im_id'] = 150
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 3)
 
             if (self.model_id==9) or (self.model_id in [3,4,6,11,12] and self.num_dim[-1]==4) or (self.model_id in [2,5] and self.num_dim[-1]==1):
@@ -71,20 +73,19 @@ class Deep_occ(DBL_model):
             self.p_data['data_id'] = 10
             self.psz = 17
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 1)
-        elif self.train_id == 10:
+        elif self.train_id in [10]:
             # pb + cnn 
             self.p_data['data_id'] = 10
             self.psz = 15
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 3)
-            self.p_data['pre_id'] = 1
-            self.p_data['im_id'] = 1
+            self.p_data['pre_id'] = 1;self.p_data['im_id'] = 1
 
         self.p_data['ishape']= np.append(self.ishape.shape,self.ishape.num_channels)
 
 
     def loadData_train(self):        
         #train_id = range(1,31000,3)
-        if self.train_id==0:
+        if self.train_id<=0:
             num_im = 307414
             valid_set = range(0,num_im,3)
             train_set = list(set(range(0,num_im)).difference(set(valid_set)))
@@ -183,16 +184,15 @@ class Deep_occ(DBL_model):
             print fff
             self.DataLoader.data['valid'].y[:fff,0] = 1
 
-        elif self.train_id==10:
+        elif self.train_id in [10]:
             # classification problem
+            # for ms_st
             self.cc =''
             self.nump = 1000
             self.bd = '4' #4: all edge, #1: strong edge
             self.nbd = '5' #4: all edge, #1: strong edge
             self.pid = '4' #4: all edge, #1: strong edge
             self.p_data['data']=[self.cc+'ucb_0_'+str(self.psz)+'_'+self.pid+'_'+self.bd+'_'+str(self.nump)+'.mat',self.cc+'ucb_0_'+str(self.psz)+'_'+self.pid+'_'+self.nbd+'_'+str(self.nump)+'.mat']
-            if self.psz==11:
-                del self.p_data['data'][0]
             self.loadData(self.path_train,'train')
             #print self.DataLoader.data['train'].y
             #print "yoyo:",self.DataLoader.data['train'].y.shape
@@ -200,8 +200,6 @@ class Deep_occ(DBL_model):
             # no need for large validation ... 
             self.nump = 1000
             self.p_data['data']=[self.cc+'ucb_1_'+str(self.psz)+'_'+self.pid+'_'+self.bd+'_'+str(self.nump)+'.mat',self.cc+'ucb_1_'+str(self.psz)+'_'+self.pid+'_'+self.nbd+'_'+str(self.nump)+'.mat']
-            if self.psz==11:
-                del self.p_data['data'][0]
             self.loadData(self.path_train,'valid')
 
 
@@ -238,7 +236,7 @@ class Deep_occ(DBL_model):
            #single mat
         elif self.test_id==0:
             self.nump = 500
-            self.do_c = 1
+            self.do_c = 0
             self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1_'+str(self.nump)+'.mat','ucb_0_'+str(self.psz)+'_2_3_'+str(self.nump)+'.mat']
             #self.p_data['data']=['ucb_0_'+str(self.psz)+'_2_1.mat','ucb_0_'+str(self.psz)+'_2_3.mat']
             self.loadData(self.path_train,'train')
@@ -275,10 +273,24 @@ class Deep_occ(DBL_model):
             pre =self.result_mat[:-5]
             #self.p_data['data_id'] = 11
             #self.p_data['data'] = ['bd_st2.mat']
+<<<<<<< HEAD
             #self.p_data['data_id'] = 12
             #self.p_data['data'] = ['dn_ucb_Is2.mat']
             self.p_data['data_id'] = 9
             self.p_data['data'] = ['dn_ucb2.mat']
+=======
+            #self.p_data['pre_id'] = 'pb'
+
+            #self.p_data['data_id'] = 12
+            #self.p_data['data'] = ['dn_ucb_Is2.mat']
+            
+            self.p_data['data_id'] = 11
+            self.p_data['data'] = ['bd_st2_ms.mat']
+            self.p_data['pre_id'] = 'pb_ms'
+
+            #self.p_data['data_id'] = 9
+            #self.p_data['data'] = ['dn_ucb2.mat']
+>>>>>>> 4d2c309215b2003c9033792fcd53bdf959d057d7
             #self.p_data['data'] = ['dn_ucb0.mat']
             tid = self.test_id-1
             for i in range(50*tid,50*(tid+1)):
@@ -295,6 +307,7 @@ class Deep_occ(DBL_model):
             self.DataLoader.data['train'].y =self.DataLoader.data['train'].y*2-1
             result = self.runTest(self.DataLoader.data['train'],metric=2)
             scipy.io.savemat('../Atoy/t'+str(self.test_id-6)+'.mat',mdict={'result':result})
+
     def buildModel(self):
         num_in = np.prod(self.ishape.shape)*self.ishape.num_channels
         if self.model_id == -2:
