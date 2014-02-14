@@ -273,12 +273,6 @@ class Deep_occ(DBL_model):
             pre =self.result_mat[:-5]
             #self.p_data['data_id'] = 11
             #self.p_data['data'] = ['bd_st2.mat']
-<<<<<<< HEAD
-            #self.p_data['data_id'] = 12
-            #self.p_data['data'] = ['dn_ucb_Is2.mat']
-            self.p_data['data_id'] = 9
-            self.p_data['data'] = ['dn_ucb2.mat']
-=======
             #self.p_data['pre_id'] = 'pb'
 
             #self.p_data['data_id'] = 12
@@ -290,7 +284,6 @@ class Deep_occ(DBL_model):
 
             #self.p_data['data_id'] = 9
             #self.p_data['data'] = ['dn_ucb2.mat']
->>>>>>> 4d2c309215b2003c9033792fcd53bdf959d057d7
             #self.p_data['data'] = ['dn_ucb0.mat']
             tid = self.test_id-1
             for i in range(50*tid,50*(tid+1)):
