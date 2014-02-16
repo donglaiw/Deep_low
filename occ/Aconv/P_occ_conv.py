@@ -19,7 +19,7 @@ class Deep_occ(DBL_model):
         self.path_test = '../data/test/'            
         self.p_data = {'ds_id':0}   # occ data         
         self.batch_size = 100
-        if self.train_id in [-1,0,1,2,9]:
+        if self.train_id in [-4,-3,-2,-1,0,1,2,9]:
             self.p_data['data_id'] = 6
             if self.model_id<=1:
                 self.psz = 11
@@ -37,12 +37,21 @@ class Deep_occ(DBL_model):
                 self.p_data['data_id'] = 6
             elif self.model_id in [13,14]:
                 self.psz = 15
-                self.p_data['data_id'] = 6
-                self.p_data['data']=['ucb_st_15.mat']
-                if self.train_id==0:
+                if self.train_id in [0,-1]:
+                    self.p_data['data_id'] = 6
+                    self.p_data['data']=['ucb_st_15.mat']
+                elif self.train_id in [-3,-2]:
+                    self.p_data['data_id'] = 10
+                    self.p_data['data']=['ucb_st_15_dc.mat']
+                elif self.train_id in [-4]:
+                    self.p_data['data_id'] = 6
+                    self.p_data['data']=['ucb_st_15_4d.mat']
+
+                if self.train_id in [0,-2,-4]:
                     self.p_data['pre_id'] = 2;self.p_data['im_id'] = 151
-                else:
+                elif self.train_id in [-1,-3]:
                     self.p_data['pre_id'] = 3;self.p_data['im_id'] = 150
+
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 3)
 
             if (self.model_id==9) or (self.model_id in [3,4,6,11,12] and self.num_dim[-1]==4) or (self.model_id in [2,5] and self.num_dim[-1]==1):
@@ -59,14 +68,13 @@ class Deep_occ(DBL_model):
         elif self.train_id == 5:
             # pb + cnn 
             self.p_data['data_id'] = 10
-            self.psz = 15
+            self.psz = 17
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 1)
         elif self.train_id == 6:
             # pb + cnn 
             self.p_data['data_id'] = 10
             self.psz = 17
             self.ishape = Conv2DSpace(shape = (self.psz,self.psz),num_channels = 1)
-
         elif self.train_id <= 8:
             self.path_train = '../Atoy/'
             self.path_test = '../Atoy/'            
@@ -86,9 +94,16 @@ class Deep_occ(DBL_model):
     def loadData_train(self):        
         #train_id = range(1,31000,3)
         if self.train_id<=0:
-            num_im = 307414
-            valid_set = range(0,num_im,3)
-            train_set = list(set(range(0,num_im)).difference(set(valid_set)))
+            if self.train_id>-4:
+                num_im = 307414
+                valid_set = range(0,num_im,3)
+                train_set = list(set(range(0,num_im)).difference(set(valid_set)))
+            else:
+                num_im = 307414
+                valid_set = range(0,num_im,3)
+                num_im = 1229656
+                train_set = list(set(range(0,num_im)).difference(set(valid_set)))
+
             self.loadData(self.path_train,'train',train_set)
             self.loadData(self.path_train,'valid',valid_set)
 
@@ -191,7 +206,7 @@ class Deep_occ(DBL_model):
             self.nump = 1000
             self.bd = '4' #4: all edge, #1: strong edge
             self.nbd = '5' #4: all edge, #1: strong edge
-            self.pid = '4' #4: all edge, #1: strong edge
+            self.pid = '4' # pb_ms
             self.p_data['data']=[self.cc+'ucb_0_'+str(self.psz)+'_'+self.pid+'_'+self.bd+'_'+str(self.nump)+'.mat',self.cc+'ucb_0_'+str(self.psz)+'_'+self.pid+'_'+self.nbd+'_'+str(self.nump)+'.mat']
             self.loadData(self.path_train,'train')
             #print self.DataLoader.data['train'].y
@@ -408,7 +423,7 @@ class Deep_occ(DBL_model):
             # man... initialization matters
             # ratio between the learning rate
             ks = [[11,11],[5,5],[3,3]]
-            ir = [1,1,1]
+            ir = [0.01,0.01,0.01]
             ps = [[1,1],[1,1],[1,1]]
             pd = [[1,1],[1,1],[1,1]]
             n1 = 0.01
@@ -539,6 +554,17 @@ class Deep_occ(DBL_model):
                 self.param.param_model_conv(self.num_dim[2],ks[2],ps[2],pd[2],ir[2],layer_type=self.num_dim[5])],
                 [self.param.param_model_cf(n_classes = self.num_dim[3],irange=0.05,layer_type=0)]
                 ]
+        elif self.model_id == 15:
+            ks = [[11,11],[3,3],[1,1]]
+            ir = [0.01,0.01,0.01]
+            ps = [[3,3],[1,1],[1,1]]
+            pd = [[2,2],[1,1],[1,1]]
+            n1 = 0.01
+            self.p_layers = [
+                [self.param.param_model_conv(self.num_dim[0],ks[0],ps[0],pd[0],ir[0],layer_type=self.num_dim[3]),
+                self.param.param_model_conv(self.num_dim[1],ks[1],ps[1],pd[1],ir[1],layer_type=self.num_dim[3]),
+                self.param.param_model_conv(self.num_dim[2],ks[2],ps[2],pd[2],ir[2],layer_type=self.num_dim[4])]
+                ]
 
     def buildAlgo(self):
         if self.algo_id <= 1:
@@ -609,4 +635,4 @@ if __name__ == "__main__":
     nn = 'dl_p1_1_6.pkl' 
     a=cPickle.load(open(nn))
     """
-    
+

@@ -31,7 +31,8 @@ end
 %nn = sprintf('result/0_11_50_50_1_2_4_2_100_0/dl_r_%d.mat',id-1);
 %nn = sprintf('result/0_11_50_50_1_2_4_2_100/dl_r_%d.mat',id-1);
 %nn = sprintf('result/0_11_50_50_1_2_4_9_100_0/dl_r_%d.mat',id-1);
-nn = sprintf('result/0_13_50_50_151_2_0_200/dl_r_%d.mat',id-1);
+%nn = sprintf('result/0_13_50_50_151_2_0_200/dl_r_%d.mat',id-1);
+nn = sprintf('result/0_13_50_50_151_2_0_500/dl_r_%d.mat',id-1);
             tmp=load(nn) 
            if do_s~=2 
             yhat = zeros(sz(1:2),'single');
