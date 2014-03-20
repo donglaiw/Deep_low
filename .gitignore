@@ -9,7 +9,6 @@
 *.bin
 # no tmp
 *~
-log*
 .*.sw*
 log*
 # no configuration
